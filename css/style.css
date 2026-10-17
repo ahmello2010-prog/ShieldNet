@@ -1,0 +1,575 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+    --font-body: "Plus Jakarta Sans", sans-serif;
+    --font-display: "Roboto Condensed", sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #0b192c;
+}
+
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background: #ffffff;
+}
+.split-side {
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+/* ---------- الجانب الأيسر ---------- */
+.left-triangle {
+    left: 0;
+    width: 50%;
+    background: linear-gradient(135deg, #0f2b46 0%, #163354 100%);
+    clip-path: polygon(0 0, 62% 0, 90% 50%, 62% 100%, 0 100%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 40px;
+}
+.left-triangle::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../img/hero.webp") left top / auto 100% no-repeat;
+}
+.sidebar-content {
+    position: relative;
+    z-index: 1;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+.branding h2 {
+    font-family: var(--font-display);
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+.branding h2 span {
+    color: #d4af37;
+}
+
+.platform-navigation .nav-label {
+    font-family: var(--font-display);
+    color: #8da2bb;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.links-grid {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+.links-grid li {
+    display: flex;
+}
+.platform-navigation .nav-link {
+    font-family: var(--font-display);
+    letter-spacing: 0.3px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    width: max-content;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 7px 14px 7px 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+/* ---------- الأيقونات اليدوية (CSS خالص، تأخذ لون النص عبر currentColor) ---------- */
+.icon {
+    display: block;
+    flex: 0 0 auto;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    color: inherit;
+    transition: transform 0.3s ease;
+}
+.icon::before,
+.icon::after {
+    content: "";
+    position: absolute;
+    box-sizing: border-box;
+}
+.nav-link:hover .icon,
+.nav-link.active .icon {
+    transform: scale(1.1);
+}
+
+/* Home: منزل */
+.icon-home::before {
+    left: 4px;
+    top: 11px;
+    width: 16px;
+    height: 10px;
+    border: 2px solid currentColor;
+    border-top: 0;
+    border-radius: 0 0 2px 2px;
+    background: linear-gradient(currentColor, currentColor) center bottom / 4px 6px no-repeat;
+}
+.icon-home::after {
+    left: 5.5px;
+    top: 4.7px;
+    width: 13px;
+    height: 13px;
+    border-left: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    transform: rotate(45deg);
+    border-radius: 2px 0 0 0;
+}
+
+/* Explore: عدسة بحث */
+.icon-search::before {
+    left: 3px;
+    top: 3px;
+    width: 15px;
+    height: 15px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+}
+.icon-search::after {
+    left: 15px;
+    top: 16px;
+    width: 8px;
+    height: 2.4px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: rotate(45deg);
+    transform-origin: 0 50%;
+}
+
+/* Profile: شخص */
+.icon-profile::before {
+    left: 8px;
+    top: 3px;
+    width: 8px;
+    height: 8px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+}
+.icon-profile::after {
+    left: 4px;
+    top: 14px;
+    width: 16px;
+    height: 8px;
+    border: 2px solid currentColor;
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Quotes: فقاعة حوار بسطرين */
+.icon-quote::before {
+    left: 2px;
+    top: 3px;
+    width: 20px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-radius: 6px 6px 6px 0;
+}
+.icon-quote::after {
+    left: 7px;
+    top: 8px;
+    width: 10px;
+    height: 7px;
+    background:
+        linear-gradient(currentColor, currentColor) 0 0 / 10px 2px no-repeat,
+        linear-gradient(currentColor, currentColor) 0 5px / 6px 2px no-repeat;
+}
+
+/* Client: مبنى */
+.icon-client::before {
+    left: 5px;
+    top: 2px;
+    width: 14px;
+    height: 20px;
+    border: 2px solid currentColor;
+    border-radius: 2px;
+    background: linear-gradient(currentColor, currentColor) center bottom / 4px 5px no-repeat;
+}
+.icon-client::after {
+    left: 8.5px;
+    top: 6px;
+    width: 3px;
+    height: 3px;
+    background: currentColor;
+    box-shadow:
+        4.5px 0 currentColor,
+        0 5px currentColor,
+        4.5px 5px currentColor;
+}
+
+/* Vendor: درع مع علامة صح */
+.icon-vendor::before {
+    left: 4px;
+    top: 2px;
+    width: 16px;
+    height: 20px;
+    border: 2px solid currentColor;
+    border-radius: 3px 3px 50% 50% / 3px 3px 60% 60%;
+}
+.icon-vendor::after {
+    left: 8px;
+    top: 8.5px;
+    width: 8px;
+    height: 4.5px;
+    border-left: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+}
+
+/* Admin: قفل */
+.icon-admin::before {
+    left: 4px;
+    top: 10px;
+    width: 16px;
+    height: 11px;
+    border: 2px solid currentColor;
+    border-radius: 3px;
+    background: radial-gradient(circle at center, currentColor 1.6px, transparent 2px);
+}
+.icon-admin::after {
+    left: 7px;
+    top: 2.5px;
+    width: 10px;
+    height: 9px;
+    border: 2px solid currentColor;
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+}
+
+.platform-navigation .nav-link:hover,
+.platform-navigation .nav-link.active {
+    background: rgba(212, 175, 55, 0.12);
+    color: #d4af37;
+    border-color: rgba(212, 175, 55, 0.3);
+}
+.platform-navigation .nav-link.is-locked {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+.platform-navigation .nav-link.is-locked:hover {
+    background: transparent;
+    color: #cbd5e1;
+    border-color: transparent;
+}
+.platform-navigation .nav-link.is-locked:hover .icon {
+    transform: none;
+}
+.nav-link:focus-visible,
+.btn:focus-visible {
+    outline: 2px solid #d4af37;
+    outline-offset: 2px;
+}
+
+/* ---------- الجانب الأيمن ---------- */
+.right-triangle {
+    right: 0;
+    width: 62%;
+    background: linear-gradient(120deg, #ffffff 55%, #f1f5f9 85%, #e2e8f0 100%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 12%;
+    overflow-y: auto;
+}
+.right-triangle > .content-wrapper {
+    margin-block: auto;
+    padding-block: 24px;
+}
+.content-wrapper {
+    transform: translateX(50px);
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 3.5vh, 35px);
+}
+.intro-text h1 {
+    font-family: var(--font-display);
+    color: #0f2b46;
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    line-height: 1.2;
+    margin-bottom: clamp(10px, 2vh, 18px);
+}
+.intro-text p {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.interactive-zone {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 3vh, 30px);
+}
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 240px;
+}
+.btn {
+    font-family: var(--font-display);
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+.btn-explore {
+    background-color: #0f2b46;
+    color: #fff;
+}
+.arrow-icon {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+.btn-explore:hover {
+    background-color: #163354;
+}
+.btn-explore:hover .arrow-icon {
+    transform: translateX(6px);
+}
+.btn-register {
+    background-color: transparent;
+    color: #0f2b46;
+    border-color: #0f2b46;
+}
+.btn-register:hover {
+    background-color: #0f2b46;
+    color: #fff;
+}
+/* ---------- الشريطان المتحركان ---------- */
+.right-triangle > .content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+.ribbons {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: clamp(180px, 42%, 380px);
+    overflow: hidden;
+    pointer-events: none;
+}
+.ribbons svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.ribbon {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    will-change: transform;
+}
+.ribbon-navy {
+    animation: ribbon-flow-navy 14s ease-in-out infinite alternate;
+}
+.ribbon-gold {
+    animation: ribbon-flow-gold 11s ease-in-out infinite alternate;
+}
+@keyframes ribbon-flow-navy {
+    from {
+        transform: translate3d(0, 0, 0) scaleY(1);
+    }
+    to {
+        transform: translate3d(-22px, -10px, 0) scaleY(1.07);
+    }
+}
+@keyframes ribbon-flow-gold {
+    from {
+        transform: translate3d(-16px, -6px, 0) scaleY(1.05);
+    }
+    to {
+        transform: translate3d(14px, 6px, 0) scaleY(0.97);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ribbon {
+        animation: none;
+    }
+}
+
+/* ---------- مودال تسجيل الدخول ---------- */
+.login-modal {
+    margin: auto;
+    width: min(92vw, 420px);
+    padding: 36px 32px 28px;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 14px;
+    background: linear-gradient(135deg, #0f2b46 0%, #163354 100%);
+    color: #cbd5e1;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(11, 25, 44, 0.55);
+}
+.login-modal::backdrop {
+    background: rgba(11, 25, 44, 0.65);
+    backdrop-filter: blur(3px);
+}
+.login-modal[open] {
+    animation: modal-in 0.25s ease;
+}
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+.modal-icon {
+    margin: 10px auto 26px;
+    color: #d4af37;
+    transform: scale(2);
+}
+.login-modal h2 {
+    font-family: var(--font-display);
+    color: #fff;
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+}
+.login-modal p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 26px;
+}
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.modal-actions .btn-register {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+}
+.modal-actions .btn-register:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.modal-actions .btn-explore {
+    background-color: #d4af37;
+    color: #0f2b46;
+}
+.modal-actions .btn-explore:hover {
+    background-color: #e0bd4f;
+}
+.modal-actions .btn:focus-visible {
+    outline-color: #fff;
+}
+
+/* ---------- التجاوب ---------- */
+@media (max-width: 1150px) {
+    .left-triangle {
+        width: 54%;
+        clip-path: polygon(0 0, 65% 0, 92% 50%, 65% 100%, 0 100%);
+    }
+    .right-triangle {
+        padding-right: 4%;
+        width: 55%;
+    }
+}
+@media (max-width: 992px) {
+    .content-wrapper {
+        transform: translateX(0);
+    }
+    body,
+    html {
+        overflow: auto;
+        height: auto;
+    }
+    .hero-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    .left-triangle,
+    .right-triangle {
+        position: relative;
+        width: 100%;
+        height: auto;
+        clip-path: none;
+    }
+    .left-triangle {
+        padding: 36px 24px 0;
+    }
+    .left-triangle::before {
+        position: static;
+        order: 2;
+        height: clamp(230px, 58vw, 440px);
+        margin: 28px -24px 0;
+        background-size: cover;
+        background-position: 14% 80%;
+    }
+    .links-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+        gap: 6px;
+    }
+    .sidebar-content {
+        width: 100%;
+        gap: 28px;
+    }
+    .right-triangle {
+        padding: 48px 20px 180px;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+    }
+    .right-triangle > .content-wrapper {
+        margin-block: 0;
+        padding-block: 0;
+    }
+}
+@media (max-width: 520px) {
+    .ribbons {
+        height: 110px;
+    }
+    .right-triangle {
+        padding-bottom: 130px;
+    }
+    .intro-text h1 {
+        font-size: 2rem;
+    }
+    .cta-buttons {
+        width: 100%;
+    }
+}

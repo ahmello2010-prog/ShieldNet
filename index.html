@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ShieldNet | Security Services Platform</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <main class="hero-container">
+            <!-- الجانب الأيسر: السهم الداكن + قائمة الملاحة -->
+            <div class="split-side left-triangle">
+                <div class="sidebar-content">
+                    <div class="branding">
+                        <h2>Shield<span>Net</span></h2>
+                    </div>
+                    <nav class="platform-navigation" aria-label="Platform Directory">
+                        <p class="nav-label">Platform Directory</p>
+                        <ul class="links-grid">
+                            <li>
+                                <a href="#" class="nav-link active"><span class="icon icon-home"></span>Home</a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link"><span class="icon icon-search"></span>Explore</a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link is-locked" aria-disabled="true" aria-haspopup="dialog"
+                                    ><span class="icon icon-profile"></span>Profile</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link is-locked" aria-disabled="true" aria-haspopup="dialog"
+                                    ><span class="icon icon-quote"></span>Quotes</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link is-locked" aria-disabled="true" aria-haspopup="dialog"
+                                    ><span class="icon icon-client"></span>Client</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link is-locked" aria-disabled="true" aria-haspopup="dialog"
+                                    ><span class="icon icon-vendor"></span>Vendor</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link is-locked" aria-disabled="true" aria-haspopup="dialog"
+                                    ><span class="icon icon-admin"></span>Admin</a
+                                >
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- الجانب الأيمن -->
+            <div class="split-side right-triangle">
+                <div class="content-wrapper">
+                    <div class="intro-text">
+                        <h1>Elite Security <br />Solutions on Demand</h1>
+                        <p>
+                            Connecting premier corporate estates and private properties with verified, top-tier Egyptian
+                            security firms. Experience seamless protection tailored precisely to your operational scale.
+                        </p>
+                    </div>
+                    <div class="interactive-zone">
+                        <div class="cta-buttons">
+                            <a href="#" class="btn btn-explore"> Explore Platform <span class="arrow-icon">→</span> </a>
+                            <a href="#" class="btn btn-register">Create Account</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- شريطان منحنيان متحركان في أسفل المساحة البيضاء -->
+                <div class="ribbons" aria-hidden="true">
+                    <svg viewBox="0 0 1000 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="ribbon-navy" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0" stop-color="#163354" stop-opacity="0.25" />
+                                <stop offset="0.45" stop-color="#163354" stop-opacity="0.95" />
+                                <stop offset="1" stop-color="#0f2b46" stop-opacity="0.9" />
+                            </linearGradient>
+                            <linearGradient id="ribbon-gold" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0" stop-color="#d4af37" stop-opacity="0.2" />
+                                <stop offset="0.5" stop-color="#d4af37" stop-opacity="0.95" />
+                                <stop offset="1" stop-color="#e3c25a" stop-opacity="0.85" />
+                            </linearGradient>
+                        </defs>
+                        <path
+                            class="ribbon ribbon-gold"
+                            fill="url(#ribbon-gold)"
+                            d="M-60,430 C200,420 430,372 620,308 S900,214 1060,176 L1060,184 C920,236 800,306 640,352 S250,462 -60,452 Z" />
+                        <path
+                            class="ribbon ribbon-navy"
+                            fill="url(#ribbon-navy)"
+                            d="M-60,410 C250,396 470,326 640,258 S900,150 1060,112 L1060,124 C920,176 790,262 640,310 S280,440 -60,448 Z" />
+                    </svg>
+                </div>
+            </div>
+        </main>
+        <dialog class="login-modal" id="login-modal" aria-labelledby="login-modal-title">
+            <span class="icon icon-admin modal-icon" aria-hidden="true"></span>
+            <h2 id="login-modal-title">Sign in to continue</h2>
+            <p>
+                This section is available to registered members only. Signing in keeps your account and requests
+                protected, and lets you receive verified quotes from trusted security firms. Create a free account or
+                sign in to unlock the full platform.
+            </p>
+            <div class="modal-actions">
+                <a href="#" class="btn btn-explore">Create Account</a>
+                <button type="button" class="btn btn-register" data-close-modal>Maybe later</button>
+            </div>
+        </dialog>
+        <script src="js/script.js"></script>
+    </body>
+</html>
