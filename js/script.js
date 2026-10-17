@@ -23,12 +23,12 @@ const policyContent = document.getElementById("policy-modal-content");
 
 const policyTexts = {
     privacy: {
-        title: "Privacy Policy",
-        html: "<p>At ShieldNet, data confidentiality and client security are foundational principles. All corporate premises details, patrol telemetry, and client communications remain strictly encrypted and confidential. We never share property intelligence with unverified entities.</p>"
+        title: "Privacy & Guard Vetting Policy",
+        html: "<p>At ShieldNet, candidate confidentiality and client property security are paramount. Guard background checks, identification records, and hiring estate discussions remain strictly protected and confidential.</p>"
     },
     terms: {
-        title: "Terms of Service",
-        html: "<p>ShieldNet acts as an enterprise security platform connecting corporate estates and properties with verified Egyptian security contractors. All security personnel and firms undergo thorough credential verification and licensing checks prior to deployment.</p>"
+        title: "Security Guard Staffing Terms",
+        html: "<p>ShieldNet operates as a premier professional network connecting verified physical security guards and protection officers with commercial estates and private properties. All candidates undergo credential auditing before deployment.</p>"
     }
 };
 
@@ -61,13 +61,14 @@ if (statValues.length > 0) {
     function updateCounters(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        // Quadratic ease-out
         const easeOut = 1 - (1 - progress) * (1 - progress);
 
         statValues.forEach((el) => {
             const target = parseInt(el.getAttribute("data-target"), 10);
-            const current = Math.floor(easeOut * target);
-            el.innerHTML = `${current.toLocaleString()}<span class="stat-plus">+</span>`;
+            const isPercent = target < 100;
+            const current = isPercent ? (easeOut * 99.4).toFixed(1) : Math.floor(easeOut * target).toLocaleString();
+            const suffix = isPercent ? "%" : "+";
+            el.innerHTML = `${current}<span class="stat-plus">${suffix}</span>`;
         });
 
         if (progress < 1) {
