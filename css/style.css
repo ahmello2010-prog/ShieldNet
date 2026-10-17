@@ -80,17 +80,54 @@ html {
     z-index: 2;
 }
 
+.branding {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-logo-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1.8px solid rgba(212, 175, 55, 0.55);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.branding:hover .brand-logo-img {
+    transform: scale(1.05);
+    border-color: var(--color-gold);
+}
+
+.brand-text-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
 .branding h2 {
     font-family: var(--font-display);
     color: #ffffff;
-    font-size: 2.3rem;
+    font-size: 2.2rem;
     font-weight: 700;
     letter-spacing: 0.5px;
+    line-height: 1.1;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
 }
 
 .branding h2 span {
     color: var(--color-gold);
+}
+
+.brand-subtext {
+    font-size: 0.68rem;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    font-weight: 700;
+    margin-top: 2px;
 }
 
 /* ---------- الفاصل الذهبي الهندسي المضيء على الحافة المائلة ---------- */
@@ -547,13 +584,30 @@ html {
     align-items: flex-start;
 }
 
+.footer-branding {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.footer-logo-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+}
+
 .footer-branding h3 {
     font-family: var(--font-display);
     font-size: 2.1rem;
     font-weight: 700;
     color: #ffffff;
     letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    margin-bottom: 0;
 }
 
 .footer-branding h3 span {
@@ -837,6 +891,17 @@ html {
     transform: scale(2);
 }
 
+.modal-logo-img {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 14px;
+    object-fit: cover;
+    border: 2px solid var(--color-gold);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    display: block;
+}
+
 .login-modal h2 {
     font-family: var(--font-display);
     color: #ffffff;
@@ -986,7 +1051,12 @@ html {
     }
 
     .branding h2 {
-        font-size: 1.9rem;
+        font-size: 1.85rem;
+    }
+
+    .brand-logo-img {
+        width: 40px;
+        height: 40px;
     }
 
     .intro-text h1 {
