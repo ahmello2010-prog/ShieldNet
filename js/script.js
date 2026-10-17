@@ -52,6 +52,74 @@ if (policyModal) {
     });
 }
 
+// التحكم في القائمة الجانبية للهاتف (Mobile Sidebar Drawer)
+const mobileDrawer = document.getElementById("mobile-nav-drawer");
+const drawerBackdrop = document.getElementById("mobile-drawer-backdrop");
+const menuToggle = document.getElementById("mobile-menu-toggle");
+const brandingBtn = document.getElementById("mobile-branding-btn");
+const drawerCloseBtn = document.getElementById("drawer-close-btn");
+
+function openMobileDrawer() {
+    if (mobileDrawer && drawerBackdrop) {
+        mobileDrawer.classList.add("is-open");
+        drawerBackdrop.classList.add("is-active");
+        mobileDrawer.setAttribute("aria-hidden", "false");
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+    }
+}
+
+function closeMobileDrawer() {
+    if (mobileDrawer && drawerBackdrop) {
+        mobileDrawer.classList.remove("is-open");
+        drawerBackdrop.classList.remove("is-active");
+        mobileDrawer.setAttribute("aria-hidden", "true");
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    }
+}
+
+if (menuToggle) {
+    menuToggle.addEventListener("click", openMobileDrawer);
+}
+
+// الضغط على شعار الموقع في شاشات الموبايل يفتح القائمة الجانبية أيضاً
+if (brandingBtn) {
+    brandingBtn.addEventListener("click", () => {
+        if (window.innerWidth <= 992) {
+            openMobileDrawer();
+        }
+    });
+    brandingBtn.addEventListener("keydown", (e) => {
+        if ((e.key === "Enter" || e.key === " ") && window.innerWidth <= 992) {
+            e.preventDefault();
+            openMobileDrawer();
+        }
+    });
+}
+
+if (drawerCloseBtn) {
+    drawerCloseBtn.addEventListener("click", closeMobileDrawer);
+}
+
+if (drawerBackdrop) {
+    drawerBackdrop.addEventListener("click", closeMobileDrawer);
+}
+
+// إغلاق القائمة عند الضغط على أي رابط بداخلها
+document.querySelectorAll(".drawer-link").forEach((link) => {
+    link.addEventListener("click", () => {
+        closeMobileDrawer();
+    });
+});
+
+// إغلاق بزر الهروب Escape
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileDrawer && mobileDrawer.classList.contains("is-open")) {
+        closeMobileDrawer();
+    }
+});
+
 // تأثير عد تصاعدي سلس وبسيط لأرقام المنصة
 const statValues = document.querySelectorAll(".stat-value[data-target]");
 if (statValues.length > 0) {
