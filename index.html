@@ -267,7 +267,11 @@
         <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop" aria-hidden="true"></div>
 
         <!-- القائمة الجانبية المنسدلة للهاتف (Mobile Sidebar Drawer) -->
-        <aside class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile Directory Navigation" aria-hidden="true">
+        <aside
+            class="mobile-nav-drawer"
+            id="mobile-nav-drawer"
+            aria-label="Mobile Directory Navigation"
+            aria-hidden="true">
             <div class="drawer-header">
                 <div class="drawer-branding">
                     <img src="/img/logo.jpg" alt="ShieldNet Emblem" class="drawer-logo-img" />
@@ -276,16 +280,16 @@
                         <span class="drawer-subtext">Guard Staffing Network</span>
                     </div>
                 </div>
-                <button class="drawer-close-btn" id="drawer-close-btn" type="button" aria-label="Close menu">&times;</button>
+                <button class="drawer-close-btn" id="drawer-close-btn" type="button" aria-label="Close menu">
+                    &times;
+                </button>
             </div>
 
             <!-- بطاقة معاينة الصورة المعمارية والأمنية داخل القائمة الجانبية -->
             <div class="drawer-banner-preview">
                 <img src="/img/hero.webp" alt="Security Headquarters" class="drawer-preview-img" />
                 <div class="drawer-preview-overlay"></div>
-                <div class="drawer-preview-badge">
-                    <span class="badge-dot"></span> 100% Vetted Guards
-                </div>
+                <div class="drawer-preview-badge"><span class="badge-dot"></span> 100% Vetted Guards</div>
             </div>
 
             <nav class="drawer-nav">
@@ -295,31 +299,38 @@
                         <a href="#" class="drawer-link active"><span class="icon icon-home"></span><span>Home</span></a>
                     </li>
                     <li>
-                        <a href="#" class="drawer-link"><span class="icon icon-search"></span><span>Explore Guards</span></a>
-                    </li>
-                    <li>
-                        <a href="#" class="drawer-link is-locked" aria-disabled="true" aria-haspopup="dialog"
-                            ><span class="icon icon-profile"></span><span>Guard Profiles</span><span class="lock-tag">Locked</span></a
+                        <a href="#" class="drawer-link"
+                            ><span class="icon icon-search"></span><span>Explore Guards</span></a
                         >
                     </li>
                     <li>
                         <a href="#" class="drawer-link is-locked" aria-disabled="true" aria-haspopup="dialog"
-                            ><span class="icon icon-quote"></span><span>Job Quotes</span><span class="lock-tag">Locked</span></a
+                            ><span class="icon icon-profile"></span><span>Guard Profiles</span
+                            ><span class="lock-tag">Locked</span></a
                         >
                     </li>
                     <li>
                         <a href="#" class="drawer-link is-locked" aria-disabled="true" aria-haspopup="dialog"
-                            ><span class="icon icon-client"></span><span>Client Portal</span><span class="lock-tag">Locked</span></a
+                            ><span class="icon icon-quote"></span><span>Job Quotes</span
+                            ><span class="lock-tag">Locked</span></a
                         >
                     </li>
                     <li>
                         <a href="#" class="drawer-link is-locked" aria-disabled="true" aria-haspopup="dialog"
-                            ><span class="icon icon-vendor"></span><span>Guard Agencies</span><span class="lock-tag">Locked</span></a
+                            ><span class="icon icon-client"></span><span>Client Portal</span
+                            ><span class="lock-tag">Locked</span></a
                         >
                     </li>
                     <li>
                         <a href="#" class="drawer-link is-locked" aria-disabled="true" aria-haspopup="dialog"
-                            ><span class="icon icon-admin"></span><span>Admin Portal</span><span class="lock-tag">Locked</span></a
+                            ><span class="icon icon-vendor"></span><span>Guard Agencies</span
+                            ><span class="lock-tag">Locked</span></a
+                        >
+                    </li>
+                    <li>
+                        <a href="#" class="drawer-link is-locked" aria-disabled="true" aria-haspopup="dialog"
+                            ><span class="icon icon-admin"></span><span>Admin Portal</span
+                            ><span class="lock-tag">Locked</span></a
                         >
                     </li>
                 </ul>
@@ -358,7 +369,7 @@
                 <button type="button" class="btn btn-explore" data-close-policy>Understood</button>
             </div>
         </dialog>
-
+        <script src="js/touch-debug.js"></script>
         <script src="js/script.js"></script>
     </body>
 </html>
