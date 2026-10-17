@@ -79,20 +79,15 @@ function closeMobileDrawer() {
     }
 }
 
-if (menuToggle) {
-    menuToggle.addEventListener("click", openMobileDrawer);
+const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener("click", openMobileDrawer);
 }
 
-// الضغط على شعار الموقع في شاشات الموبايل يفتح القائمة الجانبية أيضاً
+// دعم النقر على الشعار إذا كان مرئياً
 if (brandingBtn) {
     brandingBtn.addEventListener("click", () => {
         if (window.innerWidth <= 992) {
-            openMobileDrawer();
-        }
-    });
-    brandingBtn.addEventListener("keydown", (e) => {
-        if ((e.key === "Enter" || e.key === " ") && window.innerWidth <= 992) {
-            e.preventDefault();
             openMobileDrawer();
         }
     });

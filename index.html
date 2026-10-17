@@ -8,6 +8,20 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
+        <!-- شريط علوي ثابت في الهواتف يحتوي على زر القائمة والشعار (Fixed Mobile Header Bar) -->
+        <header class="mobile-fixed-header" id="mobile-fixed-header">
+            <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Open mobile navigation menu">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+            <div class="mobile-fixed-brand">
+                <img src="/img/logo.jpg" alt="ShieldNet" class="fixed-bar-logo" />
+                <h2>Shield<span>Net</span></h2>
+            </div>
+            <a href="#" class="mobile-fixed-cta is-locked" aria-haspopup="dialog">Sign In</a>
+        </header>
+
         <main class="hero-container">
             <!-- الجانب الأيسر: الشكل الهندسي المائل + الصورة المعمارية والأمنية السينمائية والشعار -->
             <div
@@ -17,22 +31,14 @@
                 <!-- طبقة التدرج الداكن لضمان تباين الشعار وحمايته -->
                 <div class="hero-overlay"></div>
                 <div class="sidebar-branding">
-                    <div class="branding" id="mobile-branding-btn" role="button" tabindex="0" aria-label="Open mobile navigation menu">
+                    <!-- يظهر في أجهزة الكمبيوتر فقط: الشعار الكامل واسم الموقع -->
+                    <div class="branding" id="desktop-branding">
                         <img src="/img/logo.jpg" alt="ShieldNet Security Guard Badge" class="brand-logo-img" />
                         <div class="brand-text-wrap">
                             <h2>Shield<span>Net</span></h2>
                             <span class="brand-subtext">Guard Staffing Network</span>
                         </div>
                     </div>
-                    <!-- زر القائمة الجانبية لشاشات الموبايل -->
-                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
-                        <span class="toggle-icon-bars" aria-hidden="true">
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                        </span>
-                        <span class="toggle-label">Menu</span>
-                    </button>
                 </div>
             </div>
 

@@ -952,48 +952,106 @@ html {
     outline-color: #ffffff;
 }
 
-/* ---------- زر القائمة الجانبية في الهيدر (Mobile Menu Toggle) ---------- */
-.mobile-menu-toggle {
+/* ---------- شريط علوي ثابت في الهاتف (Fixed Mobile Top Header) ---------- */
+.mobile-fixed-header {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    padding: 0 16px;
     align-items: center;
-    gap: 8px;
-    background: rgba(11, 25, 44, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(212, 175, 55, 0.5);
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: var(--font-display);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    transition: all 0.25s ease;
+    justify-content: space-between;
+    background: rgba(11, 25, 44, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1.5px solid rgba(212, 175, 55, 0.35);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+    z-index: 990;
 }
 
-.mobile-menu-toggle:hover {
-    background: rgba(212, 175, 55, 0.25);
-    border-color: var(--color-gold);
+.mobile-fixed-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.fixed-bar-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid var(--color-gold);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-fixed-brand h2 {
+    font-family: var(--font-display);
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.3px;
+}
+
+.mobile-fixed-brand h2 span {
     color: var(--color-gold);
 }
 
-.toggle-icon-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 3.5px;
-    width: 18px;
+.mobile-fixed-cta {
+    font-family: var(--font-display);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--color-navy);
+    background: var(--color-gold);
+    border: 1px solid var(--color-gold);
+    transition: all 0.25s ease;
 }
 
-.toggle-icon-bars .bar {
+.mobile-fixed-cta:hover {
+    background: #e3c25a;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
+}
+
+/* ---------- زر أيقونة القائمة الجانبية في الهاتف (Mobile Menu Button) ---------- */
+.mobile-menu-btn {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(11, 25, 44, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid var(--color-gold);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0;
+    transition: all 0.25s ease;
+}
+
+.mobile-menu-btn:hover,
+.mobile-menu-btn:active {
+    background: rgba(212, 175, 55, 0.25);
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
+    transform: scale(1.05);
+}
+
+.mobile-menu-btn .menu-bar {
     display: block;
-    width: 100%;
+    width: 20px;
     height: 2px;
     background-color: var(--color-gold);
     border-radius: 2px;
-}
-
-.toggle-label {
-    text-transform: uppercase;
 }
 
 /* ---------- خلفية القائمة الجانبية المعتمة (Backdrop) ---------- */
@@ -1257,11 +1315,16 @@ html {
         height: auto;
     }
 
+    .mobile-fixed-header {
+        display: flex;
+    }
+
     .hero-container {
         flex-direction: column;
         height: auto;
         min-height: 100vh;
         overflow: visible;
+        padding-top: 60px;
     }
 
     .left-triangle,
@@ -1273,25 +1336,15 @@ html {
     }
 
     .left-triangle {
-        height: clamp(320px, 48vh, 460px);
-        padding: 28px 20px;
+        height: clamp(300px, 46vh, 440px);
+        padding: 0;
         box-shadow: none;
         border-bottom: 3px solid var(--color-gold);
     }
 
+    /* إخفاء الهيدر الداخلي في الهاتف لوجود الشريط العلوي الثابت */
     .sidebar-branding {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .branding {
-        cursor: pointer;
-    }
-
-    .mobile-menu-toggle {
-        display: inline-flex;
+        display: none !important;
     }
 
     .golden-divider {
