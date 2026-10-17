@@ -1,0 +1,7 @@
+{
+  "name": "ShieldNet",
+  "description": "Elite Security Solutions on Demand - Security Services Platform",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
