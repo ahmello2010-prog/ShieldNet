@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Create Account | ShieldNet</title>
+        <link rel="icon" type="image/jpeg" href="/img/logo.jpg" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body class="auth-page">
+        <main class="auth-shell">
+            <section class="auth-card" aria-labelledby="auth-title">
+                <a href="index.html" class="auth-back" aria-label="Back to home">← Back to home</a>
+
+                <img src="/img/logo.jpg" alt="ShieldNet Security Emblem" class="auth-logo" />
+                <h1 id="auth-title">Create Your Account</h1>
+                <p class="auth-subtitle" id="auth-subtitle">
+                    Join Egypt's verified security network. This is a demo: no real data is sent anywhere.
+                </p>
+
+                <div class="auth-tabs" role="tablist" aria-label="Account mode">
+                    <button type="button" class="auth-tab is-active" role="tab" aria-selected="true" data-mode="signup">
+                        Create Account
+                    </button>
+                    <button type="button" class="auth-tab" role="tab" aria-selected="false" data-mode="signin">
+                        Sign In
+                    </button>
+                </div>
+
+                <form id="auth-form" class="auth-form" novalidate>
+                    <div class="auth-field" data-only="signup">
+                        <label for="auth-name">Full name</label>
+                        <input
+                            id="auth-name"
+                            name="name"
+                            type="text"
+                            autocomplete="name"
+                            placeholder="e.g. Tarek Mansour" />
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="auth-email">Email</label>
+                        <input
+                            id="auth-email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            placeholder="you@example.com"
+                            required />
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="auth-password">Password</label>
+                        <input
+                            id="auth-password"
+                            name="password"
+                            type="password"
+                            autocomplete="current-password"
+                            placeholder="At least 6 characters"
+                            minlength="6"
+                            required />
+                    </div>
+
+                    <div class="auth-field" data-only="signup">
+                        <label for="auth-role">I am a</label>
+                        <select id="auth-role" name="role">
+                            <option value="client">Client / Estate owner</option>
+                            <option value="guard">Security guard</option>
+                            <option value="agency">Guard agency</option>
+                        </select>
+                    </div>
+
+                    <p class="auth-error" id="auth-error" role="alert" aria-live="polite"></p>
+
+                    <button type="submit" class="btn btn-explore auth-submit" id="auth-submit">
+                        Confirm &amp; Continue
+                    </button>
+                </form>
+            </section>
+        </main>
+
+        <script type="module" src="js/login.js"></script>
+    </body>
+</html>

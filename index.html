@@ -5,12 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ShieldNet | The Professional Network for Vetted Security Guards</title>
         <link rel="icon" type="image/jpeg" href="/img/logo.jpg" />
-        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
         <!-- شريط علوي ثابت في الهواتف يحتوي على زر القائمة والشعار (Fixed Mobile Header Bar) -->
         <header class="mobile-fixed-header" id="mobile-fixed-header">
-            <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" data-action="nav:toggle-drawer" aria-label="Open mobile navigation menu">
+            <button
+                class="mobile-menu-btn"
+                id="mobile-menu-btn"
+                type="button"
+                data-action="nav:toggle-drawer"
+                aria-label="Open mobile navigation menu">
                 <span class="menu-bar"></span>
                 <span class="menu-bar"></span>
                 <span class="menu-bar"></span>
@@ -19,7 +24,7 @@
                 <img src="/img/logo.jpg" alt="ShieldNet" class="fixed-bar-logo" />
                 <h2>Shield<span>Net</span></h2>
             </div>
-            <a href="#" class="mobile-fixed-cta" data-action="action:sign-in">Sign In</a>
+            <a href="#" class="mobile-fixed-cta" data-action="action:sign-in" data-auth="signin">Sign In</a>
         </header>
 
         <main class="hero-container">
@@ -55,34 +60,68 @@
                     <nav class="platform-navigation" aria-label="Platform Directory">
                         <ul class="links-inline">
                             <li>
-                                <a href="#" class="nav-link active" data-action="nav:home"><span class="icon icon-home"></span>Home</a>
+                                <a href="#" class="nav-link active" data-action="nav:home"
+                                    ><span class="icon icon-home"></span>Home</a
+                                >
                             </li>
                             <li>
-                                <a href="#" class="nav-link" data-action="action:explore-guards"><span class="icon icon-search"></span>Explore Guards</a>
+                                <a href="#" class="nav-link" data-action="action:explore-guards"
+                                    ><span class="icon icon-search"></span>Explore Guards</a
+                                >
                             </li>
                             <li>
-                                <a href="#" class="nav-link is-locked" data-action="nav:locked-portal" data-portal="Guard Profiles" aria-haspopup="dialog"
+                                <a
+                                    href="#"
+                                    class="nav-link is-locked"
+                                    data-action="nav:locked-portal"
+                                    data-portal="Guard Profiles"
+                                    aria-haspopup="dialog"
                                     ><span class="icon icon-profile"></span>Guard Profiles</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="nav-link is-locked" data-action="nav:locked-portal" data-portal="Job Quotes" aria-haspopup="dialog"
+                                <a
+                                    href="#"
+                                    class="nav-link is-locked"
+                                    data-action="nav:locked-portal"
+                                    data-portal="Job Quotes"
+                                    aria-haspopup="dialog"
                                     ><span class="icon icon-quote"></span>Job Quotes</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="nav-link is-locked" data-action="nav:locked-portal" data-portal="Client Portal" aria-haspopup="dialog"
+                                <a
+                                    href="#"
+                                    class="nav-link is-locked"
+                                    data-action="nav:locked-portal"
+                                    data-portal="Client Portal"
+                                    aria-haspopup="dialog"
                                     ><span class="icon icon-client"></span>Client Portal</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="nav-link is-locked" data-action="nav:locked-portal" data-portal="Guard Agencies" aria-haspopup="dialog"
+                                <a
+                                    href="#"
+                                    class="nav-link is-locked"
+                                    data-action="nav:locked-portal"
+                                    data-portal="Guard Agencies"
+                                    aria-haspopup="dialog"
                                     ><span class="icon icon-vendor"></span>Guard Agencies</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="nav-link is-locked" data-action="nav:locked-portal" data-portal="Admin Portal" aria-haspopup="dialog"
+                                <a
+                                    href="#"
+                                    class="nav-link is-locked"
+                                    data-action="nav:locked-portal"
+                                    data-portal="Admin Portal"
+                                    aria-haspopup="dialog"
                                     ><span class="icon icon-admin"></span>Admin</a
+                                >
+                            </li>
+                            <li class="nav-auth-item">
+                                <a href="#" class="nav-link nav-auth" data-action="action:sign-in" data-auth="signin"
+                                    >Sign In</a
                                 >
                             </li>
                         </ul>
@@ -104,7 +143,9 @@
                             <a href="#" class="btn btn-explore" data-action="action:explore-guards">
                                 Explore Guard Network <span class="arrow-icon">→</span>
                             </a>
-                            <a href="#" class="btn btn-register" data-action="action:create-account">Create Account</a>
+                            <a href="#" class="btn btn-register" data-action="action:create-account" data-auth="signup"
+                                >Create Account</a
+                            >
                         </div>
 
                         <!-- ثلاث بطاقات إحصائيات للمنصة -->
@@ -179,10 +220,34 @@
                     <div class="footer-col links-col">
                         <h4>Guard Network & Legal</h4>
                         <ul class="footer-menu">
-                            <li><a href="#" class="footer-nav-link" data-action="action:explore-guards">Browse Guard Directory</a></li>
-                            <li><a href="#" class="footer-nav-link" data-action="modal:open-policy" data-policy="privacy">Privacy Policy</a></li>
-                            <li><a href="#" class="footer-nav-link" data-action="modal:open-policy" data-policy="terms">Terms of Service</a></li>
-                            <li><a href="#" class="footer-nav-link is-locked" data-action="nav:locked-portal" data-portal="Guard Credential Verification">Guard Credential Verification</a></li>
+                            <li>
+                                <a href="#" class="footer-nav-link" data-action="action:explore-guards"
+                                    >Browse Guard Directory</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="footer-nav-link"
+                                    data-action="modal:open-policy"
+                                    data-policy="privacy"
+                                    >Privacy Policy</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#" class="footer-nav-link" data-action="modal:open-policy" data-policy="terms"
+                                    >Terms of Service</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="footer-nav-link is-locked"
+                                    data-action="nav:locked-portal"
+                                    data-portal="Guard Credential Verification"
+                                    >Guard Credential Verification</a
+                                >
+                            </li>
                         </ul>
                     </div>
 
@@ -264,7 +329,11 @@
         </footer>
 
         <!-- خلفية معتمة للقائمة الجانبية في الهاتف -->
-        <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop" data-action="nav:close-drawer" aria-hidden="true"></div>
+        <div
+            class="mobile-drawer-backdrop"
+            id="mobile-drawer-backdrop"
+            data-action="nav:close-drawer"
+            aria-hidden="true"></div>
 
         <!-- القائمة الجانبية المنسدلة للهاتف (Mobile Sidebar Drawer) -->
         <aside
@@ -280,7 +349,12 @@
                         <span class="drawer-subtext">Guard Staffing Network</span>
                     </div>
                 </div>
-                <button class="drawer-close-btn" id="drawer-close-btn" type="button" data-action="nav:close-drawer" aria-label="Close menu">
+                <button
+                    class="drawer-close-btn"
+                    id="drawer-close-btn"
+                    type="button"
+                    data-action="nav:close-drawer"
+                    aria-label="Close menu">
                     &times;
                 </button>
             </div>
@@ -296,7 +370,9 @@
                 <p class="drawer-nav-label">Platform Directory</p>
                 <ul class="drawer-links-list">
                     <li>
-                        <a href="#" class="drawer-link active" data-action="nav:home"><span class="icon icon-home"></span><span>Home</span></a>
+                        <a href="#" class="drawer-link active" data-action="nav:home"
+                            ><span class="icon icon-home"></span><span>Home</span></a
+                        >
                     </li>
                     <li>
                         <a href="#" class="drawer-link" data-action="action:explore-guards"
@@ -304,31 +380,56 @@
                         >
                     </li>
                     <li>
-                        <a href="#" class="drawer-link is-locked" data-action="nav:locked-portal" data-portal="Guard Profiles" aria-haspopup="dialog"
+                        <a
+                            href="#"
+                            class="drawer-link is-locked"
+                            data-action="nav:locked-portal"
+                            data-portal="Guard Profiles"
+                            aria-haspopup="dialog"
                             ><span class="icon icon-profile"></span><span>Guard Profiles</span
                             ><span class="lock-tag">Locked</span></a
                         >
                     </li>
                     <li>
-                        <a href="#" class="drawer-link is-locked" data-action="nav:locked-portal" data-portal="Job Quotes" aria-haspopup="dialog"
+                        <a
+                            href="#"
+                            class="drawer-link is-locked"
+                            data-action="nav:locked-portal"
+                            data-portal="Job Quotes"
+                            aria-haspopup="dialog"
                             ><span class="icon icon-quote"></span><span>Job Quotes</span
                             ><span class="lock-tag">Locked</span></a
                         >
                     </li>
                     <li>
-                        <a href="#" class="drawer-link is-locked" data-action="nav:locked-portal" data-portal="Client Portal" aria-haspopup="dialog"
+                        <a
+                            href="#"
+                            class="drawer-link is-locked"
+                            data-action="nav:locked-portal"
+                            data-portal="Client Portal"
+                            aria-haspopup="dialog"
                             ><span class="icon icon-client"></span><span>Client Portal</span
                             ><span class="lock-tag">Locked</span></a
                         >
                     </li>
                     <li>
-                        <a href="#" class="drawer-link is-locked" data-action="nav:locked-portal" data-portal="Guard Agencies" aria-haspopup="dialog"
+                        <a
+                            href="#"
+                            class="drawer-link is-locked"
+                            data-action="nav:locked-portal"
+                            data-portal="Guard Agencies"
+                            aria-haspopup="dialog"
                             ><span class="icon icon-vendor"></span><span>Guard Agencies</span
                             ><span class="lock-tag">Locked</span></a
                         >
                     </li>
                     <li>
-                        <a href="#" class="drawer-link is-locked" data-action="nav:locked-portal" data-portal="Admin Portal" aria-haspopup="dialog"
+                        <a
+                            href="#"
+                            class="drawer-link is-locked"
+                            data-action="nav:locked-portal"
+                            data-portal="Admin Portal"
+                            aria-haspopup="dialog"
                             ><span class="icon icon-admin"></span><span>Admin Portal</span
                             ><span class="lock-tag">Locked</span></a
                         >
@@ -337,15 +438,29 @@
             </nav>
 
             <div class="drawer-footer-cta">
-                <a href="#" class="btn btn-explore btn-drawer" data-action="action:create-account">Create Account</a>
+                <a
+                    href="login.html"
+                    class="btn btn-explore btn-drawer"
+                    data-action="action:create-account"
+                    data-auth="signup"
+                    >Create Account</a
+                >
             </div>
         </aside>
 
         <!-- نافذة تسجيل الدخول للمنصة (Login & Join Modal) -->
-        <div class="custom-modal" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-modal-title" aria-hidden="true">
+        <div
+            class="custom-modal"
+            id="login-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="login-modal-title"
+            aria-hidden="true">
             <div class="modal-backdrop" data-action="modal:close-login" tabindex="-1"></div>
             <div class="modal-card">
-                <button type="button" class="modal-close-btn" data-action="modal:close-login" aria-label="Close modal">&times;</button>
+                <button type="button" class="modal-close-btn" data-action="modal:close-login" aria-label="Close modal">
+                    &times;
+                </button>
                 <img src="/img/logo.jpg" alt="ShieldNet Security Emblem" class="modal-logo-img" />
                 <h2 id="login-modal-title">Access Guard Network</h2>
                 <p id="login-modal-desc">
@@ -353,23 +468,43 @@
                     security guards or create your verified security guard candidate profile.
                 </p>
                 <div class="modal-actions">
-                    <button type="button" class="btn btn-explore" id="modal-submit-cta" data-action="modal:submit-access">Sign In (Demo Mode)</button>
-                    <button type="button" class="btn btn-register" id="modal-cancel-cta" data-action="modal:close-login">Maybe later</button>
+                    <button
+                        type="button"
+                        class="btn btn-explore"
+                        id="modal-submit-cta"
+                        data-action="modal:submit-access">
+                        Sign In (Demo Mode)
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-register"
+                        id="modal-cancel-cta"
+                        data-action="modal:close-login">
+                        Maybe later
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- نافذة الشروط والخصوصية (Policy Modal) -->
-        <div class="custom-modal policy-dialog" id="policy-modal" role="dialog" aria-modal="true" aria-labelledby="policy-modal-title" aria-hidden="true">
+        <div
+            class="custom-modal policy-dialog"
+            id="policy-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="policy-modal-title"
+            aria-hidden="true">
             <div class="modal-backdrop" data-action="modal:close-policy" tabindex="-1"></div>
             <div class="modal-card">
-                <button type="button" class="modal-close-btn" data-action="modal:close-policy" aria-label="Close modal">&times;</button>
+                <button type="button" class="modal-close-btn" data-action="modal:close-policy" aria-label="Close modal">
+                    &times;
+                </button>
                 <span class="icon icon-vendor modal-icon" aria-hidden="true"></span>
                 <h2 id="policy-modal-title">Guard Staffing Terms</h2>
                 <div class="policy-body" id="policy-modal-content">
                     <p>
-                        ShieldNet verifies professional licenses, background checks, and physical security qualifications
-                        before matching guards with corporate facilities and private properties.
+                        ShieldNet verifies professional licenses, background checks, and physical security
+                        qualifications before matching guards with corporate facilities and private properties.
                     </p>
                 </div>
                 <div class="modal-actions" style="margin-top: 20px">
@@ -384,6 +519,6 @@
             <span class="toast-message" id="toast-message">Action successful</span>
         </div>
 
-        <script type="module" src="/js/script.js"></script>
+        <script type="module" src="js/script.js"></script>
     </body>
 </html>

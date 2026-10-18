@@ -1,5 +1,7 @@
 // ShieldNet - script.js
-// Centralized Action Manager and Event Architecture with Interactive Mock Login
+// Centralized Action Manager + persistent Demo Mode (sign in / create account / log out)
+
+import { SESSION_KEY, getSession, startSession, endSession } from "./session.js";
 
 (function initShieldNet() {
     function start() {
@@ -18,46 +20,18 @@
         const mobileDrawer = document.getElementById("mobile-nav-drawer");
         const drawerBackdrop = document.getElementById("mobile-drawer-backdrop");
         const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-        const mobileFixedCta = document.querySelector(".mobile-fixed-cta");
 
         const toastEl = document.getElementById("action-toast");
         const toastMessage = document.getElementById("toast-message");
         let toastTimeout = null;
         let lastFocusedElement = null;
 
-        // Mock Login State (Demo Session)
-        let isDemoLoggedIn = false;
+        // Every button that is locked until the user enters Demo Mode
+        const lockableEls = document.querySelectorAll('[data-action="nav:locked-portal"]');
+        // Sign In / Log Out buttons and Create Account / Check Your Profile buttons
+        const signInEls = document.querySelectorAll('[data-auth="signin"]');
+        const signUpEls = document.querySelectorAll('[data-auth="signup"]');
 
-        // Demo portal data for unlocked exploration in mock mode
-        const demoPortalData = {
-            "Guard Profiles": {
-                title: "Guard Profiles (Demo Preview)",
-                desc: "Connected to verified officer registry: 14,250 certified candidates available for corporate facilities, residential compounds, and private estates across Egypt.",
-                actionLabel: "Filter Profiles (Demo)"
-            },
-            "Job Quotes": {
-                title: "Job Quotes (Demo Preview)",
-                desc: "Active hiring requests: 1,280 estates requesting competitive security deployment proposals across corporate facilities and luxury estates.",
-                actionLabel: "Review Quotes (Demo)"
-            },
-            "Client Portal": {
-                title: "Client Portal (Demo Preview)",
-                desc: "Estate Management Console: 24/7 post logs, guard check-ins, shift rotations, and live incident reporting logs.",
-                actionLabel: "View Console (Demo)"
-            },
-            "Guard Agencies": {
-                title: "Guard Agencies (Demo Preview)",
-                desc: "Partner Agency Directory: 48 licensed security contractor agencies with verified compliance records and insurance audits.",
-                actionLabel: "Browse Agencies (Demo)"
-            },
-            "Admin Portal": {
-                title: "Admin Portal (Demo Preview)",
-                desc: "Platform Governance: Verification queue, officer background checks, and clearance level accreditation console.",
-                actionLabel: "Open Admin Tools (Demo)"
-            }
-        };
-
-        // Vetting and staffing policies content
         const policyTexts = {
             privacy: {
                 title: "Privacy & Guard Vetting Policy",
@@ -70,7 +44,47 @@
         };
 
         /* ========================================================
-           2. Helper Functions (Modals, Toasts, Drawer)
+           2. Demo Mode (persisted in localStorage)
+           ======================================================== */
+        function isDemoMode() {
+            return !!getSession();
+        }
+
+        // Single source of truth: reads the saved session and updates the whole UI
+        function applyAuthState() {
+            const on = isDemoMode();
+            document.body.classList.toggle("demo-on", on);
+
+            lockableEls.forEach((el) => {
+                el.classList.toggle("is-locked", !on);
+                if (on) {
+                    el.removeAttribute("aria-haspopup");
+                } else {
+                    el.setAttribute("aria-haspopup", "dialog");
+                }
+            });
+
+            signInEls.forEach((el) => {
+                el.textContent = on ? "Log Out" : "Sign In";
+            });
+
+            signUpEls.forEach((el) => {
+                el.textContent = on ? "Check Your Profile" : "Create Account";
+            });
+        }
+
+        function enableDemoMode() {
+            startSession();
+            applyAuthState();
+        }
+
+        function disableDemoMode() {
+            endSession();
+            applyAuthState();
+        }
+
+        /* ========================================================
+           3. Helper Functions (Modals, Toasts, Drawer)
            ======================================================== */
         let lastModalActionTime = 0;
 
@@ -92,7 +106,6 @@
             modalEl.setAttribute("aria-hidden", "false");
             document.body.classList.add("modal-open");
 
-            // Accessible focus placement
             const closeBtn = modalEl.querySelector(".modal-close-btn");
             if (closeBtn) closeBtn.focus();
         }
@@ -106,7 +119,6 @@
             if (!document.querySelector(".custom-modal.is-active")) {
                 document.body.classList.remove("modal-open");
             }
-            // Restore focus
             if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
                 lastFocusedElement.focus();
             }
@@ -136,34 +148,11 @@
             if (mobileMenuBtn) mobileMenuBtn.setAttribute("aria-expanded", "false");
         }
 
-        function configureLoginModalForDemo(portalName) {
+        // Modal shown only to visitors who are NOT in Demo Mode yet
+        function configureLoginModal(portalName) {
             if (!loginModalTitle || !loginModalDesc || !modalSubmitCta) return;
 
-            if (isDemoLoggedIn) {
-                // If user is already in demo session and clicks a locked portal
-                if (portalName && demoPortalData[portalName]) {
-                    const data = demoPortalData[portalName];
-                    loginModalTitle.textContent = data.title;
-                    loginModalDesc.textContent = data.desc;
-                    modalSubmitCta.textContent = data.actionLabel;
-                    modalSubmitCta.setAttribute("data-action", "modal:demo-action");
-                    modalSubmitCta.setAttribute("data-portal-name", portalName);
-                    if (modalCancelCta) modalCancelCta.textContent = "Close Preview";
-                    return;
-                }
-
-                // If user clicks Sign In while already in demo session (Session info)
-                loginModalTitle.textContent = "ShieldNet Demo Session";
-                loginModalDesc.textContent =
-                    "Active Demo Session: Signed in as Capt. Tarek Mansour (Verified CSO — ID #SN-84920-EGY). All portal features and candidate registries are available to explore in Demo Mode.";
-                modalSubmitCta.textContent = "Sign Out (Demo)";
-                modalSubmitCta.setAttribute("data-action", "modal:logout");
-                if (modalCancelCta) modalCancelCta.textContent = "Close";
-                return;
-            }
-
-            // Standard Sign In state (pre-login)
-            if (portalName && portalName !== "Guard Network Access" && portalName !== "Guard Network Login") {
+            if (portalName) {
                 loginModalTitle.textContent = `Access ${portalName}`;
                 loginModalDesc.textContent = `Please sign in or start a Demo Session to view ${portalName} and access certified security guard profiles.`;
             } else {
@@ -177,22 +166,20 @@
             if (modalCancelCta) modalCancelCta.textContent = "Maybe later";
         }
 
+        // Temporary destination for every unlocked button
+        function goToPlaceholder() {
+            closeMobileDrawer();
+            window.location.hash = "#";
+        }
+
         /* ========================================================
-           3. ButtonActionManager (Categorized Master Dispatcher)
+           4. ButtonActionManager (Categorized Master Dispatcher)
            ======================================================== */
         const ButtonActionManager = {
-            categories: {
-                MODAL: "modal",
-                NAVIGATION: "nav",
-                ACTION: "action",
-                CUSTOM: "custom"
-            },
-
             handlers: {
                 /* ----- Modal Actions ----- */
                 "modal:open-login": (target) => {
-                    const portal = target.getAttribute("data-portal") || "Guard Network Access";
-                    configureLoginModalForDemo(portal);
+                    configureLoginModal(target.getAttribute("data-portal"));
                     closeMobileDrawer();
                     openModal(loginModal);
                 },
@@ -211,31 +198,12 @@
                 "modal:close-policy": () => {
                     closeModal(policyModal);
                 },
-                // Mock Login: Signs in as demo user and unlocks demo exploration
+                // "Sign In (Demo Mode)" inside the locked-portal modal
                 "modal:submit-access": () => {
-                    isDemoLoggedIn = true;
-                    if (mobileFixedCta) {
-                        mobileFixedCta.textContent = "Demo User ✓";
-                        mobileFixedCta.setAttribute("data-portal", "Demo Session");
-                    }
+                    enableDemoMode();
+                    lastModalActionTime = 0;
                     closeModal(loginModal);
-                    showToast("Signed in (Demo Mode): Exploring ShieldNet features");
-                },
-                // Demo Logout: Resets session back to initial
-                "modal:logout": () => {
-                    isDemoLoggedIn = false;
-                    if (mobileFixedCta) {
-                        mobileFixedCta.textContent = "Sign In";
-                        mobileFixedCta.setAttribute("data-portal", "Guard Network Login");
-                    }
-                    closeModal(loginModal);
-                    showToast("Signed out of Demo Mode");
-                },
-                // Demo Action inside unlocked portal
-                "modal:demo-action": (target) => {
-                    const portalName = target.getAttribute("data-portal-name") || "Portal";
-                    closeModal(loginModal);
-                    showToast(`Demo Preview: Interacting with ${portalName}`);
+                    showToast("Signed in (Demo Mode): all features unlocked");
                 },
                 "modal:close-all": () => {
                     closeAllModals();
@@ -259,28 +227,41 @@
                     closeMobileDrawer();
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 },
+                // Locked portals: open the sign-in modal, or go to # once Demo Mode is on
                 "nav:locked-portal": (target) => {
+                    if (isDemoMode()) {
+                        goToPlaceholder();
+                        return;
+                    }
                     const portal = target.getAttribute("data-portal") || target.textContent.trim();
-                    configureLoginModalForDemo(portal);
+                    configureLoginModal(portal);
                     closeMobileDrawer();
                     openModal(loginModal);
                 },
 
                 /* ----- Interactive Platform Actions ----- */
-                // زر Explore: ينتقل مؤقتاً إلى # دون فتح أي مودال
                 "action:explore-guards": () => {
-                    closeMobileDrawer();
-                    window.location.hash = "#";
+                    goToPlaceholder();
                 },
-                // زر Create Account: ينتقل مؤقتاً إلى # دون فتح أي مودال
+                // Create Account -> login page  |  Check Your Profile -> # (temporary)
                 "action:create-account": () => {
                     closeMobileDrawer();
-                    window.location.hash = "#";
+                    if (isDemoMode()) {
+                        window.location.hash = "#";
+                        return;
+                    }
+                    window.location.href = "/login.html";
                 },
-                // زر Sign In: ينتقل مؤقتاً إلى # دون فتح أي مودال
+                // Sign In -> starts Demo Mode  |  Log Out -> resets everything
                 "action:sign-in": () => {
                     closeMobileDrawer();
-                    window.location.hash = "#";
+                    if (isDemoMode()) {
+                        disableDemoMode();
+                        showToast("Logged out: demo mode ended");
+                    } else {
+                        enableDemoMode();
+                        showToast("Signed in (Demo Mode): all features unlocked");
+                    }
                 }
             },
 
@@ -304,7 +285,7 @@
                 }
 
                 if (actionKey.startsWith("modal:open-")) {
-                    configureLoginModalForDemo("Guard Network Access");
+                    configureLoginModal(null);
                     openModal(loginModal);
                     return true;
                 }
@@ -328,7 +309,6 @@
                 if (element.classList.contains("drawer-close-btn")) return "nav:close-drawer";
                 if (element.classList.contains("mobile-drawer-backdrop")) return "nav:close-drawer";
                 if (element.classList.contains("is-locked")) return "nav:locked-portal";
-                // تأكيد توجيه أزرار Sign In و Create Account و Explore لعدم فتح المودال
                 if (element.classList.contains("mobile-fixed-cta")) return "action:sign-in";
                 if (element.classList.contains("btn-register")) return "action:create-account";
                 if (element.classList.contains("btn-drawer")) return "action:create-account";
@@ -342,7 +322,7 @@
         window.ShieldNetDispatch = (actionKey, el) => ButtonActionManager.dispatch(actionKey, el);
 
         /* ========================================================
-           4. Master Event Delegation (Touch & Click Support)
+           5. Master Event Delegation (Touch & Click Support)
            ======================================================== */
         document.addEventListener(
             "click",
@@ -355,19 +335,6 @@
 
                 const actionKey = ButtonActionManager.resolveAction(clickable);
                 if (actionKey) {
-                    // If it's an action that navigates to # (explore, create-account, or sign-in),
-                    // we close any mobile drawer and navigate to # without opening modals.
-                    if (
-                        actionKey === "action:explore-guards" ||
-                        actionKey === "action:create-account" ||
-                        actionKey === "action:sign-in"
-                    ) {
-                        e.preventDefault();
-                        ButtonActionManager.dispatch(actionKey, clickable, e);
-                        window.location.hash = "#";
-                        return;
-                    }
-
                     e.preventDefault();
                     e.stopPropagation();
                     ButtonActionManager.dispatch(actionKey, clickable, e);
@@ -389,8 +356,16 @@
             }
         });
 
+        // Keep every open tab in sync (log in/out in one tab updates the others)
+        window.addEventListener("storage", (e) => {
+            if (e.key === SESSION_KEY || e.key === null) applyAuthState();
+        });
+
+        // Coming back from login.html via the browser's back/forward cache
+        window.addEventListener("pageshow", applyAuthState);
+
         /* ========================================================
-           5. Smooth Number Counters
+           6. Smooth Number Counters
            ======================================================== */
         const statValues = document.querySelectorAll(".stat-value[data-target]");
         if (statValues.length > 0) {
@@ -425,6 +400,11 @@
                 requestAnimationFrame(updateCounters);
             }
         }
+
+        /* ========================================================
+           7. Initial state: restore a saved Demo Mode session
+           ======================================================== */
+        applyAuthState();
     }
 
     if (document.readyState === "loading") {
