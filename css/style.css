@@ -560,7 +560,7 @@ html {
 
 .nav-link:focus-visible,
 .btn:focus-visible,
-.footer-link:focus-visible,
+.footer-nav-link:focus-visible,
 .dev-link:focus-visible {
     outline: 2px solid var(--color-gold);
     outline-offset: 2px;
@@ -798,18 +798,6 @@ html {
     color: var(--color-navy-dark);
     box-shadow: 0 2px 12px rgba(212, 175, 55, 0.4);
     transform: translateY(-1px);
-}
-
-.policy-body {
-    text-align: left;
-    font-size: 0.92rem;
-    line-height: 1.7;
-    color: #cbd5e1;
-    margin-block: 16px;
-    padding: 16px;
-    background: rgba(11, 25, 44, 0.45);
-    border-radius: 8px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 /* ---------- الشريطان المنحنيان المتحركان ---------- */
@@ -1101,12 +1089,21 @@ body.modal-open {
     color: var(--color-navy);
     background: var(--color-gold);
     border: 1px solid var(--color-gold);
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.mobile-fixed-cta:hover {
-    background: #e3c25a;
-    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
+@media (hover: hover) {
+    .mobile-fixed-cta:hover {
+        background: #e3c25a;
+        box-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
+    }
+}
+
+.mobile-fixed-cta:active {
+    background: #d4af37;
+    transform: scale(0.96);
 }
 
 /* ---------- زر أيقونة القائمة الجانبية في الهاتف (Mobile Menu Button) ---------- */
@@ -1125,14 +1122,22 @@ body.modal-open {
     justify-content: center;
     gap: 4px;
     padding: 0;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.mobile-menu-btn:hover,
+@media (hover: hover) {
+    .mobile-menu-btn:hover {
+        background: rgba(212, 175, 55, 0.25);
+        box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
+        transform: scale(1.05);
+    }
+}
+
 .mobile-menu-btn:active {
-    background: rgba(212, 175, 55, 0.25);
-    box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
-    transform: scale(1.05);
+    background: rgba(212, 175, 55, 0.35);
+    transform: scale(0.95);
 }
 
 .mobile-menu-btn .menu-bar {
@@ -1141,6 +1146,7 @@ body.modal-open {
     height: 2px;
     background-color: var(--color-gold);
     border-radius: 2px;
+    pointer-events: none;
 }
 
 /* ---------- خلفية القائمة الجانبية المعتمة (Backdrop) ---------- */
@@ -1330,13 +1336,22 @@ body.modal-open {
     border-radius: 8px;
     border: 1px solid transparent;
     transition: all 0.2s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.drawer-link:hover {
-    background: rgba(212, 175, 55, 0.12);
+@media (hover: hover) {
+    .drawer-link:hover {
+        background: rgba(212, 175, 55, 0.12);
+        color: var(--color-gold);
+        border-color: rgba(212, 175, 55, 0.3);
+        transform: translateX(4px);
+    }
+}
+
+.drawer-link:active {
+    background: rgba(212, 175, 55, 0.2);
     color: var(--color-gold);
-    border-color: rgba(212, 175, 55, 0.3);
-    transform: translateX(4px);
 }
 
 .drawer-link.active {
@@ -1350,9 +1365,10 @@ body.modal-open {
     opacity: 0.7;
 }
 
-.drawer-link .icon {
-    width: 20px;
-    height: 20px;
+.drawer-link .icon,
+.drawer-link .lock-tag,
+.drawer-link span {
+    pointer-events: none;
 }
 
 .lock-tag {
@@ -1382,13 +1398,10 @@ body.modal-open {
 @media (max-width: 1150px) {
     .left-triangle {
         width: 54%;
-        clip-path: polygon(0 0, 65% 0, 92% 50%, 65% 100%, 0 100%);
+        clip-path: polygon(0 0, 62% 0, 90% 50%, 62% 100%, 0 100%);
     }
     .golden-divider {
         width: 54%;
-    }
-    .golden-divider .divider-line {
-        points: "65,0 92,50 65,100";
     }
     .right-triangle {
         padding-left: 50%;
