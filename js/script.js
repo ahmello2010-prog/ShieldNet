@@ -154,7 +154,8 @@
 
                 // If user clicks Sign In while already in demo session (Session info)
                 loginModalTitle.textContent = "ShieldNet Demo Session";
-                loginModalDesc.textContent = "Active Demo Session: Signed in as Capt. Tarek Mansour (Verified CSO — ID #SN-84920-EGY). All portal features and candidate registries are available to explore in Demo Mode.";
+                loginModalDesc.textContent =
+                    "Active Demo Session: Signed in as Capt. Tarek Mansour (Verified CSO — ID #SN-84920-EGY). All portal features and candidate registries are available to explore in Demo Mode.";
                 modalSubmitCta.textContent = "Sign Out (Demo)";
                 modalSubmitCta.setAttribute("data-action", "modal:logout");
                 if (modalCancelCta) modalCancelCta.textContent = "Close";
@@ -167,7 +168,8 @@
                 loginModalDesc.textContent = `Please sign in or start a Demo Session to view ${portalName} and access certified security guard profiles.`;
             } else {
                 loginModalTitle.textContent = "Access Guard Network";
-                loginModalDesc.textContent = "Join Egypt's verified security personnel network. Start a Demo Session to explore experienced, background-checked security guards and estate recruitment tools.";
+                loginModalDesc.textContent =
+                    "Join Egypt's verified security personnel network. Start a Demo Session to explore experienced, background-checked security guards and estate recruitment tools.";
             }
 
             modalSubmitCta.textContent = "Sign In (Demo Mode)";
@@ -241,7 +243,11 @@
 
                 /* ----- Navigation Actions ----- */
                 "nav:toggle-drawer": () => {
-                    isDrawerOpen() ? closeMobileDrawer() : openMobileDrawer();
+                    if (isDrawerOpen()) {
+                        closeMobileDrawer();
+                    } else {
+                        openMobileDrawer();
+                    }
                 },
                 "nav:open-drawer": () => {
                     openMobileDrawer();
@@ -338,29 +344,37 @@
         /* ========================================================
            4. Master Event Delegation (Touch & Click Support)
            ======================================================== */
-        document.addEventListener("click", (e) => {
-            const clickable = e.target.closest(
-                "[data-action], button, .btn, .nav-link, .drawer-link, .mobile-menu-btn, .mobile-fixed-cta, [data-open-policy], [data-close-modal], [data-close-policy]"
-            );
+        document.addEventListener(
+            "click",
+            (e) => {
+                const clickable = e.target.closest(
+                    "[data-action], button, .btn, .nav-link, .drawer-link, .mobile-menu-btn, .mobile-fixed-cta, [data-open-policy], [data-close-modal], [data-close-policy]"
+                );
 
-            if (!clickable) return;
+                if (!clickable) return;
 
-            const actionKey = ButtonActionManager.resolveAction(clickable);
-            if (actionKey) {
-                // If it's an action that navigates to # (explore, create-account, or sign-in),
-                // we close any mobile drawer and navigate to # without opening modals.
-                if (actionKey === "action:explore-guards" || actionKey === "action:create-account" || actionKey === "action:sign-in") {
+                const actionKey = ButtonActionManager.resolveAction(clickable);
+                if (actionKey) {
+                    // If it's an action that navigates to # (explore, create-account, or sign-in),
+                    // we close any mobile drawer and navigate to # without opening modals.
+                    if (
+                        actionKey === "action:explore-guards" ||
+                        actionKey === "action:create-account" ||
+                        actionKey === "action:sign-in"
+                    ) {
+                        e.preventDefault();
+                        ButtonActionManager.dispatch(actionKey, clickable, e);
+                        window.location.hash = "#";
+                        return;
+                    }
+
                     e.preventDefault();
+                    e.stopPropagation();
                     ButtonActionManager.dispatch(actionKey, clickable, e);
-                    window.location.hash = "#";
-                    return;
                 }
-
-                e.preventDefault();
-                e.stopPropagation();
-                ButtonActionManager.dispatch(actionKey, clickable, e);
-            }
-        }, { passive: false });
+            },
+            { passive: false }
+        );
 
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
@@ -399,11 +413,11 @@
                 });
             };
 
-            function updateCounters(currentTime) {
+            const updateCounters = (currentTime) => {
                 const progress = Math.min((currentTime - startTime) / duration, 1);
                 render(progress);
                 if (progress < 1) requestAnimationFrame(updateCounters);
-            }
+            };
 
             if (reduceMotion) {
                 render(1);
