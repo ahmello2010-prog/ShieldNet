@@ -861,43 +861,103 @@ html {
     }
 }
 
-/* ---------- نافذة تسجيل الدخول (Modal) ---------- */
-.login-modal {
-    margin: auto;
-    width: min(92vw, 420px);
-    padding: 36px 32px 28px;
-    border: 1px solid rgba(212, 175, 55, 0.35);
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
+/* ---------- النوافذ المنبثقة الشاملة للموبايل وسطح المكتب (Universal Modals) ---------- */
+.custom-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10005;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    touch-action: pan-y;
+}
+
+.custom-modal.is-active {
+    display: flex;
+}
+
+body.modal-open {
+    overflow: hidden !important;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(7, 21, 36, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.modal-card {
+    position: relative;
+    z-index: 2;
+    width: min(92vw, 440px);
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 38px 28px 28px;
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    border-radius: 16px;
+    background: linear-gradient(145deg, #0f2b46 0%, #0b192c 100%);
     color: #cbd5e1;
     text-align: center;
-    box-shadow: 0 24px 60px rgba(11, 25, 44, 0.55);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 25px rgba(212, 175, 55, 0.2);
+    animation: modal-pop 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-overflow-scrolling: touch;
 }
 
-.login-modal::backdrop {
-    background: rgba(11, 25, 44, 0.65);
-    backdrop-filter: blur(4px);
-}
-
-.login-modal[open] {
-    animation: modal-in 0.25s ease;
-}
-
-@keyframes modal-in {
+@keyframes modal-pop {
     from {
         opacity: 0;
-        transform: translateY(12px) scale(0.97);
+        transform: scale(0.92) translateY(14px);
     }
     to {
         opacity: 1;
-        transform: none;
+        transform: scale(1) translateY(0);
     }
 }
 
+.modal-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cbd5e1;
+    font-size: 1.6rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 4;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.modal-close-btn:hover,
+.modal-close-btn:active {
+    background: var(--color-gold);
+    color: var(--color-navy-dark);
+    border-color: var(--color-gold);
+    transform: scale(1.06);
+}
+
 .modal-icon {
-    margin: 10px auto 26px;
+    margin: 6px auto 18px;
     color: var(--color-gold);
-    transform: scale(2);
+    transform: scale(1.8);
+    display: block;
 }
 
 .modal-logo-img {
@@ -911,17 +971,35 @@ html {
     display: block;
 }
 
-.login-modal h2 {
+.modal-card h2 {
     font-family: var(--font-display);
     color: #ffffff;
     font-size: 1.6rem;
     margin-bottom: 12px;
+    line-height: 1.25;
 }
 
-.login-modal p {
-    font-size: 0.9rem;
+.modal-card p {
+    font-size: 0.92rem;
     line-height: 1.7;
-    margin-bottom: 26px;
+    margin-bottom: 24px;
+    color: #cbd5e1;
+}
+
+.policy-dialog .modal-card {
+    text-align: left;
+    width: min(94vw, 500px);
+}
+
+.policy-body {
+    margin: 14px 0 22px;
+    padding: 16px;
+    background: rgba(11, 25, 44, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: #e2e8f0;
 }
 
 .modal-actions {
@@ -935,7 +1013,8 @@ html {
     border-color: rgba(255, 255, 255, 0.35);
 }
 
-.modal-actions .btn-register:hover {
+.modal-actions .btn-register:hover,
+.modal-actions .btn-register:active {
     background-color: rgba(255, 255, 255, 0.12);
 }
 
@@ -944,12 +1023,15 @@ html {
     color: var(--color-navy);
 }
 
-.modal-actions .btn-explore:hover {
+.modal-actions .btn-explore:hover,
+.modal-actions .btn-explore:active {
     background-color: #e0bd4f;
 }
 
-.modal-actions .btn:focus-visible {
-    outline-color: #ffffff;
+.modal-actions .btn:focus-visible,
+.modal-close-btn:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
 }
 
 /* ---------- شريط علوي ثابت في الهاتف (Fixed Mobile Top Header) ---------- */
@@ -1086,12 +1168,16 @@ html {
     padding: 24px 20px 28px;
     overflow-y: auto;
     transform: translateX(-105%);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
     box-shadow: 14px 0 40px rgba(0, 0, 0, 0.65);
 }
 
 .mobile-nav-drawer.is-open {
     transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .drawer-header {

@@ -19,7 +19,7 @@
                 <img src="/img/logo.jpg" alt="ShieldNet" class="fixed-bar-logo" />
                 <h2>Shield<span>Net</span></h2>
             </div>
-            <a href="#" class="mobile-fixed-cta is-locked" aria-haspopup="dialog">Sign In</a>
+            <a href="#" class="mobile-fixed-cta is-locked" data-open-modal="login" aria-haspopup="dialog">Sign In</a>
         </header>
 
         <main class="hero-container">
@@ -101,10 +101,10 @@
                     </div>
                     <div class="interactive-zone">
                         <div class="cta-buttons">
-                            <a href="#" class="btn btn-explore">
+                            <a href="#" class="btn btn-explore" data-open-modal="login">
                                 Explore Guard Network <span class="arrow-icon">→</span>
                             </a>
-                            <a href="#" class="btn btn-register">Create Account</a>
+                            <a href="#" class="btn btn-register" data-open-modal="login">Create Account</a>
                         </div>
 
                         <!-- ثلاث بطاقات إحصائيات للمنصة -->
@@ -299,7 +299,7 @@
                         <a href="#" class="drawer-link active"><span class="icon icon-home"></span><span>Home</span></a>
                     </li>
                     <li>
-                        <a href="#" class="drawer-link"
+                        <a href="#" class="drawer-link" data-open-modal="login"
                             ><span class="icon icon-search"></span><span>Explore Guards</span></a
                         >
                     </li>
@@ -337,39 +337,46 @@
             </nav>
 
             <div class="drawer-footer-cta">
-                <a href="#" class="btn btn-explore btn-drawer">Create Account</a>
+                <a href="#" class="btn btn-explore btn-drawer" data-open-modal="login">Create Account</a>
             </div>
         </aside>
 
-        <!-- نافذة تسجيل الدخول للمنصة -->
-        <dialog class="login-modal" id="login-modal" aria-labelledby="login-modal-title">
-            <img src="/img/logo.jpg" alt="ShieldNet Security Emblem" class="modal-logo-img" />
-            <h2 id="login-modal-title">Access Guard Network</h2>
-            <p>
-                Join Egypt's verified security personnel network. Sign in to hire experienced, background-checked
-                security guards or create your verified security guard candidate profile.
-            </p>
-            <div class="modal-actions">
-                <a href="#" class="btn btn-explore">Hire or Join Network</a>
-                <button type="button" class="btn btn-register" data-close-modal>Maybe later</button>
+        <!-- نافذة تسجيل الدخول للمنصة (Login & Join Modal) -->
+        <div class="custom-modal" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-modal-title" aria-hidden="true">
+            <div class="modal-backdrop" data-close-modal tabindex="-1"></div>
+            <div class="modal-card">
+                <button type="button" class="modal-close-btn" data-close-modal aria-label="Close modal">&times;</button>
+                <img src="/img/logo.jpg" alt="ShieldNet Security Emblem" class="modal-logo-img" />
+                <h2 id="login-modal-title">Access Guard Network</h2>
+                <p>
+                    Join Egypt's verified security personnel network. Sign in to hire experienced, background-checked
+                    security guards or create your verified security guard candidate profile.
+                </p>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-explore" id="modal-submit-cta" data-close-modal>Hire or Join Network</button>
+                    <button type="button" class="btn btn-register" data-close-modal>Maybe later</button>
+                </div>
             </div>
-        </dialog>
+        </div>
 
         <!-- نافذة الشروط والخصوصية (Policy Modal) -->
-        <dialog class="login-modal policy-dialog" id="policy-modal" aria-labelledby="policy-modal-title">
-            <span class="icon icon-vendor modal-icon" aria-hidden="true"></span>
-            <h2 id="policy-modal-title">Guard Staffing Terms</h2>
-            <div class="policy-body" id="policy-modal-content">
-                <p>
-                    ShieldNet verifies professional licenses, background checks, and physical security qualifications
-                    before matching guards with corporate facilities and private properties.
-                </p>
+        <div class="custom-modal policy-dialog" id="policy-modal" role="dialog" aria-modal="true" aria-labelledby="policy-modal-title" aria-hidden="true">
+            <div class="modal-backdrop" data-close-policy tabindex="-1"></div>
+            <div class="modal-card">
+                <button type="button" class="modal-close-btn" data-close-policy aria-label="Close modal">&times;</button>
+                <span class="icon icon-vendor modal-icon" aria-hidden="true"></span>
+                <h2 id="policy-modal-title">Guard Staffing Terms</h2>
+                <div class="policy-body" id="policy-modal-content">
+                    <p>
+                        ShieldNet verifies professional licenses, background checks, and physical security qualifications
+                        before matching guards with corporate facilities and private properties.
+                    </p>
+                </div>
+                <div class="modal-actions" style="margin-top: 20px">
+                    <button type="button" class="btn btn-explore" data-close-policy>Understood</button>
+                </div>
             </div>
-            <div class="modal-actions" style="margin-top: 20px">
-                <button type="button" class="btn btn-explore" data-close-policy>Understood</button>
-            </div>
-        </dialog>
-        <script src="js/touch-debug.js"></script>
+        </div>
         <script src="js/script.js"></script>
     </body>
 </html>
