@@ -1655,15 +1655,29 @@ body.demo-on .lock-tag {
     border-color: var(--color-gold-light);
 }
 
-/* ---------- Auth page (login.html) ---------- */
-body.auth-page {
+/* ---------- Auth view (inside index.html, shown on #login) ---------- */
+.auth-view {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10010;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     background:
         linear-gradient(rgba(11, 25, 44, 0.9), rgba(11, 25, 44, 0.94)),
-        url("/img/hero.webp") center / cover no-repeat fixed;
+        url("/img/hero.webp") center / cover no-repeat;
+}
+
+.auth-view.is-active {
+    display: block;
+}
+
+body.auth-open {
+    overflow: hidden !important;
 }
 
 .auth-shell {
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1686,14 +1700,16 @@ body.auth-page {
 }
 
 .auth-back {
-    display: inline-block;
+    float: left;
     margin-bottom: 14px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
     font-family: var(--font-display);
     font-size: 0.85rem;
     font-weight: 600;
     color: #94a3b8;
-    text-decoration: none;
-    float: left;
     transition: color 0.2s ease;
 }
 
@@ -1814,16 +1830,41 @@ body.auth-page {
 
 .auth-submit {
     width: 100%;
-    flex: none;
+    padding: 13px 26px;
+    border: 2px solid transparent;
+    border-radius: 6px;
     background-color: var(--color-gold);
     color: var(--color-navy-dark);
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .auth-submit:hover {
     background-color: var(--color-gold-light);
 }
 
+.auth-submit:active {
+    transform: scale(0.97);
+}
+
 .auth-submit:disabled {
     opacity: 0.8;
     cursor: default;
+}
+
+/* Auth screen used as a standalone page (login.html) */
+.auth-view.auth-standalone {
+    position: relative;
+    display: block;
+    min-height: 100vh;
+    overflow: visible;
+}
+
+a.auth-back {
+    display: inline-block;
+    text-decoration: none;
 }

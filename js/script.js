@@ -1,13 +1,116 @@
-// ShieldNet - script.js
-// Centralized Action Manager + persistent Demo Mode (sign in / create account / log out)
+/* =============================================================
+   1. AUTH - Shared demo mode (runs on every page)
+   ============================================================= */
+const SESSION_KEY = "shieldnet_demo_session";
+const LOGIN_URL = "/login.html";
+const HOME_URL = "/";
 
-import { SESSION_KEY, getSession, startSession, endSession } from "./session.js";
+function getSession() {
+    try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch (err) {
+        return null;
+    }
+}
 
-(function initShieldNet() {
+function isLoggedIn() {
+    return !!getSession();
+}
+
+function startSession(data = {}) {
+    const session = { demo: true, name: "Demo User", startedAt: Date.now(), ...data };
+    try {
+        localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    } catch (err) {
+        console.warn("[ShieldNet] Could not persist demo session:", err);
+    }
+    return session;
+}
+
+function endSession() {
+    try {
+        localStorage.removeItem(SESSION_KEY);
+    } catch (err) {
+        console.warn("[ShieldNet] Could not clear demo session:", err);
+    }
+}
+
+// Updates every auth-aware element on the current page
+function applyAuthUI() {
+    const on = isLoggedIn();
+    document.body.classList.toggle("demo-on", on);
+
+    document.querySelectorAll('[data-auth="locked"]').forEach((el) => {
+        el.classList.toggle("is-locked", !on);
+    });
+    document.querySelectorAll('[data-auth="signin"]').forEach((el) => {
+        el.textContent = on ? "Log Out" : "Sign In";
+    });
+    document.querySelectorAll('[data-auth="signup"]').forEach((el) => {
+        el.textContent = on ? "Check Your Profile" : "Create Account";
+    });
+}
+
+// Lets page sections (e.g. HOME) react: show a toast, close menus, ...
+function emitAuthEvent(type) {
+    document.dispatchEvent(new CustomEvent("shieldnet:auth", { detail: { type } }));
+}
+
+// Capture phase: runs before any other click handler on the page
+document.addEventListener(
+    "click",
+    (e) => {
+        const el = e.target.closest("[data-auth]");
+        if (!el) return;
+
+        const kind = el.dataset.auth;
+        if (kind !== "signin" && kind !== "signup" && kind !== "locked") return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (kind === "signin") {
+            if (isLoggedIn()) {
+                endSession();
+                applyAuthUI();
+                emitAuthEvent("logout");
+            } else {
+                startSession();
+                applyAuthUI();
+                emitAuthEvent("login");
+            }
+            return;
+        }
+
+        // signup + locked
+        if (isLoggedIn()) {
+            window.location.hash = "#"; // temporary destination
+            emitAuthEvent("navigate");
+        } else {
+            window.location.href = LOGIN_URL;
+        }
+    },
+    true
+);
+
+// Keep tabs in sync and handle back/forward cache restores
+window.addEventListener("storage", (e) => {
+    if (e.key === SESSION_KEY || e.key === null) applyAuthUI();
+});
+window.addEventListener("pageshow", applyAuthUI);
+
+applyAuthUI();
+
+/* =============================================================
+   2. HOME - index.html
+   ============================================================= */
+(function initHomePage() {
     function start() {
-        /* ========================================================
-           1. DOM References and State
-           ======================================================== */
+        // Only run on the home page
+        if (!document.querySelector(".hero-container")) return;
+
+        /* ----- DOM references ----- */
         const policyModal = document.getElementById("policy-modal");
         const policyTitle = document.getElementById("policy-modal-title");
         const policyContent = document.getElementById("policy-modal-content");
@@ -20,12 +123,7 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
         const toastMessage = document.getElementById("toast-message");
         let toastTimeout = null;
         let lastFocusedElement = null;
-
-        // Every button that is locked until the user enters Demo Mode
-        const lockableEls = document.querySelectorAll('[data-action="nav:locked-portal"]');
-        // Sign In / Log Out buttons and Create Account / Check Your Profile buttons
-        const signInEls = document.querySelectorAll('[data-auth="signin"]');
-        const signUpEls = document.querySelectorAll('[data-auth="signup"]');
+        let lastModalActionTime = 0;
 
         const policyTexts = {
             privacy: {
@@ -38,59 +136,13 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
             }
         };
 
-        /* ========================================================
-           2. Demo Mode (persisted in localStorage)
-           ======================================================== */
-        function isDemoMode() {
-            return !!getSession();
-        }
-
-        // Single source of truth: reads the saved session and updates the whole UI
-        function applyAuthState() {
-            const on = isDemoMode();
-            document.body.classList.toggle("demo-on", on);
-
-            lockableEls.forEach((el) => {
-                el.classList.toggle("is-locked", !on);
-                if (on) {
-                    el.removeAttribute("aria-haspopup");
-                } else {
-                    el.setAttribute("aria-haspopup", "dialog");
-                }
-            });
-
-            signInEls.forEach((el) => {
-                el.textContent = on ? "Log Out" : "Sign In";
-            });
-
-            signUpEls.forEach((el) => {
-                el.textContent = on ? "Check Your Profile" : "Create Account";
-            });
-        }
-
-        function enableDemoMode() {
-            startSession();
-            applyAuthState();
-        }
-
-        function disableDemoMode() {
-            endSession();
-            applyAuthState();
-        }
-
-        /* ========================================================
-           3. Helper Functions (Modals, Toasts, Drawer)
-           ======================================================== */
-        let lastModalActionTime = 0;
-
+        /* ----- Helpers: toast, modal, drawer ----- */
         function showToast(message, duration = 3200) {
             if (!toastEl || !toastMessage) return;
             toastMessage.textContent = message;
             toastEl.classList.add("is-visible");
             clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toastEl.classList.remove("is-visible");
-            }, duration);
+            toastTimeout = setTimeout(() => toastEl.classList.remove("is-visible"), duration);
         }
 
         function openModal(modalEl) {
@@ -100,7 +152,6 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
             modalEl.classList.add("is-active");
             modalEl.setAttribute("aria-hidden", "false");
             document.body.classList.add("modal-open");
-
             const closeBtn = modalEl.querySelector(".modal-close-btn");
             if (closeBtn) closeBtn.focus();
         }
@@ -143,18 +194,9 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
             if (mobileMenuBtn) mobileMenuBtn.setAttribute("aria-expanded", "false");
         }
 
-        // Temporary destination for every unlocked button
-        function goToPlaceholder() {
-            closeMobileDrawer();
-            window.location.hash = "#";
-        }
-
-        /* ========================================================
-           4. ButtonActionManager (Categorized Master Dispatcher)
-           ======================================================== */
+        /* ----- ButtonActionManager ----- */
         const ButtonActionManager = {
             handlers: {
-                /* ----- Modal Actions ----- */
                 "modal:open-policy": (target) => {
                     const policyKey = target.getAttribute("data-policy") || "privacy";
                     if (policyTexts[policyKey]) {
@@ -164,76 +206,30 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
                     closeMobileDrawer();
                     openModal(policyModal);
                 },
-                "modal:close-policy": () => {
-                    closeModal(policyModal);
-                },
-                "modal:close-all": () => {
-                    closeAllModals();
-                },
+                "modal:close-policy": () => closeModal(policyModal),
+                "modal:close-all": () => closeAllModals(),
 
-                /* ----- Navigation Actions ----- */
-                "nav:toggle-drawer": () => {
-                    if (isDrawerOpen()) {
-                        closeMobileDrawer();
-                    } else {
-                        openMobileDrawer();
-                    }
-                },
-                "nav:open-drawer": () => {
-                    openMobileDrawer();
-                },
-                "nav:close-drawer": () => {
-                    closeMobileDrawer();
-                },
+                "nav:toggle-drawer": () => (isDrawerOpen() ? closeMobileDrawer() : openMobileDrawer()),
+                "nav:open-drawer": () => openMobileDrawer(),
+                "nav:close-drawer": () => closeMobileDrawer(),
                 "nav:home": () => {
                     closeMobileDrawer();
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 },
-                // Locked portals: go to the login page, or to # once Demo Mode is on
-                "nav:locked-portal": () => {
-                    closeMobileDrawer();
-                    if (isDemoMode()) {
-                        window.location.hash = "#";
-                        return;
-                    }
-                    window.location.href = "/login.html";
-                },
 
-                /* ----- Interactive Platform Actions ----- */
+                // Temporary destination: #
                 "action:explore-guards": () => {
-                    goToPlaceholder();
-                },
-                // Create Account -> login page  |  Check Your Profile -> # (temporary)
-                "action:create-account": () => {
                     closeMobileDrawer();
-                    if (isDemoMode()) {
-                        window.location.hash = "#";
-                        return;
-                    }
-                    window.location.href = "/login.html";
-                },
-                // Sign In -> starts Demo Mode  |  Log Out -> resets everything
-                "action:sign-in": () => {
-                    closeMobileDrawer();
-                    if (isDemoMode()) {
-                        disableDemoMode();
-                        showToast("Logged out: demo mode ended");
-                    } else {
-                        enableDemoMode();
-                        showToast("Signed in (Demo Mode): all features unlocked");
-                    }
+                    window.location.hash = "#";
                 }
             },
 
             registerAction(actionKey, handler) {
-                if (typeof handler === "function") {
-                    this.handlers[actionKey] = handler;
-                }
+                if (typeof handler === "function") this.handlers[actionKey] = handler;
             },
 
             dispatch(actionKey, element, event) {
                 if (!actionKey) return false;
-
                 if (typeof this.handlers[actionKey] === "function") {
                     try {
                         this.handlers[actionKey](element, event);
@@ -243,7 +239,6 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
                         return false;
                     }
                 }
-
                 console.warn(`[ButtonActionManager] No handler registered for: '${actionKey}'`);
                 return false;
             },
@@ -260,10 +255,6 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
                 if (element.classList.contains("mobile-menu-btn")) return "nav:toggle-drawer";
                 if (element.classList.contains("drawer-close-btn")) return "nav:close-drawer";
                 if (element.classList.contains("mobile-drawer-backdrop")) return "nav:close-drawer";
-                if (element.classList.contains("is-locked")) return "nav:locked-portal";
-                if (element.classList.contains("mobile-fixed-cta")) return "action:sign-in";
-                if (element.classList.contains("btn-register")) return "action:create-account";
-                if (element.classList.contains("btn-drawer")) return "action:create-account";
                 if (element.classList.contains("btn-explore")) return "action:explore-guards";
 
                 return null;
@@ -273,16 +264,14 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
         window.ButtonActionManager = ButtonActionManager;
         window.ShieldNetDispatch = (actionKey, el) => ButtonActionManager.dispatch(actionKey, el);
 
-        /* ========================================================
-           5. Master Event Delegation (Touch & Click Support)
-           ======================================================== */
+        /* ----- Events ----- */
+        // Buttons marked data-auth are handled by the AUTH section and never reach this.
         document.addEventListener(
             "click",
             (e) => {
                 const clickable = e.target.closest(
-                    "[data-action], button, .btn, .nav-link, .drawer-link, .mobile-menu-btn, .mobile-fixed-cta, [data-open-policy], [data-close-policy]"
+                    "[data-action], button, .btn, .nav-link, .drawer-link, .mobile-menu-btn, [data-open-policy], [data-close-policy]"
                 );
-
                 if (!clickable) return;
 
                 const actionKey = ButtonActionManager.resolveAction(clickable);
@@ -295,6 +284,14 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
             { passive: false }
         );
 
+        // Feedback from the AUTH section (sign in / log out / navigate)
+        document.addEventListener("shieldnet:auth", (e) => {
+            closeMobileDrawer();
+            const type = e.detail && e.detail.type;
+            if (type === "login") showToast("Signed in (Demo Mode): all features unlocked");
+            if (type === "logout") showToast("Logged out: demo mode ended");
+        });
+
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
                 ButtonActionManager.dispatch("modal:close-all");
@@ -303,22 +300,10 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
         });
 
         window.addEventListener("resize", () => {
-            if (window.innerWidth > 992 && isDrawerOpen()) {
-                closeMobileDrawer();
-            }
+            if (window.innerWidth > 992 && isDrawerOpen()) closeMobileDrawer();
         });
 
-        // Keep every open tab in sync (log in/out in one tab updates the others)
-        window.addEventListener("storage", (e) => {
-            if (e.key === SESSION_KEY || e.key === null) applyAuthState();
-        });
-
-        // Coming back from login.html via the browser's back/forward cache
-        window.addEventListener("pageshow", applyAuthState);
-
-        /* ========================================================
-           6. Smooth Number Counters
-           ======================================================== */
+        /* ----- Smooth number counters ----- */
         const statValues = document.querySelectorAll(".stat-value[data-target]");
         if (statValues.length > 0) {
             const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -334,9 +319,7 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
                         ? (easeOut * 99.4).toFixed(1)
                         : Math.floor(easeOut * target).toLocaleString();
                     const node = el.firstChild;
-                    if (node && node.nodeType === Node.TEXT_NODE) {
-                        node.nodeValue = current;
-                    }
+                    if (node && node.nodeType === Node.TEXT_NODE) node.nodeValue = current;
                 });
             };
 
@@ -346,17 +329,125 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
                 if (progress < 1) requestAnimationFrame(updateCounters);
             };
 
-            if (reduceMotion) {
-                render(1);
-            } else {
-                requestAnimationFrame(updateCounters);
-            }
+            if (reduceMotion) render(1);
+            else requestAnimationFrame(updateCounters);
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+
+/* =============================================================
+   3. LOGIN - login.html (create account / sign in)
+   ============================================================= */
+(function initLoginPage() {
+    function start() {
+        const form = document.getElementById("auth-form");
+        // Only run on the login page
+        if (!form) return;
+
+        // Already in demo mode -> nothing to do here
+        if (isLoggedIn()) {
+            window.location.replace(HOME_URL);
+            return;
         }
 
-        /* ========================================================
-           7. Initial state: restore a saved Demo Mode session
-           ======================================================== */
-        applyAuthState();
+        const title = document.getElementById("auth-title");
+        const subtitle = document.getElementById("auth-subtitle");
+        const submitBtn = document.getElementById("auth-submit");
+        const errorEl = document.getElementById("auth-error");
+        const tabs = document.querySelectorAll(".auth-tab");
+        const signupOnly = document.querySelectorAll('[data-only="signup"]');
+        const nameInput = document.getElementById("auth-name");
+        const emailInput = document.getElementById("auth-email");
+        const passInput = document.getElementById("auth-password");
+        const roleInput = document.getElementById("auth-role");
+
+        const copy = {
+            signup: {
+                title: "Create Your Account",
+                subtitle: "Join Egypt's verified security network. This is a demo: no real data is sent anywhere.",
+                button: "Confirm & Continue",
+                autocomplete: "new-password",
+                page: "Create Account"
+            },
+            signin: {
+                title: "Welcome Back",
+                subtitle: "Sign in to continue. This is a demo: any valid email and password will work.",
+                button: "Sign In",
+                autocomplete: "current-password",
+                page: "Sign In"
+            }
+        };
+
+        let mode = "signup";
+        let submitting = false;
+
+        function setMode(next) {
+            mode = next;
+            const c = copy[mode];
+            title.textContent = c.title;
+            subtitle.textContent = c.subtitle;
+            submitBtn.textContent = c.button;
+            passInput.setAttribute("autocomplete", c.autocomplete);
+            signupOnly.forEach((el) => el.classList.toggle("is-hidden", mode !== "signup"));
+            tabs.forEach((tab) => {
+                const active = tab.dataset.mode === mode;
+                tab.classList.toggle("is-active", active);
+                tab.setAttribute("aria-selected", String(active));
+            });
+            document.title = `${c.page} | ShieldNet`;
+            errorEl.textContent = "";
+        }
+
+        function validate() {
+            if (mode === "signup" && nameInput.value.trim().length < 2) {
+                nameInput.focus();
+                return "Please enter your full name.";
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+                emailInput.focus();
+                return "Please enter a valid email address.";
+            }
+            if (passInput.value.length < 6) {
+                passInput.focus();
+                return "Password must be at least 6 characters.";
+            }
+            return "";
+        }
+
+        tabs.forEach((tab) => tab.addEventListener("click", () => setMode(tab.dataset.mode)));
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (submitting) return;
+
+            const problem = validate();
+            if (problem) {
+                errorEl.textContent = problem;
+                return;
+            }
+            errorEl.textContent = "";
+
+            const email = emailInput.value.trim();
+            const name = mode === "signup" ? nameInput.value.trim() : email.split("@")[0];
+
+            // Same demo session the Sign In button creates -> everything unlocks on the home page
+            startSession({ name, email, role: mode === "signup" ? roleInput.value : "client" });
+
+            submitting = true;
+            submitBtn.disabled = true;
+            submitBtn.textContent = "✓ Confirmed, redirecting…";
+            setTimeout(() => window.location.assign(HOME_URL), 700);
+        });
+
+        if (new URLSearchParams(window.location.search).get("mode") === "signin") {
+            setMode("signin");
+        }
     }
 
     if (document.readyState === "loading") {
