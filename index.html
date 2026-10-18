@@ -63,67 +63,42 @@
                     <nav class="platform-navigation" aria-label="Platform Directory">
                         <ul class="links-inline">
                             <li>
-                                <a href="#" class="nav-link active" data-action="nav:home"
-                                    ><span class="icon icon-home"></span>Home</a
-                                >
+                                <a href="#" class="nav-link active" data-action="nav:home">
+                                    <span class="icon icon-home" aria-hidden="true"></span><span data-i18n="navHome">Home</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link" data-action="action:explore-guards"
-                                    ><span class="icon icon-search"></span>Explore Guards</a
-                                >
+                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                    <span class="icon icon-search" aria-hidden="true"></span><span data-i18n="navCompanies">Security Companies</span>
+                                </a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    class="nav-link is-locked"
-                                    data-auth="locked"
-                                    data-portal="Guard Profiles"
-                                    aria-haspopup="dialog"
-                                    ><span class="icon icon-profile"></span>Guard Profiles</a
-                                >
+                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                    <span class="icon icon-vendor" aria-hidden="true"></span><span data-i18n="navServices">Services</span>
+                                </a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    class="nav-link is-locked"
-                                    data-auth="locked"
-                                    data-portal="Job Quotes"
-                                    aria-haspopup="dialog"
-                                    ><span class="icon icon-quote"></span>Job Quotes</a
-                                >
+                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                    <span class="icon icon-client" aria-hidden="true"></span><span data-i18n="navAbout">About Platform</span>
+                                </a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    class="nav-link is-locked"
-                                    data-auth="locked"
-                                    data-portal="Client Portal"
-                                    aria-haspopup="dialog"
-                                    ><span class="icon icon-client"></span>Client Portal</a
-                                >
+                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                    <span class="icon icon-quote" aria-hidden="true"></span><span data-i18n="navRequests">My Requests</span>
+                                </a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    class="nav-link is-locked"
-                                    data-auth="locked"
-                                    data-portal="Guard Agencies"
-                                    aria-haspopup="dialog"
-                                    ><span class="icon icon-vendor"></span>Guard Agencies</a
-                                >
+                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                    <span class="icon icon-contact" aria-hidden="true"></span><span data-i18n="navContact">Contact Us</span>
+                                </a>
                             </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="nav-link is-locked"
-                                    data-auth="locked"
-                                    data-portal="Admin Portal"
-                                    aria-haspopup="dialog"
-                                    ><span class="icon icon-admin"></span>Admin</a
-                                >
+                            <li class="nav-lang-item">
+                                <button type="button" class="nav-link nav-lang-btn" data-action="action:toggle-lang" aria-label="Switch Language">
+                                    <span class="icon icon-globe" aria-hidden="true"></span><span class="lang-label" data-i18n="langToggle">العربية</span>
+                                </button>
                             </li>
                             <li class="nav-auth-item">
-                                <a href="#" class="nav-link nav-auth" data-auth="signin">Sign In</a>
+                                <a href="#" class="nav-link nav-auth" data-auth="signin" data-i18n="navSignIn">Sign In</a>
                             </li>
                         </ul>
                     </nav>
@@ -131,8 +106,8 @@
 
                 <div class="content-wrapper">
                     <div class="intro-text">
-                        <h1>Elite Security Guards <br />For Corporate & Estates</h1>
-                        <p>
+                        <h1 data-i18n="heroTitle" data-i18n-html="true">Elite Security Guards <br />For Corporate & Estates</h1>
+                        <p data-i18n="heroDesc">
                             The professional networking and hiring platform connecting trusted corporate facilities,
                             commercial compounds, and luxury private properties with verified, top-tier security guards.
                             Like LinkedIn for experienced security professionals—discover certified guards with verified
@@ -141,10 +116,10 @@
                     </div>
                     <div class="interactive-zone">
                         <div class="cta-buttons">
-                            <a href="#" class="btn btn-explore" data-action="action:explore-guards">
+                            <a href="#" class="btn btn-explore" data-action="action:explore-guards" data-i18n="heroExplore" data-i18n-html="true">
                                 Explore Guard Network <span class="arrow-icon">→</span>
                             </a>
-                            <a href="#" class="btn btn-register" data-auth="signup">Create Account</a>
+                            <a href="#" class="btn btn-register" data-auth="signup" data-i18n="heroCreate">Create Account</a>
                         </div>
 
                         <!-- ثلاث بطاقات إحصائيات للمنصة -->
@@ -153,15 +128,15 @@
                                 <span class="stat-value" data-target="14250"
                                     >14,250<span class="stat-plus">+</span></span
                                 >
-                                <span class="stat-label">Verified Guards</span>
+                                <span class="stat-label" data-i18n="statGuards">Verified Guards</span>
                             </div>
                             <div class="stat-card">
                                 <span class="stat-value" data-target="1280">1,280<span class="stat-plus">+</span></span>
-                                <span class="stat-label">Hiring Estates</span>
+                                <span class="stat-label" data-i18n="statEstates">Hiring Estates</span>
                             </div>
                             <div class="stat-card">
                                 <span class="stat-value" data-target="99">99.4<span class="stat-plus">%</span></span>
-                                <span class="stat-label">Vetting Trust</span>
+                                <span class="stat-label" data-i18n="statTrust">Vetting Trust</span>
                             </div>
                         </div>
                     </div>
@@ -205,22 +180,22 @@
                             <img src="/img/logo.jpg" alt="ShieldNet Guard Emblem" class="footer-logo-img" />
                             <h3>Shield<span>Net</span></h3>
                         </div>
-                        <p class="footer-tagline">
+                        <p class="footer-tagline" data-i18n="footerTagline">
                             The premier professional networking & staffing platform connecting prestigious corporate
                             estates, gated compounds, and luxury private properties with certified, vetted security
                             guards and protection forces.
                         </p>
                         <div class="security-badge">
-                            <span class="badge-dot"></span> 100% Vetted & Background-Checked Guards
+                            <span class="badge-dot"></span> <span data-i18n="footerBadge">100% Vetted & Background-Checked Guards</span>
                         </div>
                     </div>
 
                     <!-- العمود الثاني: روابط سريعة والسياسات -->
                     <div class="footer-col links-col">
-                        <h4>Guard Network & Legal</h4>
+                        <h4 data-i18n="footerColLegal">Guard Network & Legal</h4>
                         <ul class="footer-menu">
                             <li>
-                                <a href="#" class="footer-nav-link" data-action="action:explore-guards"
+                                <a href="#" class="footer-nav-link" data-action="action:explore-guards" data-i18n="footerBrowse"
                                     >Browse Guard Directory</a
                                 >
                             </li>
@@ -230,11 +205,12 @@
                                     class="footer-nav-link"
                                     data-action="modal:open-policy"
                                     data-policy="privacy"
+                                    data-i18n="footerPrivacy"
                                     >Privacy Policy</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="footer-nav-link" data-action="modal:open-policy" data-policy="terms"
+                                <a href="#" class="footer-nav-link" data-action="modal:open-policy" data-policy="terms" data-i18n="footerTerms"
                                     >Terms of Service</a
                                 >
                             </li>
@@ -244,6 +220,7 @@
                                     class="footer-nav-link is-locked"
                                     data-auth="locked"
                                     data-portal="Guard Credential Verification"
+                                    data-i18n="footerVerify"
                                     >Guard Credential Verification</a
                                 >
                             </li>
@@ -252,8 +229,8 @@
 
                     <!-- العمود الثالث: وسائل التواصل الاجتماعي -->
                     <div class="footer-col social-col">
-                        <h4>Connect With Us</h4>
-                        <p class="social-text">
+                        <h4 data-i18n="footerColSocial">Connect With Us</h4>
+                        <p class="social-text" data-i18n="footerSocialText">
                             Follow guard staffing announcements, placement updates, and estate security insights.
                         </p>
                         <div class="social-links-grid" aria-label="Social media channels">
@@ -310,7 +287,7 @@
                 </div>
 
                 <div class="footer-bottom-bar">
-                    <p class="copyright-text">© 2026 ShieldNet. All rights reserved.</p>
+                    <p class="copyright-text" data-i18n="footerCopyright">© 2026 ShieldNet. All rights reserved.</p>
                     <div class="developer-credit">
                         <span
                             >تم تصميمه وتطويره بواسطة
@@ -362,82 +339,51 @@
             <div class="drawer-banner-preview">
                 <img src="/img/hero.webp" alt="Security Headquarters" class="drawer-preview-img" />
                 <div class="drawer-preview-overlay"></div>
-                <div class="drawer-preview-badge"><span class="badge-dot"></span> 100% Vetted Guards</div>
+                <div class="drawer-preview-badge"><span class="badge-dot"></span> <span data-i18n="badgeGuards">100% Vetted Guards</span></div>
             </div>
 
+            <button type="button" class="drawer-lang-btn" data-action="action:toggle-lang" aria-label="Switch Language">
+                <span class="icon icon-globe" aria-hidden="true"></span><span class="lang-label" data-i18n="langToggle">العربية</span>
+            </button>
+
             <nav class="drawer-nav">
-                <p class="drawer-nav-label">Platform Directory</p>
+                <p class="drawer-nav-label" data-i18n="drawerLabel">Platform Directory</p>
                 <ul class="drawer-links-list">
                     <li>
-                        <a href="#" class="drawer-link active" data-action="nav:home"
-                            ><span class="icon icon-home"></span><span>Home</span></a
-                        >
+                        <a href="#" class="drawer-link active" data-action="nav:home">
+                            <span class="icon icon-home" aria-hidden="true"></span><span data-i18n="navHome">Home</span>
+                        </a>
                     </li>
                     <li>
-                        <a href="#" class="drawer-link" data-action="action:explore-guards"
-                            ><span class="icon icon-search"></span><span>Explore Guards</span></a
-                        >
+                        <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                            <span class="icon icon-search" aria-hidden="true"></span><span data-i18n="navCompanies">Security Companies</span>
+                        </a>
                     </li>
                     <li>
-                        <a
-                            href="#"
-                            class="drawer-link is-locked"
-                            data-auth="locked"
-                            data-portal="Guard Profiles"
-                            aria-haspopup="dialog"
-                            ><span class="icon icon-profile"></span><span>Guard Profiles</span
-                            ><span class="lock-tag">Locked</span></a
-                        >
+                        <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                            <span class="icon icon-vendor" aria-hidden="true"></span><span data-i18n="navServices">Services</span>
+                        </a>
                     </li>
                     <li>
-                        <a
-                            href="#"
-                            class="drawer-link is-locked"
-                            data-auth="locked"
-                            data-portal="Job Quotes"
-                            aria-haspopup="dialog"
-                            ><span class="icon icon-quote"></span><span>Job Quotes</span
-                            ><span class="lock-tag">Locked</span></a
-                        >
+                        <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                            <span class="icon icon-client" aria-hidden="true"></span><span data-i18n="navAbout">About Platform</span>
+                        </a>
                     </li>
                     <li>
-                        <a
-                            href="#"
-                            class="drawer-link is-locked"
-                            data-auth="locked"
-                            data-portal="Client Portal"
-                            aria-haspopup="dialog"
-                            ><span class="icon icon-client"></span><span>Client Portal</span
-                            ><span class="lock-tag">Locked</span></a
-                        >
+                        <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                            <span class="icon icon-quote" aria-hidden="true"></span><span data-i18n="navRequests">My Requests</span>
+                        </a>
                     </li>
                     <li>
-                        <a
-                            href="#"
-                            class="drawer-link is-locked"
-                            data-auth="locked"
-                            data-portal="Guard Agencies"
-                            aria-haspopup="dialog"
-                            ><span class="icon icon-vendor"></span><span>Guard Agencies</span
-                            ><span class="lock-tag">Locked</span></a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="drawer-link is-locked"
-                            data-auth="locked"
-                            data-portal="Admin Portal"
-                            aria-haspopup="dialog"
-                            ><span class="icon icon-admin"></span><span>Admin Portal</span
-                            ><span class="lock-tag">Locked</span></a
-                        >
+                        <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                            <span class="icon icon-contact" aria-hidden="true"></span><span data-i18n="navContact">Contact Us</span>
+                        </a>
                     </li>
                 </ul>
             </nav>
 
             <div class="drawer-footer-cta">
-                <a href="#" class="btn btn-explore btn-drawer" data-auth="signup">Create Account</a>
+                <a href="#" class="btn btn-explore btn-drawer" data-auth="signup" data-i18n="heroCreate">Create Account</a>
             </div>
         </aside>
 

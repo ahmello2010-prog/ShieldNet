@@ -1,4 +1,134 @@
 /* =============================================================
+   0. I18N - Shared Language System (English / Arabic)
+   ============================================================= */
+const LANG_KEY = "shieldnet_lang";
+
+const TRANSLATIONS = {
+    en: {
+        langToggle: "العربية",
+        navHome: "Home",
+        navCompanies: "Security Companies",
+        navServices: "Services",
+        navAbout: "About Platform",
+        navRequests: "My Requests",
+        navContact: "Contact Us",
+        navSignIn: "Sign In",
+        navLogOut: "Log Out",
+        navSignUp: "Create Account",
+        navProfile: "Check Your Profile",
+        heroTitle: "Elite Security Guards <br />For Corporate & Estates",
+        heroDesc: "The professional networking and hiring platform connecting trusted corporate facilities, commercial compounds, and luxury private properties with verified, top-tier security guards. Like LinkedIn for experienced security professionals—discover certified guards with verified backgrounds tailored to your property.",
+        heroExplore: "Explore Guard Network <span class=\"arrow-icon\">→</span>",
+        heroCreate: "Create Account",
+        statGuards: "Verified Guards",
+        statEstates: "Hiring Estates",
+        statTrust: "Vetting Trust",
+        badgeGuards: "100% Vetted Guards",
+        subtextNetwork: "Guard Staffing Network",
+        drawerLabel: "Platform Directory",
+        footerTagline: "The premier professional networking & staffing platform connecting prestigious corporate estates, gated compounds, and luxury private properties with certified, vetted security guards and protection forces.",
+        footerBadge: "100% Vetted & Background-Checked Guards",
+        footerColLegal: "Guard Network & Legal",
+        footerBrowse: "Browse Guard Directory",
+        footerPrivacy: "Privacy Policy",
+        footerTerms: "Terms of Service",
+        footerVerify: "Guard Credential Verification",
+        footerColSocial: "Connect With Us",
+        footerSocialText: "Follow guard staffing announcements, placement updates, and estate security insights.",
+        footerCopyright: "© 2026 ShieldNet. All rights reserved.",
+        toastLogin: "Signed in (Demo Mode): all features unlocked",
+        toastLogout: "Logged out: demo mode ended",
+        toastLang: "Language changed to English"
+    },
+    ar: {
+        langToggle: "English",
+        navHome: "الرئيسية",
+        navCompanies: "تصفح شركات الأمن",
+        navServices: "الخدمات",
+        navAbout: "عن المنصة",
+        navRequests: "طلباتي",
+        navContact: "تواصل معنا",
+        navSignIn: "تسجيل الدخول",
+        navLogOut: "تسجيل الخروج",
+        navSignUp: "إنشاء حساب",
+        navProfile: "الملف الشخصي",
+        heroTitle: "نخبة حراس الأمن <br />للشركات والمنشآت الراقية",
+        heroDesc: "المنصة المهنية الرائدة للتوظيف والربط الأمني، تجمع كبرى المنشآت والشركات والمجمعات الراقية مع نخبة حراس الأمن المعتمدين والموثقين جنائياً ومهنياً. شبكة احترافية متكاملة لاختيار الكفاءات الأمنية الأنسب لمنشأتك.",
+        heroExplore: "استكشف شبكة الحراس <span class=\"arrow-icon\">←</span>",
+        heroCreate: "إنشاء حساب",
+        statGuards: "حراس موثقون",
+        statEstates: "منشآت متعاقدة",
+        statTrust: "نسبة التدقيق",
+        badgeGuards: "حراس معتمدون ومفحوصون 100%",
+        subtextNetwork: "شبكة التوظيف الأمني",
+        drawerLabel: "دليل المنصة",
+        footerTagline: "المنصة المهنية المعتمدة لتوظيف الكفاءات الأمنية والربط بين المنشآت الحيوية والمجمعات الخاصة وحراس الأمن المعتمدين وفِرق الحماية.",
+        footerBadge: "حراس معتمدون ومفحوصون أمنياً بنسبة 100%",
+        footerColLegal: "الشبكة الأمنية والشروط",
+        footerBrowse: "تصفح دليل الحراس",
+        footerPrivacy: "سياسة الخصوصية",
+        footerTerms: "شروط الخدمة",
+        footerVerify: "التحقق من المؤهلات الأمنية",
+        footerColSocial: "تواصل معنا",
+        footerSocialText: "تابع مستجدات التوظيف الأمني وإعلانات التعاقدات وتحديثات حماية المنشآت.",
+        footerCopyright: "© 2026 ShieldNet. جميع الحقوق محفوظة.",
+        toastLogin: "تم تسجيل الدخول (وضع تجريبي): تم تفعيل المزايا",
+        toastLogout: "تم تسجيل الخروج بنجاح",
+        toastLang: "تم تحويل لغة الموقع إلى العربية"
+    }
+};
+
+function getLanguage() {
+    try {
+        const saved = localStorage.getItem(LANG_KEY);
+        if (saved === "ar" || saved === "en") return saved;
+    } catch (e) {
+        // ignore
+    }
+    return "en";
+}
+
+function setLanguage(lang, triggerToast = false) {
+    const validLang = lang === "ar" ? "ar" : "en";
+    try {
+        localStorage.setItem(LANG_KEY, validLang);
+    } catch (e) {
+        // ignore
+    }
+
+    document.documentElement.lang = validLang;
+    document.body.classList.toggle("lang-ar", validLang === "ar");
+
+    const dict = TRANSLATIONS[validLang];
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict && dict[key]) {
+            if (el.hasAttribute("data-i18n-html")) {
+                el.innerHTML = dict[key];
+            } else {
+                el.textContent = dict[key];
+            }
+        }
+    });
+
+    document.querySelectorAll(".lang-label").forEach((el) => {
+        el.textContent = dict.langToggle;
+    });
+
+    applyAuthUI();
+
+    if (triggerToast && typeof window.ShieldNetShowToast === "function") {
+        window.ShieldNetShowToast(dict.toastLang);
+    }
+}
+
+function toggleLanguage() {
+    const next = getLanguage() === "ar" ? "en" : "ar";
+    setLanguage(next, true);
+}
+
+/* =============================================================
    1. AUTH - Shared demo mode (runs on every page)
    ============================================================= */
 const SESSION_KEY = "shieldnet_demo_session";
@@ -39,16 +169,18 @@ function endSession() {
 // Updates every auth-aware element on the current page
 function applyAuthUI() {
     const on = isLoggedIn();
+    const lang = getLanguage();
+    const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
     document.body.classList.toggle("demo-on", on);
 
     document.querySelectorAll('[data-auth="locked"]').forEach((el) => {
         el.classList.toggle("is-locked", !on);
     });
     document.querySelectorAll('[data-auth="signin"]').forEach((el) => {
-        el.textContent = on ? "Log Out" : "Sign In";
+        el.textContent = on ? dict.navLogOut : dict.navSignIn;
     });
     document.querySelectorAll('[data-auth="signup"]').forEach((el) => {
-        el.textContent = on ? "Check Your Profile" : "Create Account";
+        el.textContent = on ? dict.navProfile : dict.navSignUp;
     });
 }
 
@@ -97,10 +229,15 @@ document.addEventListener(
 // Keep tabs in sync and handle back/forward cache restores
 window.addEventListener("storage", (e) => {
     if (e.key === SESSION_KEY || e.key === null) applyAuthUI();
+    if (e.key === LANG_KEY) setLanguage(getLanguage());
 });
-window.addEventListener("pageshow", applyAuthUI);
+window.addEventListener("pageshow", () => {
+    applyAuthUI();
+    setLanguage(getLanguage());
+});
 
 applyAuthUI();
+setLanguage(getLanguage());
 
 /* =============================================================
    2. HOME - index.html
@@ -126,13 +263,25 @@ applyAuthUI();
         let lastModalActionTime = 0;
 
         const policyTexts = {
-            privacy: {
-                title: "Privacy & Guard Vetting Policy",
-                html: "<p>At ShieldNet, candidate confidentiality and client property security are paramount. Guard background checks, identification records, and hiring estate discussions remain strictly protected and confidential.</p>"
+            en: {
+                privacy: {
+                    title: "Privacy & Guard Vetting Policy",
+                    html: "<p>At ShieldNet, candidate confidentiality and client property security are paramount. Guard background checks, identification records, and hiring estate discussions remain strictly protected and confidential.</p>"
+                },
+                terms: {
+                    title: "Security Guard Staffing Terms",
+                    html: "<p>ShieldNet operates as a premier professional network connecting verified physical security guards and protection officers with commercial estates and private properties. All candidates undergo credential auditing before deployment.</p>"
+                }
             },
-            terms: {
-                title: "Security Guard Staffing Terms",
-                html: "<p>ShieldNet operates as a premier professional network connecting verified physical security guards and protection officers with commercial estates and private properties. All candidates undergo credential auditing before deployment.</p>"
+            ar: {
+                privacy: {
+                    title: "سياسة الخصوصية والتدقيق الأمني",
+                    html: "<p>في ShieldNet، خصوصية المرشحين وأمن منشآت العملاء في مقدمة أولوياتنا. تظل سجلات الفحص الأمني والتحقق من الهوية ومفاوضات التعاقد سرية ومحمية بالكامل.</p>"
+                },
+                terms: {
+                    title: "شروط التوظيف والتعاقد الأمني",
+                    html: "<p>تعمل ShieldNet كمنصة مهنية رائدة تربط بين حراس الأمن المعتمدين وفِرق الحماية المؤهلة مع المنشآت التجارية والمجمعات السكنية. يخضع جميع الحراس لتدقيق مهني صارم قبل الاعتماد.</p>"
+                }
             }
         };
 
@@ -144,6 +293,8 @@ applyAuthUI();
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => toastEl.classList.remove("is-visible"), duration);
         }
+
+        window.ShieldNetShowToast = showToast;
 
         function openModal(modalEl) {
             if (!modalEl) return;
@@ -199,9 +350,11 @@ applyAuthUI();
             handlers: {
                 "modal:open-policy": (target) => {
                     const policyKey = target.getAttribute("data-policy") || "privacy";
-                    if (policyTexts[policyKey]) {
-                        if (policyTitle) policyTitle.textContent = policyTexts[policyKey].title;
-                        if (policyContent) policyContent.innerHTML = policyTexts[policyKey].html;
+                    const currentLang = getLanguage();
+                    const langPack = policyTexts[currentLang] || policyTexts.en;
+                    if (langPack[policyKey]) {
+                        if (policyTitle) policyTitle.textContent = langPack[policyKey].title;
+                        if (policyContent) policyContent.innerHTML = langPack[policyKey].html;
                     }
                     closeMobileDrawer();
                     openModal(policyModal);
@@ -215,6 +368,10 @@ applyAuthUI();
                 "nav:home": () => {
                     closeMobileDrawer();
                     window.scrollTo({ top: 0, behavior: "smooth" });
+                },
+
+                "action:toggle-lang": () => {
+                    toggleLanguage();
                 },
 
                 // Temporary destination: #
@@ -252,6 +409,7 @@ applyAuthUI();
                 if (element.hasAttribute("data-close-policy")) return "modal:close-policy";
                 if (element.hasAttribute("data-open-policy")) return "modal:open-policy";
 
+                if (element.classList.contains("nav-lang-btn") || element.classList.contains("drawer-lang-btn")) return "action:toggle-lang";
                 if (element.classList.contains("mobile-menu-btn")) return "nav:toggle-drawer";
                 if (element.classList.contains("drawer-close-btn")) return "nav:close-drawer";
                 if (element.classList.contains("mobile-drawer-backdrop")) return "nav:close-drawer";
