@@ -108,7 +108,8 @@
                 loginModalDesc.textContent = `Please sign in or register to access ${portalName} and explore verified security personnel profiles.`;
             } else {
                 loginModalTitle.textContent = "Access Guard Network";
-                loginModalDesc.textContent = "Join Egypt's verified security personnel network. Sign in to hire experienced, background-checked security guards or create your verified security guard candidate profile.";
+                loginModalDesc.textContent =
+                    "Join Egypt's verified security personnel network. Sign in to hire experienced, background-checked security guards or create your verified security guard candidate profile.";
             }
         }
 
@@ -149,7 +150,9 @@
                 "modal:submit-access": () => {
                     closeModal(loginModal);
                     // Honest prototype feedback without false backend persistence claim
-                    showToast("ShieldNet Prototype Preview: Guard onboarding and hiring flow will connect to backend API upon full release.");
+                    showToast(
+                        "ShieldNet Prototype Preview: Guard onboarding and hiring flow will connect to backend API upon full release."
+                    );
                 },
                 "modal:close-all": () => {
                     closeAllModals();
@@ -157,7 +160,11 @@
 
                 /* ----- Navigation Actions ----- */
                 "nav:toggle-drawer": () => {
-                    isDrawerOpen() ? closeMobileDrawer() : openMobileDrawer();
+                    if (isDrawerOpen()) {
+                        closeMobileDrawer();
+                    } else {
+                        openMobileDrawer();
+                    }
                 },
                 "nav:open-drawer": () => {
                     openMobileDrawer();
@@ -246,20 +253,24 @@
         /* ========================================================
            4. Master Event Delegation (Touch & Click Support)
            ======================================================== */
-        document.addEventListener("click", (e) => {
-            const clickable = e.target.closest(
-                "[data-action], button, .btn, .nav-link, .drawer-link, .mobile-menu-btn, .mobile-fixed-cta, [data-open-policy], [data-close-modal], [data-close-policy]"
-            );
+        document.addEventListener(
+            "click",
+            (e) => {
+                const clickable = e.target.closest(
+                    "[data-action], button, .btn, .nav-link, .drawer-link, .mobile-menu-btn, .mobile-fixed-cta, [data-open-policy], [data-close-modal], [data-close-policy]"
+                );
 
-            if (!clickable) return;
+                if (!clickable) return;
 
-            const actionKey = ButtonActionManager.resolveAction(clickable);
-            if (actionKey) {
-                e.preventDefault();
-                e.stopPropagation();
-                ButtonActionManager.dispatch(actionKey, clickable, e);
-            }
-        }, { passive: false });
+                const actionKey = ButtonActionManager.resolveAction(clickable);
+                if (actionKey) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    ButtonActionManager.dispatch(actionKey, clickable, e);
+                }
+            },
+            { passive: false }
+        );
 
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
@@ -298,11 +309,11 @@
                 });
             };
 
-            function updateCounters(currentTime) {
+            const updateCounters = (currentTime) => {
                 const progress = Math.min((currentTime - startTime) / duration, 1);
                 render(progress);
                 if (progress < 1) requestAnimationFrame(updateCounters);
-            }
+            };
 
             if (reduceMotion) {
                 render(1);
