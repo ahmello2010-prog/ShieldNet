@@ -1,16 +1,26 @@
 // ShieldNet - script.js
-// نظام تفاعلي متوافق تماماً مع شاشات اللمس والهواتف الذكية ومتصفحات سطح المكتب
+// بنية مركزية شاملة لإدارة وتصنيف مشغلات جميع الأزرار على الهواتف والمتصفحات
 
 document.addEventListener("DOMContentLoaded", () => {
     /* ========================================================
-       1. إدارة النوافذ المنبثقة (Universal Modals)
+       1. العناصر المرجعية ونصوص السياسات
        ======================================================== */
     const loginModal = document.getElementById("login-modal");
+    const loginModalTitle = document.getElementById("login-modal-title");
+    const loginModalDesc = document.getElementById("login-modal-desc");
     const policyModal = document.getElementById("policy-modal");
     const policyTitle = document.getElementById("policy-modal-title");
     const policyContent = document.getElementById("policy-modal-content");
 
-    // نصوص سياسة الخصوصية وشروط الخدمة
+    const mobileDrawer = document.getElementById("mobile-nav-drawer");
+    const drawerBackdrop = document.getElementById("mobile-drawer-backdrop");
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+
+    const toastEl = document.getElementById("action-toast");
+    const toastMessage = document.getElementById("toast-message");
+    let toastTimeout = null;
+
+    // نصوص النوافذ المخصصة لسياسة الخصوصية والشروط
     const policyTexts = {
         privacy: {
             title: "Privacy & Guard Vetting Policy",
@@ -22,7 +32,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    /* ========================================================
+       2. دوال مساعدة لإظهار الإشعارات والنوافذ
+       ======================================================== */
     let lastModalActionTime = 0;
+
+    function showToast(message, duration = 3200) {
+        if (!toastEl || !toastMessage) return;
+        toastMessage.textContent = message;
+        toastEl.classList.add("is-visible");
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toastEl.classList.remove("is-visible");
+        }, duration);
+    }
 
     function openModal(modalEl) {
         if (!modalEl) return;
@@ -34,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function closeModal(modalEl) {
         if (!modalEl) return;
-        // منع الإغلاق الفوري الناتج عن نقرة اللمس المزدوجة أو المتأخرة
+        // حماية ضد الإغلاق اللحظي الخاطئ الناتج عن نقرات اللمس المتتالية
         if (Date.now() - lastModalActionTime < 180) return;
         modalEl.classList.remove("is-active");
         modalEl.setAttribute("aria-hidden", "true");
@@ -46,25 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function closeAllModals() {
         document.querySelectorAll(".custom-modal.is-active").forEach(closeModal);
     }
-
-    // الاستماع لأحداث الإغلاق (النقر على الخلفية المعتمة أو زر الإغلاق X أو الأزرار)
-    document.querySelectorAll(".custom-modal").forEach((modalEl) => {
-        modalEl.addEventListener("click", (e) => {
-            const closeTrigger = e.target.closest("[data-close-modal], [data-close-policy]");
-            if (closeTrigger) {
-                e.preventDefault();
-                closeModal(modalEl);
-            }
-        });
-    });
-
-    /* ========================================================
-       2. إدارة القائمة الجانبية في الهاتف (Mobile Drawer)
-       ======================================================== */
-    const mobileDrawer = document.getElementById("mobile-nav-drawer");
-    const drawerBackdrop = document.getElementById("mobile-drawer-backdrop");
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-    const drawerCloseBtn = document.getElementById("drawer-close-btn");
 
     function isDrawerOpen() {
         return !!mobileDrawer && mobileDrawer.classList.contains("is-open");
@@ -86,74 +90,197 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mobileMenuBtn) mobileMenuBtn.setAttribute("aria-expanded", "false");
     }
 
-    if (mobileMenuBtn) {
-        mobileMenuBtn.setAttribute("aria-controls", "mobile-nav-drawer");
-        mobileMenuBtn.setAttribute("aria-expanded", "false");
-        mobileMenuBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            isDrawerOpen() ? closeMobileDrawer() : openMobileDrawer();
-        });
-    }
-
-    if (drawerCloseBtn) {
-        drawerCloseBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            closeMobileDrawer();
-        });
-    }
-
-    if (drawerBackdrop) {
-        drawerBackdrop.addEventListener("click", (e) => {
-            e.preventDefault();
-            closeMobileDrawer();
-        });
+    function updateLoginModalCopy(portalName) {
+        if (!loginModalTitle || !loginModalDesc) return;
+        if (portalName && portalName !== "Guard Network Access") {
+            loginModalTitle.textContent = `Access ${portalName}`;
+            loginModalDesc.textContent = `Please sign in or create a verified account to view ${portalName} and access certified security personnel profiles.`;
+        } else {
+            loginModalTitle.textContent = "Access Guard Network";
+            loginModalDesc.textContent = "Join Egypt's verified security personnel network. Sign in to hire experienced, background-checked security guards or create your verified security guard candidate profile.";
+        }
     }
 
     /* ========================================================
-       3. ربط أزرار وروابط فتح المودال بوكس باللمس والنقر
+       3. المدير الموحد لجميع مشغلي الأزرار (ButtonActionManager)
+          - يجمع المشغلات في فئات محددة (Modals, Navigation, Interactive, Custom)
+          - يقبل إضافة أزرار جديدة مستقبلاً بسهولة
        ======================================================== */
-    function triggerLoginModal(e) {
-        if (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        closeMobileDrawer();
-        openModal(loginModal);
-    }
+    const ButtonActionManager = {
+        // فئات الأزرار المعيارية
+        categories: {
+            MODAL: "modal",
+            NAVIGATION: "nav",
+            ACTION: "action",
+            CUSTOM: "custom"
+        },
 
-    // جميع العناصر التفاعلية المرتبطة بطلب تسجيل الدخول أو الانضمام أو الروابط المقفلة
-    const loginTriggers = document.querySelectorAll(
-        ".is-locked, [data-open-modal='login'], .mobile-fixed-cta, .btn-register, .btn-drawer, .btn-explore"
-    );
-
-    loginTriggers.forEach((btn) => {
-        btn.addEventListener("click", triggerLoginModal);
-    });
-
-    // روابط فتح سياسة الخصوصية وشروط الخدمة
-    document.querySelectorAll("[data-open-policy]").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const type = btn.getAttribute("data-open-policy");
-            if (policyModal && policyTexts[type]) {
-                if (policyTitle) policyTitle.textContent = policyTexts[type].title;
-                if (policyContent) policyContent.innerHTML = policyTexts[type].html;
+        // سجل المشغلات المبوب حسب الفئة والمعرّف
+        handlers: {
+            /* ----- فئة النوافذ المنبثقة (MODAL ACTIONS) ----- */
+            "modal:open-login": (target) => {
+                const portal = target.getAttribute("data-portal") || "Guard Network Access";
+                updateLoginModalCopy(portal);
+                closeMobileDrawer();
+                openModal(loginModal);
+            },
+            "modal:close-login": () => {
+                closeModal(loginModal);
+            },
+            "modal:open-policy": (target) => {
+                const policyKey = target.getAttribute("data-policy") || "privacy";
+                if (policyTexts[policyKey]) {
+                    if (policyTitle) policyTitle.textContent = policyTexts[policyKey].title;
+                    if (policyContent) policyContent.innerHTML = policyTexts[policyKey].html;
+                }
                 closeMobileDrawer();
                 openModal(policyModal);
-            }
-        });
-    });
+            },
+            "modal:close-policy": () => {
+                closeModal(policyModal);
+            },
+            "modal:submit-access": () => {
+                closeModal(loginModal);
+                showToast("✓ تم إرسال الطلب بنجاح! جاري التوجيه لبوابة الحراس...");
+            },
+            "modal:close-all": () => {
+                closeAllModals();
+            },
 
-    // إغلاق المودال أو القائمة عند الضغط على زر Escape
+            /* ----- فئة التنقل والقائمة الجانبية (NAVIGATION ACTIONS) ----- */
+            "nav:toggle-drawer": () => {
+                isDrawerOpen() ? closeMobileDrawer() : openMobileDrawer();
+            },
+            "nav:open-drawer": () => {
+                openMobileDrawer();
+            },
+            "nav:close-drawer": () => {
+                closeMobileDrawer();
+            },
+            "nav:home": () => {
+                closeMobileDrawer();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            },
+            "nav:locked-portal": (target) => {
+                const portal = target.getAttribute("data-portal") || target.textContent.trim();
+                updateLoginModalCopy(portal);
+                closeMobileDrawer();
+                openModal(loginModal);
+            },
+
+            /* ----- فئة تفاعل المنصة والخدمات (INTERACTIVE ACTIONS) ----- */
+            "action:explore-guards": () => {
+                updateLoginModalCopy("Verified Guard Directory");
+                closeMobileDrawer();
+                openModal(loginModal);
+            },
+            "action:create-account": () => {
+                updateLoginModalCopy("Create Guard / Employer Account");
+                closeMobileDrawer();
+                openModal(loginModal);
+            }
+        },
+
+        /**
+         * دالة تسجيل مشغل جديد (تتيح إضافة أي زر مستقبلاً من أي مكان)
+         * @param {string} actionKey - معرّف الزر مثل 'payroll:download' أو 'modal:open-custom'
+         * @param {Function} handler - الدالة التي ستنفذ عند الضغط
+         */
+        registerAction(actionKey, handler) {
+            if (typeof handler === "function") {
+                this.handlers[actionKey] = handler;
+            }
+        },
+
+        /**
+         * الدالة المركزية لتنفيذ المشغل المناسب للزر
+         */
+        dispatch(actionKey, element, event) {
+            if (!actionKey) return false;
+
+            if (typeof this.handlers[actionKey] === "function") {
+                try {
+                    this.handlers[actionKey](element, event);
+                    return true;
+                } catch (error) {
+                    console.error(`[ButtonActionManager] Error executing '${actionKey}':`, error);
+                    return false;
+                }
+            }
+
+            // معالجة مرنة في حال إضافة زر مودال بدون تسجيل يدوي
+            if (actionKey.startsWith("modal:open-")) {
+                openModal(loginModal);
+                return true;
+            }
+
+            console.warn(`[ButtonActionManager] No handler registered for: '${actionKey}'`);
+            return false;
+        },
+
+        /**
+         * استنتاج نوع الزر ومعرّفه تلقائياً
+         */
+        resolveAction(element) {
+            if (!element) return null;
+
+            // 1. أولوية السمة الصريحة data-action
+            const explicitAction = element.getAttribute("data-action");
+            if (explicitAction) return explicitAction;
+
+            // 2. التحقق من سمات التوافق القديمة
+            if (element.hasAttribute("data-close-modal")) return "modal:close-login";
+            if (element.hasAttribute("data-close-policy")) return "modal:close-policy";
+            if (element.hasAttribute("data-open-policy")) return "modal:open-policy";
+            if (element.hasAttribute("data-open-modal")) return "modal:open-login";
+
+            // 3. التحقق من فئات العناصر (CSS Classes)
+            if (element.classList.contains("mobile-menu-btn")) return "nav:toggle-drawer";
+            if (element.classList.contains("drawer-close-btn")) return "nav:close-drawer";
+            if (element.classList.contains("mobile-drawer-backdrop")) return "nav:close-drawer";
+            if (element.classList.contains("is-locked")) return "nav:locked-portal";
+            if (element.classList.contains("btn-register")) return "action:create-account";
+            if (element.classList.contains("btn-drawer")) return "action:create-account";
+            if (element.classList.contains("btn-explore")) return "action:explore-guards";
+
+            return null;
+        }
+    };
+
+    // إتاحة الكائن على المستوى العام window لسهولة الوصول والإضافة في أي وقت
+    window.ButtonActionManager = ButtonActionManager;
+    window.ShieldNetDispatch = (actionKey, el) => ButtonActionManager.dispatch(actionKey, el);
+
+    /* ========================================================
+       4. مستمع الأحداث المركزي الموحد (Master Event Delegation)
+          - يلتقط كل النقرات واللمس على كامل الصفحة
+          - يمنع الأخطاء في الهواتف الذكية ومتصفحات الويب
+       ======================================================== */
+    document.addEventListener("click", (e) => {
+        // البحث عن أقرب عنصر قابل للنقر أو يحمل معرّف إجراء
+        const clickable = e.target.closest(
+            "[data-action], button, .btn, .nav-link, .drawer-link, .mobile-menu-btn, .mobile-fixed-cta, [data-open-policy], [data-close-modal], [data-close-policy]"
+        );
+
+        if (!clickable) return;
+
+        const actionKey = ButtonActionManager.resolveAction(clickable);
+        if (actionKey) {
+            e.preventDefault();
+            e.stopPropagation();
+            ButtonActionManager.dispatch(actionKey, clickable, e);
+        }
+    }, { passive: false });
+
+    // إغلاق المودال أو القائمة بمفتاح Escape
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
-            closeAllModals();
-            closeMobileDrawer();
+            ButtonActionManager.dispatch("modal:close-all");
+            ButtonActionManager.dispatch("nav:close-drawer");
         }
     });
 
-    // إغلاق القائمة الجانبية إذا كبرت الشاشة لوضع سطح المكتب
+    // إغلاق القائمة الجانبية تلقائياً عند تغيير حجم الشاشة إلى وضع سطح المكتب
     window.addEventListener("resize", () => {
         if (window.innerWidth > 992 && isDrawerOpen()) {
             closeMobileDrawer();
@@ -161,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* ========================================================
-       4. عداد الإحصائيات التصاعدي السلس (Smooth Stat Counters)
+       5. عداد الإحصائيات التصاعدي السلس (Smooth Stat Counters)
        ======================================================== */
     const statValues = document.querySelectorAll(".stat-value[data-target]");
     if (statValues.length > 0) {
