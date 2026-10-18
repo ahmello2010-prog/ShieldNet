@@ -8,11 +8,6 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
         /* ========================================================
            1. DOM References and State
            ======================================================== */
-        const loginModal = document.getElementById("login-modal");
-        const loginModalTitle = document.getElementById("login-modal-title");
-        const loginModalDesc = document.getElementById("login-modal-desc");
-        const modalSubmitCta = document.getElementById("modal-submit-cta");
-        const modalCancelCta = document.getElementById("modal-cancel-cta");
         const policyModal = document.getElementById("policy-modal");
         const policyTitle = document.getElementById("policy-modal-title");
         const policyContent = document.getElementById("policy-modal-content");
@@ -148,24 +143,6 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
             if (mobileMenuBtn) mobileMenuBtn.setAttribute("aria-expanded", "false");
         }
 
-        // Modal shown only to visitors who are NOT in Demo Mode yet
-        function configureLoginModal(portalName) {
-            if (!loginModalTitle || !loginModalDesc || !modalSubmitCta) return;
-
-            if (portalName) {
-                loginModalTitle.textContent = `Access ${portalName}`;
-                loginModalDesc.textContent = `Please sign in or start a Demo Session to view ${portalName} and access certified security guard profiles.`;
-            } else {
-                loginModalTitle.textContent = "Access Guard Network";
-                loginModalDesc.textContent =
-                    "Join Egypt's verified security personnel network. Start a Demo Session to explore experienced, background-checked security guards and estate recruitment tools.";
-            }
-
-            modalSubmitCta.textContent = "Sign In (Demo Mode)";
-            modalSubmitCta.setAttribute("data-action", "modal:submit-access");
-            if (modalCancelCta) modalCancelCta.textContent = "Maybe later";
-        }
-
         // Temporary destination for every unlocked button
         function goToPlaceholder() {
             closeMobileDrawer();
@@ -178,14 +155,6 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
         const ButtonActionManager = {
             handlers: {
                 /* ----- Modal Actions ----- */
-                "modal:open-login": (target) => {
-                    configureLoginModal(target.getAttribute("data-portal"));
-                    closeMobileDrawer();
-                    openModal(loginModal);
-                },
-                "modal:close-login": () => {
-                    closeModal(loginModal);
-                },
                 "modal:open-policy": (target) => {
                     const policyKey = target.getAttribute("data-policy") || "privacy";
                     if (policyTexts[policyKey]) {
@@ -197,13 +166,6 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
                 },
                 "modal:close-policy": () => {
                     closeModal(policyModal);
-                },
-                // "Sign In (Demo Mode)" inside the locked-portal modal
-                "modal:submit-access": () => {
-                    enableDemoMode();
-                    lastModalActionTime = 0;
-                    closeModal(loginModal);
-                    showToast("Signed in (Demo Mode): all features unlocked");
                 },
                 "modal:close-all": () => {
                     closeAllModals();
@@ -227,16 +189,14 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
                     closeMobileDrawer();
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 },
-                // Locked portals: open the sign-in modal, or go to # once Demo Mode is on
-                "nav:locked-portal": (target) => {
+                // Locked portals: go to the login page, or to # once Demo Mode is on
+                "nav:locked-portal": () => {
+                    closeMobileDrawer();
                     if (isDemoMode()) {
-                        goToPlaceholder();
+                        window.location.hash = "#";
                         return;
                     }
-                    const portal = target.getAttribute("data-portal") || target.textContent.trim();
-                    configureLoginModal(portal);
-                    closeMobileDrawer();
-                    openModal(loginModal);
+                    window.location.href = "/login.html";
                 },
 
                 /* ----- Interactive Platform Actions ----- */
@@ -284,12 +244,6 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
                     }
                 }
 
-                if (actionKey.startsWith("modal:open-")) {
-                    configureLoginModal(null);
-                    openModal(loginModal);
-                    return true;
-                }
-
                 console.warn(`[ButtonActionManager] No handler registered for: '${actionKey}'`);
                 return false;
             },
@@ -300,10 +254,8 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
                 const explicitAction = element.getAttribute("data-action");
                 if (explicitAction) return explicitAction;
 
-                if (element.hasAttribute("data-close-modal")) return "modal:close-login";
                 if (element.hasAttribute("data-close-policy")) return "modal:close-policy";
                 if (element.hasAttribute("data-open-policy")) return "modal:open-policy";
-                if (element.hasAttribute("data-open-modal")) return "modal:open-login";
 
                 if (element.classList.contains("mobile-menu-btn")) return "nav:toggle-drawer";
                 if (element.classList.contains("drawer-close-btn")) return "nav:close-drawer";
@@ -328,7 +280,7 @@ import { SESSION_KEY, getSession, startSession, endSession } from "./session.js"
             "click",
             (e) => {
                 const clickable = e.target.closest(
-                    "[data-action], button, .btn, .nav-link, .drawer-link, .mobile-menu-btn, .mobile-fixed-cta, [data-open-policy], [data-close-modal], [data-close-policy]"
+                    "[data-action], button, .btn, .nav-link, .drawer-link, .mobile-menu-btn, .mobile-fixed-cta, [data-open-policy], [data-close-policy]"
                 );
 
                 if (!clickable) return;

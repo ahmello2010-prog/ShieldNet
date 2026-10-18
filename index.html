@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ShieldNet | The Professional Network for Vetted Security Guards</title>
         <link rel="icon" type="image/jpeg" href="/img/logo.jpg" />
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="/css/style.css" />
     </head>
     <body>
         <!-- شريط علوي ثابت في الهواتف يحتوي على زر القائمة والشعار (Fixed Mobile Header Bar) -->
@@ -444,44 +444,6 @@
             </div>
         </aside>
 
-        <!-- نافذة تسجيل الدخول للمنصة (Login & Join Modal) -->
-        <div
-            class="custom-modal"
-            id="login-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="login-modal-title"
-            aria-hidden="true">
-            <div class="modal-backdrop" data-action="modal:close-login" tabindex="-1"></div>
-            <div class="modal-card">
-                <button type="button" class="modal-close-btn" data-action="modal:close-login" aria-label="Close modal">
-                    &times;
-                </button>
-                <img src="/img/logo.jpg" alt="ShieldNet Security Emblem" class="modal-logo-img" />
-                <h2 id="login-modal-title">Access Guard Network</h2>
-                <p id="login-modal-desc">
-                    Join Egypt's verified security personnel network. Sign in to hire experienced, background-checked
-                    security guards or create your verified security guard candidate profile.
-                </p>
-                <div class="modal-actions">
-                    <button
-                        type="button"
-                        class="btn btn-explore"
-                        id="modal-submit-cta"
-                        data-action="modal:submit-access">
-                        Sign In (Demo Mode)
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-register"
-                        id="modal-cancel-cta"
-                        data-action="modal:close-login">
-                        Maybe later
-                    </button>
-                </div>
-            </div>
-        </div>
-
         <!-- نافذة الشروط والخصوصية (Policy Modal) -->
         <div
             class="custom-modal policy-dialog"
@@ -515,6 +477,6 @@
             <span class="toast-message" id="toast-message">Action successful</span>
         </div>
 
-        <script type="module" src="js/script.js"></script>
+        <script type="module" src="/js/script.js"></script>
     </body>
 </html>
