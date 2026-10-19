@@ -701,8 +701,24 @@ body.lang-ar .mobile-fixed-header {
 }
 
 body.lang-ar .mobile-nav-drawer {
+    left: auto;
+    right: 0;
+    transform: translateX(105%);
+    border-right: none;
+    border-left: 2px solid rgba(212, 175, 55, 0.4);
+    box-shadow: -14px 0 40px rgba(0, 0, 0, 0.65);
     direction: rtl;
     text-align: right;
+}
+
+body.lang-ar .mobile-nav-drawer.is-open {
+    transform: translateX(0);
+}
+
+@media (hover: hover) {
+    body.lang-ar .drawer-link:hover {
+        transform: translateX(-4px);
+    }
 }
 
 body.lang-ar .drawer-links-list {
@@ -1533,10 +1549,12 @@ body.modal-open {
     position: fixed;
     top: 0;
     left: 0;
+    right: auto;
     bottom: 0;
     width: min(88vw, 360px);
     background: linear-gradient(180deg, #0d233a 0%, #071524 100%);
     border-right: 2px solid rgba(212, 175, 55, 0.4);
+    border-left: none;
     z-index: 999;
     display: flex;
     flex-direction: column;
