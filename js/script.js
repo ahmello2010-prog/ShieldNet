@@ -90,7 +90,7 @@ function getLanguage() {
     return "en";
 }
 
-function setLanguage(lang, triggerToast = false) {
+function setLanguage(lang) {
     const validLang = lang === "ar" ? "ar" : "en";
     try {
         localStorage.setItem(LANG_KEY, validLang);
@@ -119,15 +119,11 @@ function setLanguage(lang, triggerToast = false) {
     });
 
     applyAuthUI();
-
-    if (triggerToast && typeof window.ShieldNetShowToast === "function") {
-        window.ShieldNetShowToast(dict.toastLang);
-    }
 }
 
 function toggleLanguage() {
     const next = getLanguage() === "ar" ? "en" : "ar";
-    setLanguage(next, true);
+    setLanguage(next);
 }
 
 /* =============================================================
