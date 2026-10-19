@@ -185,7 +185,7 @@ html {
 /* ---------- شريط التنقل الحديث والمتطور (Modern Platform Navbar) ---------- */
 .top-header {
     width: 100%;
-    margin-bottom:7%;
+    margin-bottom: 7%;
     position: relative;
     z-index: 10;
 }
@@ -797,8 +797,8 @@ body.lang-ar .footer-bottom-bar {
     display: flex;
     flex-direction: row;
     gap: 17px;
-    width: 100%;
-    max-width: 480px;
+    width: 106%;
+    max-width: 550px;
 }
 
 .btn {

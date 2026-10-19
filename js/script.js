@@ -18,8 +18,9 @@ const TRANSLATIONS = {
         navSignUp: "Create Account",
         navProfile: "Check Your Profile",
         heroTitle: "Elite Security Guards <br />For Corporate & Estates",
-        heroDesc: "The professional networking and hiring platform connecting trusted corporate facilities, commercial compounds, and luxury private properties with verified, top-tier security guards. Like LinkedIn for experienced security professionals—discover certified guards with verified backgrounds tailored to your property.",
-        heroExplore: "Explore Guard Network <span class=\"arrow-icon\">→</span>",
+        heroDesc:
+            "The professional networking and hiring platform connecting trusted corporate facilities, commercial compounds, and luxury private properties with verified, top-tier security guards. Like LinkedIn for experienced security professionals—discover certified guards with verified backgrounds tailored to your property.",
+        heroExplore: 'Explore Security Companies <span class="arrow-icon">→</span>',
         heroCreate: "Create Account",
         statGuards: "Verified Guards",
         statEstates: "Hiring Estates",
@@ -27,7 +28,8 @@ const TRANSLATIONS = {
         badgeGuards: "100% Vetted Guards",
         subtextNetwork: "Guard Staffing Network",
         drawerLabel: "Platform Directory",
-        footerTagline: "The premier professional networking & staffing platform connecting prestigious corporate estates, gated compounds, and luxury private properties with certified, vetted security guards and protection forces.",
+        footerTagline:
+            "The premier professional networking & staffing platform connecting prestigious corporate estates, gated compounds, and luxury private properties with certified, vetted security guards and protection forces.",
         footerBadge: "100% Vetted & Background-Checked Guards",
         footerColLegal: "Guard Network & Legal",
         footerBrowse: "Browse Guard Directory",
@@ -55,8 +57,9 @@ const TRANSLATIONS = {
         navSignUp: "إنشاء حساب",
         navProfile: "الملف الشخصي",
         heroTitle: "نخبة حراس الأمن <br />للشركات والمنشآت الراقية",
-        heroDesc: "المنصة المهنية الرائدة للتوظيف والربط الأمني، تجمع كبرى المنشآت والشركات والمجمعات الراقية مع نخبة حراس الأمن المعتمدين والموثقين جنائياً ومهنياً. شبكة احترافية متكاملة لاختيار الكفاءات الأمنية الأنسب لمنشأتك.",
-        heroExplore: "استكشف شبكة الحراس <span class=\"arrow-icon\">←</span>",
+        heroDesc:
+            "المنصة المهنية الرائدة للتوظيف والربط الأمني، تجمع كبرى المنشآت والشركات والمجمعات الراقية مع نخبة حراس الأمن المعتمدين والموثقين جنائياً ومهنياً. شبكة احترافية متكاملة لاختيار الكفاءات الأمنية الأنسب لمنشأتك.",
+        heroExplore: 'استكشف شركات الأمن <span class="arrow-icon">←</span>',
         heroCreate: "إنشاء حساب",
         statGuards: "حراس موثقون",
         statEstates: "منشآت متعاقدة",
@@ -64,7 +67,8 @@ const TRANSLATIONS = {
         badgeGuards: "حراس معتمدون ومفحوصون 100%",
         subtextNetwork: "شبكة التوظيف الأمني",
         drawerLabel: "دليل المنصة",
-        footerTagline: "المنصة المهنية المعتمدة لتوظيف الكفاءات الأمنية والربط بين المنشآت الحيوية والمجمعات الخاصة وحراس الأمن المعتمدين وفِرق الحماية.",
+        footerTagline:
+            "المنصة المهنية المعتمدة لتوظيف الكفاءات الأمنية والربط بين المنشآت الحيوية والمجمعات الخاصة وحراس الأمن المعتمدين وفِرق الحماية.",
         footerBadge: "حراس معتمدون ومفحوصون أمنياً بنسبة 100%",
         footerColLegal: "الشبكة الأمنية والشروط",
         footerBrowse: "تصفح دليل الحراس",
@@ -407,7 +411,8 @@ setLanguage(getLanguage());
                 if (element.hasAttribute("data-close-policy")) return "modal:close-policy";
                 if (element.hasAttribute("data-open-policy")) return "modal:open-policy";
 
-                if (element.classList.contains("nav-lang-btn") || element.classList.contains("drawer-lang-btn")) return "action:toggle-lang";
+                if (element.classList.contains("nav-lang-btn") || element.classList.contains("drawer-lang-btn"))
+                    return "action:toggle-lang";
                 if (element.classList.contains("mobile-menu-btn")) return "nav:toggle-drawer";
                 if (element.classList.contains("drawer-close-btn")) return "nav:close-drawer";
                 if (element.classList.contains("mobile-drawer-backdrop")) return "nav:close-drawer";
