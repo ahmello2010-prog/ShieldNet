@@ -168,7 +168,7 @@ html {
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 36px clamp(24px, 6vw, 90px) 40px 48%;
+    padding: 10px clamp(24px, 6vw, 90px) 40px 48%; /* تم تقليل الهامش العلوي إلى 10px أو 0 */
     overflow: visible;
 }
 
@@ -177,13 +177,15 @@ html {
     width: 13px;
     height: 13px;
     flex-shrink: 0;
-    transition: transform 0.2s ease, stroke 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        stroke 0.2s ease;
 }
 
 /* ---------- شريط التنقل الحديث والمتطور (Modern Platform Navbar) ---------- */
 .top-header {
     width: 100%;
-    margin-bottom: auto;
+    margin-bottom:7%;
     position: relative;
     z-index: 10;
 }
@@ -216,8 +218,8 @@ html {
     transition: all 0.25s ease;
     flex-wrap: nowrap !important;
     white-space: nowrap !important;
-    max-width: 100%;
-    width: 100%;
+    max-width: 105%;
+    width: 104%;
 }
 
 .modern-navbar:hover {
