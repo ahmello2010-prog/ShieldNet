@@ -649,9 +649,20 @@ body.lang-ar .golden-divider {
     transform: none !important;
 }
 
-body.lang-ar .right-triangle {
-    padding-left: 48% !important;
-    padding-right: clamp(24px, 6vw, 90px) !important;
+@media (min-width: 993px) {
+    body.lang-ar .right-triangle {
+        padding-left: 48% !important;
+        padding-right: clamp(24px, 6vw, 90px) !important;
+    }
+}
+
+body.lang-ar .arrow-icon {
+    margin-inline-start: 8px;
+    margin-inline-end: 0;
+}
+
+body.lang-ar .btn-explore:hover .arrow-icon {
+    transform: translateX(-6px);
 }
 
 body.lang-ar .modern-navbar {
@@ -821,7 +832,8 @@ body.lang-ar .footer-bottom-bar {
 }
 
 .arrow-icon {
-    margin-left: 8px;
+    display: inline-block;
+    margin-inline-start: 8px;
     transition: transform 0.3s ease;
 }
 
@@ -1893,6 +1905,42 @@ body.modal-open {
         margin-inline: auto;
     }
 
+    body.lang-ar .right-triangle {
+        padding: 32px 20px 140px !important;
+        padding-inline: 20px !important;
+        width: 100% !important;
+        align-items: center !important;
+    }
+
+    body.lang-ar .content-wrapper {
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 540px !important;
+        margin-inline: auto !important;
+    }
+
+    body.lang-ar .intro-text h1,
+    body.lang-ar .intro-text p {
+        text-align: center !important;
+    }
+
+    body.lang-ar .cta-buttons {
+        justify-content: center !important;
+        width: 100% !important;
+    }
+
+    body.lang-ar .stats-grid {
+        justify-content: center !important;
+        margin-inline: auto !important;
+        width: 100% !important;
+    }
+
+    body.lang-ar .stat-card {
+        text-align: center !important;
+        align-items: center !important;
+    }
+
     .footer-top-grid {
         grid-template-columns: 1fr 1fr;
         gap: 32px;
@@ -1925,6 +1973,30 @@ body.modal-open {
     .cta-buttons {
         flex-direction: column;
         width: 100%;
+        gap: 12px;
+    }
+
+    .cta-buttons .btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    body.lang-ar .right-triangle {
+        padding: 24px 16px 130px !important;
+        padding-inline: 16px !important;
+    }
+
+    body.lang-ar .cta-buttons {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 12px !important;
+    }
+
+    body.lang-ar .cta-buttons .btn {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
     }
 
     .stats-grid {
