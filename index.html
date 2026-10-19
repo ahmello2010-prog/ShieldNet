@@ -27,7 +27,9 @@
                 <img src="/img/logo.jpg" alt="ShieldNet" class="fixed-bar-logo" />
                 <h2>Shield<span>Net</span></h2>
             </div>
-            <a href="#" class="mobile-fixed-cta" data-auth="signin">Sign In</a>
+            <div class="mobile-fixed-actions">
+                <a href="#" class="mobile-fixed-cta" data-auth="signin" data-i18n="navSignIn">Sign In</a>
+            </div>
         </header>
 
         <main class="hero-container">
@@ -60,47 +62,40 @@
             <!-- الجانب الأيمن: شريط التنقل العلوي والمحتوى النصي والأزرار والمنحنيات -->
             <div class="split-side right-triangle">
                 <header class="top-header">
-                    <nav class="platform-navigation" aria-label="Platform Directory">
-                        <ul class="links-inline">
-                            <li>
-                                <a href="#" class="nav-link active" data-action="nav:home">
-                                    <span class="icon icon-home" aria-hidden="true"></span><span data-i18n="navHome">Home</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                                    <span class="icon icon-search" aria-hidden="true"></span><span data-i18n="navCompanies">Security Companies</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                                    <span class="icon icon-vendor" aria-hidden="true"></span><span data-i18n="navServices">Services</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                                    <span class="icon icon-client" aria-hidden="true"></span><span data-i18n="navAbout">About Platform</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                                    <span class="icon icon-quote" aria-hidden="true"></span><span data-i18n="navRequests">My Requests</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                                    <span class="icon icon-contact" aria-hidden="true"></span><span data-i18n="navContact">Contact Us</span>
-                                </a>
-                            </li>
-                            <li class="nav-lang-item">
-                                <button type="button" class="nav-link nav-lang-btn" data-action="action:toggle-lang" aria-label="Switch Language">
-                                    <span class="icon icon-globe" aria-hidden="true"></span><span class="lang-label" data-i18n="langToggle">العربية</span>
-                                </button>
-                            </li>
-                            <li class="nav-auth-item">
-                                <a href="#" class="nav-link nav-auth" data-auth="signin" data-i18n="navSignIn">Sign In</a>
-                            </li>
-                        </ul>
+                    <nav class="modern-navbar" aria-label="Platform Navigation">
+                        <div class="modern-nav-links">
+                            <a href="#" class="modern-nav-link active" data-action="nav:home">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span data-i18n="navHome">Home</span>
+                            </a>
+                            <a href="javascript:void(0)" class="modern-nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span data-i18n="navCompanies">Security Companies</span>
+                            </a>
+                            <a href="javascript:void(0)" class="modern-nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                                <span data-i18n="navServices">Services</span>
+                            </a>
+                            <a href="javascript:void(0)" class="modern-nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                                <span data-i18n="navAbout">About Platform</span>
+                            </a>
+                            <a href="javascript:void(0)" class="modern-nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                <span data-i18n="navTerms">Terms and Conditions</span>
+                            </a>
+                            <a href="javascript:void(0)" class="modern-nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                <span data-i18n="navContact">Contact Us</span>
+                            </a>
+                        </div>
+                        <div class="modern-nav-actions">
+                            <button type="button" class="modern-nav-lang-btn nav-lang-btn" data-action="action:toggle-lang" aria-label="Switch Language">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                <span class="lang-label" data-i18n="langToggle">العربية</span>
+                            </button>
+                            <a href="#" class="modern-nav-cta" data-auth="signin" data-i18n="navSignIn">Sign In</a>
+                        </div>
                     </nav>
                 </header>
 
@@ -342,8 +337,9 @@
                 <div class="drawer-preview-badge"><span class="badge-dot"></span> <span data-i18n="badgeGuards">100% Vetted Guards</span></div>
             </div>
 
-            <button type="button" class="drawer-lang-btn" data-action="action:toggle-lang" aria-label="Switch Language">
-                <span class="icon icon-globe" aria-hidden="true"></span><span class="lang-label" data-i18n="langToggle">العربية</span>
+            <button type="button" class="drawer-lang-btn nav-lang-btn" data-action="action:toggle-lang" aria-label="Switch Language">
+                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                <span class="lang-label" data-i18n="langToggle">العربية</span>
             </button>
 
             <nav class="drawer-nav">
@@ -351,32 +347,38 @@
                 <ul class="drawer-links-list">
                     <li>
                         <a href="#" class="drawer-link active" data-action="nav:home">
-                            <span class="icon icon-home" aria-hidden="true"></span><span data-i18n="navHome">Home</span>
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span data-i18n="navHome">Home</span>
                         </a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                            <span class="icon icon-search" aria-hidden="true"></span><span data-i18n="navCompanies">Security Companies</span>
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <span data-i18n="navCompanies">Security Companies</span>
                         </a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                            <span class="icon icon-vendor" aria-hidden="true"></span><span data-i18n="navServices">Services</span>
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            <span data-i18n="navServices">Services</span>
                         </a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                            <span class="icon icon-client" aria-hidden="true"></span><span data-i18n="navAbout">About Platform</span>
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <span data-i18n="navAbout">About Platform</span>
                         </a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                            <span class="icon icon-quote" aria-hidden="true"></span><span data-i18n="navRequests">My Requests</span>
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            <span data-i18n="navTerms">Terms and Conditions</span>
                         </a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" class="drawer-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
-                            <span class="icon icon-contact" aria-hidden="true"></span><span data-i18n="navContact">Contact Us</span>
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <span data-i18n="navContact">Contact Us</span>
                         </a>
                     </li>
                 </ul>
