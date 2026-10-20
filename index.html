@@ -36,7 +36,7 @@
             </div>
         </header>
 
-        <main class="hero-container">
+        <main class="hero-container" id="hero-container">
             <!-- الجانب الأيسر: الشكل الهندسي المائل + الصورة المعمارية والأمنية السينمائية والشعار -->
             <div
                 class="split-side left-triangle"
@@ -84,10 +84,9 @@
                                 <span data-i18n="navHome">Home</span>
                             </a>
                             <a
-                                href="javascript:void(0)"
-                                class="modern-nav-link nav-link-static"
-                                aria-disabled="true"
-                                onclick="event.preventDefault();">
+                                href="#"
+                                class="modern-nav-link"
+                                data-action="nav:companies">
                                 <svg
                                     class="nav-svg-icon"
                                     viewBox="0 0 24 24"
@@ -284,6 +283,251 @@
                 </div>
             </div>
         </main>
+
+        <!-- صفحة استكشاف شركات الأمن (Discover Security Companies Page) -->
+        <section class="discover-view" id="discover-view" style="display: none;" aria-label="Discover Security Companies">
+            <!-- شريط تنقل علوي بكامل عرض الصفحة (Full-width Navbar) -->
+            <header class="discover-top-header">
+                <div class="discover-nav-container">
+                    <a href="#" class="discover-brand" data-action="nav:home" aria-label="ShieldNet Home">
+                        <img src="/img/logo.jpg" alt="ShieldNet Emblem" class="discover-brand-logo" />
+                        <h2>Shield<span>Net</span></h2>
+                    </a>
+
+                    <nav class="modern-navbar discover-modern-navbar" aria-label="Platform Full Navigation">
+                        <div class="modern-nav-links">
+                            <a href="#" class="modern-nav-link" data-action="nav:home">
+                                <svg
+                                    class="nav-svg-icon"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                                <span data-i18n="navHome">Home</span>
+                            </a>
+                            <a href="#" class="modern-nav-link active" data-action="nav:companies">
+                                <svg
+                                    class="nav-svg-icon"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span data-i18n="navCompanies">Security Companies</span>
+                            </a>
+                            <a
+                                href="javascript:void(0)"
+                                class="modern-nav-link nav-link-static"
+                                aria-disabled="true"
+                                onclick="event.preventDefault();">
+                                <svg
+                                    class="nav-svg-icon"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                <span data-i18n="navServices">Services</span>
+                            </a>
+                            <a
+                                href="javascript:void(0)"
+                                class="modern-nav-link nav-link-static"
+                                aria-disabled="true"
+                                onclick="event.preventDefault();">
+                                <svg
+                                    class="nav-svg-icon"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span data-i18n="navAbout">About Platform</span>
+                            </a>
+                            <a
+                                href="javascript:void(0)"
+                                class="modern-nav-link nav-link-static"
+                                aria-disabled="true"
+                                onclick="event.preventDefault();">
+                                <svg
+                                    class="nav-svg-icon"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                                <span data-i18n="navContact">Contact Us</span>
+                            </a>
+                            <a
+                                href="#"
+                                class="modern-nav-link"
+                                data-action="modal:open-policy"
+                                data-policy="terms">
+                                <svg
+                                    class="nav-svg-icon"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                </svg>
+                                <span data-i18n="navTerms">Terms and Conditions</span>
+                            </a>
+                        </div>
+                        <div class="modern-nav-actions">
+                            <button
+                                type="button"
+                                class="modern-nav-lang-btn nav-lang-btn"
+                                data-action="action:toggle-lang"
+                                aria-label="Switch Language">
+                                <svg
+                                    class="nav-svg-icon"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                                <span class="lang-label" data-i18n="langToggle">العربية</span>
+                            </button>
+                            <a href="#" class="modern-nav-cta" data-auth="signin" data-i18n="navSignIn">Sign In</a>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="discover-main">
+                <!-- قسم العنوان الرئيسي وزر البحث المنبثق -->
+                <div class="discover-hero-header">
+                    <div class="discover-header-top">
+                        <div class="discover-title-area">
+                            <h1 class="discover-heading" data-i18n="discoverTitle">Discover Security Companies</h1>
+                            <p class="discover-subheading" data-i18n="discoverDesc">
+                                Compare security providers, explore their coverage areas, and find the right security partner for your property.
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            class="discover-search-toggle"
+                            id="discover-search-toggle"
+                            aria-expanded="false"
+                            aria-controls="discover-search-panel">
+                            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            <span data-i18n="searchBtn">Search &amp; Filter Companies</span>
+                            <span class="search-filter-badge" id="search-active-badge" style="display: none;">0</span>
+                        </button>
+                    </div>
+
+                    <!-- لوحة البحث والفلترة القابلة للتمدد (Expandable Search Panel) -->
+                    <div class="search-expandable-panel" id="discover-search-panel" role="region" aria-label="Search and Filter Controls">
+                        <div class="search-panel-inner">
+                            <div class="filter-grid">
+                                <div class="filter-group">
+                                    <label for="filter-keyword" class="filter-label" data-i18n="filterKeyword">Keyword Search</label>
+                                    <input
+                                        type="text"
+                                        id="filter-keyword"
+                                        class="filter-input"
+                                        placeholder="e.g. CCTV, VIP, Patrol, Armed..."
+                                        data-i18n-placeholder="filterKeywordPlaceholder" />
+                                </div>
+                                <div class="filter-group">
+                                    <label for="filter-coverage" class="filter-label" data-i18n="filterCoverage">Location &amp; Coverage</label>
+                                    <select id="filter-coverage" class="filter-select">
+                                        <option value="all" data-i18n="filterCoverageAll">All Coverage Areas</option>
+                                        <option value="cairo" data-i18n="filterCoverageCairo">New Cairo &amp; Commercial (Greater Cairo)</option>
+                                        <option value="giza" data-i18n="filterCoverageGiza">Sheikh Zayed &amp; 6th of October</option>
+                                        <option value="smart" data-i18n="filterCoverageSmart">Smart Village &amp; Financial Centers</option>
+                                        <option value="industrial" data-i18n="filterCoverageIndustrial">Ain Sokhna &amp; Logistics Hubs</option>
+                                        <option value="coastal" data-i18n="filterCoverageCoastal">Alexandria &amp; Coastal Resorts</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label for="filter-name" class="filter-label" data-i18n="filterCompany">Company Name</label>
+                                    <input
+                                        type="text"
+                                        id="filter-name"
+                                        class="filter-input"
+                                        placeholder="e.g. Aegis, Vanguard..."
+                                        data-i18n-placeholder="filterCompanyPlaceholder" />
+                                </div>
+                                <div class="filter-group">
+                                    <label for="filter-wage" class="filter-label" data-i18n="filterWage">Min. Employee Wage</label>
+                                    <select id="filter-wage" class="filter-select">
+                                        <option value="0" data-i18n="filterWageAll">Any Wage Tier</option>
+                                        <option value="8000" data-i18n="filterWage8000">EGP 8,000+ / mo</option>
+                                        <option value="9000" data-i18n="filterWage9000">EGP 9,000+ / mo</option>
+                                        <option value="11000" data-i18n="filterWage11000">EGP 11,000+ / mo</option>
+                                        <option value="13000" data-i18n="filterWage13000">EGP 13,000+ / mo</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- قائمة آخر 3 عمليات بحث لتسهيل وسرعة الوصول (Recent Searches via localStorage) -->
+                            <div class="recent-searches-container" id="recent-searches-container" style="display: none;"></div>
+
+                            <div class="filter-actions">
+                                <button type="button" class="btn-filter-clear" id="btn-clear-filters" data-i18n="btnClear">Clear All</button>
+                                <button type="button" class="btn-filter-apply" id="btn-apply-filters" data-i18n="btnApply">Apply Filters</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- شريط ملخص الفلاتر النشطة وعدد النتائج -->
+                    <div class="filter-summary-bar" id="filter-summary-bar">
+                        <span class="results-count-text" id="results-count-text">Showing 6 of 6 security companies</span>
+                        <div class="active-filter-chips" id="active-filter-chips"></div>
+                    </div>
+                </div>
+
+                <!-- شبكة بطاقات الشركات (Companies Grid: 6 Companies) -->
+                <div class="companies-grid" id="companies-grid" role="list">
+                    <!-- Populated dynamically via script.js for full reactivity & state sync -->
+                </div>
+            </div>
+        </section>
 
         <!-- تذييل الصفحة بالكامل: شريط أزرق داكن متكامل مع وسائل التواصل والروابط وحقوق التطوير -->
         <footer class="site-footer">
@@ -513,10 +757,9 @@
                     </li>
                     <li>
                         <a
-                            href="javascript:void(0)"
-                            class="drawer-link nav-link-static"
-                            aria-disabled="true"
-                            onclick="event.preventDefault();">
+                            href="#"
+                            class="drawer-link"
+                            data-action="nav:companies">
                             <svg
                                 class="nav-svg-icon"
                                 viewBox="0 0 24 24"
@@ -653,6 +896,257 @@
                 </div>
                 <div class="modal-actions" style="margin-top: 20px">
                     <button type="button" class="btn btn-explore" data-action="modal:close-policy">Understood</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- نافذة طلب التعاقد والتوظيف الأمني (Hire Request Modal) -->
+        <div
+            class="custom-modal hire-dialog"
+            id="hire-request-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="hire-modal-title"
+            aria-hidden="true">
+            <div class="modal-backdrop" data-action="modal:close-hire" tabindex="-1"></div>
+            <div class="hire-modal-card">
+                <button type="button" class="modal-close-btn" data-action="modal:close-hire" aria-label="Close modal">
+                    &times;
+                </button>
+                <h2 id="hire-modal-title" data-i18n="hireModalTitle">Request Security Guarding Proposal</h2>
+                <p class="auth-subtitle" data-i18n="hireModalSubtitle">
+                    Submit your requirements for direct dispatch and verified staffing.
+                </p>
+
+                <div class="hire-company-preview" id="hire-modal-company-preview">
+                    <img src="/img/company_aegis.jpg" alt="Company" class="hire-company-img" id="hire-preview-img" />
+                    <div>
+                        <h4 id="hire-preview-name" style="font-family: var(--font-display); font-size: 1.05rem; color: var(--color-navy); margin: 0;">Company Name</h4>
+                        <span id="hire-preview-location" style="font-size: 0.82rem; color: #64748b;">Location</span>
+                    </div>
+                </div>
+
+                <form id="hire-request-form" class="hire-form" novalidate>
+                    <input type="hidden" id="hire-form-company-id" name="companyId" />
+                    <div class="hire-field">
+                        <label for="hire-property-type" data-i18n="hireFieldProperty">Property / Facility Type</label>
+                        <select id="hire-property-type" name="propertyType" required>
+                            <option value="Commercial Compound">Commercial Compound / Business Park</option>
+                            <option value="Private Estate / Villa">Private Estate / Luxury Villa</option>
+                            <option value="Corporate Tower">Corporate Headquarters / Bank</option>
+                            <option value="Industrial Logistics">Industrial Facility / Logistics Hub</option>
+                            <option value="VIP Event">VIP Summit / Private Event</option>
+                        </select>
+                    </div>
+
+                    <div class="hire-field">
+                        <label for="hire-guards-count" data-i18n="hireFieldGuards">Required Guard Count</label>
+                        <input type="number" id="hire-guards-count" name="guardsCount" min="1" max="100" value="4" required />
+                    </div>
+
+                    <div class="hire-field">
+                        <label for="hire-start-date" data-i18n="hireFieldDate">Deployment Start Date</label>
+                        <input type="date" id="hire-start-date" name="startDate" required />
+                    </div>
+
+                    <div class="hire-field">
+                        <label for="hire-notes" data-i18n="hireFieldNotes">Specific Requirements / Instructions</label>
+                        <textarea id="hire-notes" name="notes" placeholder="e.g. 24/7 CCTV surveillance, gatehouse pass control, armed response detail..."></textarea>
+                    </div>
+
+                    <button type="submit" class="hire-submit-btn" id="hire-submit-btn" data-i18n="hireSubmit">
+                        Submit Hire Request
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- نافذة تنبيه عدم توفر الخدمات حالياً (Service Unavailable Notification Modal) -->
+        <div
+            class="custom-modal unavailable-dialog"
+            id="service-unavailable-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="unavailable-modal-title"
+            aria-hidden="true">
+            <div class="modal-backdrop" data-action="modal:close-unavailable" tabindex="-1"></div>
+            <div class="modal-card unavailable-modal-card">
+                <button type="button" class="modal-close-btn" data-action="modal:close-unavailable" aria-label="Close modal">
+                    &times;
+                </button>
+                <div class="unavailable-icon-wrapper" aria-hidden="true">
+                    <svg class="unavailable-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <h2 id="unavailable-modal-title" data-i18n="serviceUnavailableTitle">تنبيه: لا توجد خدمات متاحة حالياً</h2>
+                <p class="auth-subtitle" data-i18n="serviceUnavailableSubtitle" style="margin-bottom: 14px;">
+                    إشعار الجدولة والطاقة الاستيعابية
+                </p>
+
+                <div class="unavailable-company-preview" id="unavailable-company-preview">
+                    <img src="/img/company_aegis.jpg" alt="Company" class="unavailable-comp-thumb" id="unavailable-preview-img" />
+                    <div class="unavailable-comp-meta">
+                        <span class="unavailable-comp-tag" data-i18n="selectedCompanyLabel">الشركة الأمنية المختارة:</span>
+                        <h4 id="unavailable-preview-name" class="unavailable-comp-title">Aegis Shield Operations</h4>
+                        <span id="unavailable-preview-location" class="unavailable-comp-loc">New Cairo &amp; Commercial</span>
+                    </div>
+                </div>
+
+                <div class="unavailable-notice-box">
+                    <div class="unavailable-alert-headline">
+                        <svg class="notice-alert-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <strong data-i18n="serviceUnavailableMsg">لا يوجد خدمات متاحة الآن، عُد قريباً</strong>
+                    </div>
+                    <p class="unavailable-desc-text" data-i18n="serviceUnavailableDesc">
+                        نعتذر عن عدم إمكانية تقديم الخدمة في الوقت الراهن نظراً لاكتمال حجز الكوادر الأمنية ووحدات الحراسة الميدانية لجميع المواقع المتعاقد عليها. يجري حالياً تحديث الجداول الاستيعابية والتعاقدات مع الشركات المعتمدة. يرجى التحقق مرة أخرى قريباً.
+                    </p>
+                </div>
+
+                <div class="modal-actions" style="margin-top: 22px;">
+                    <button type="button" class="btn btn-explore" data-action="modal:close-unavailable" id="btn-close-unavailable" data-i18n="serviceUnavailableBtn">
+                        حسناً، عُد قريباً
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- نافذة تفاصيل الشركة وتقييمات العملاء وإضافة تقييم (Company Details & Reviews Modal) -->
+        <div
+            class="custom-modal details-dialog"
+            id="company-details-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="details-company-name"
+            aria-hidden="true">
+            <div class="modal-backdrop" data-action="modal:close-details" tabindex="-1"></div>
+            <div class="company-details-modal-card">
+                <button type="button" class="modal-close-btn" data-action="modal:close-details" aria-label="Close modal">
+                    &times;
+                </button>
+
+                <!-- رأس تفاصيل الشركة (Company Header) -->
+                <div class="details-header-section">
+                    <div class="details-company-hero">
+                        <img src="/img/company_aegis.jpg" alt="Company" class="details-company-img" id="details-company-img" />
+                        <div class="details-company-info">
+                            <div class="details-title-row">
+                                <h2 id="details-company-name" class="details-company-name">Aegis Shield Operations</h2>
+                                <span class="recommended-badge" id="details-recommended-badge" style="display: none;">
+                                    <svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                    </svg>
+                                    <span data-i18n="badgeRecommended">Recommended for You</span>
+                                </span>
+                            </div>
+                            <div class="card-location-row" style="margin-top: 4px;">
+                                <svg class="pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span id="details-company-location">New Cairo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="details-company-desc" id="details-company-desc"></p>
+
+                    <div class="card-metrics-grid" style="margin-top: 14px;">
+                        <div class="metric-item">
+                            <span class="metric-label" data-i18n="cardWorkforce">Workforce</span>
+                            <span class="metric-value" id="details-company-workforce">1,450+ Certified Guards</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label" data-i18n="cardMinWage">Min. Wage</span>
+                            <span class="metric-value wage-highlight" id="details-company-wage">EGP 9,500 / mo</span>
+                        </div>
+                    </div>
+
+                    <div class="card-services-list" id="details-company-services" style="margin-top: 12px;"></div>
+                </div>
+
+                <!-- قسم التقييم ومراجعات العملاء (Ratings & Reviews Section) -->
+                <div class="details-reviews-section">
+                    <div class="reviews-header-bar">
+                        <div>
+                            <h3 class="reviews-section-title" data-i18n="reviewsHeading">Client Reviews &amp; Ratings</h3>
+                            <div class="details-rating-summary">
+                                <span class="details-rating-big" id="details-average-score">4.9</span>
+                                <div class="details-rating-stars-col">
+                                    <div class="details-stars-visual" id="details-stars-visual"></div>
+                                    <span class="details-total-reviews" id="details-total-reviews">Based on verified client reviews</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-leave-review" id="btn-toggle-review-form" data-action="review:toggle-form">
+                            <svg class="pen-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                            <span data-i18n="leaveReviewBtn">Leave a Review</span>
+                        </button>
+                    </div>
+
+                    <!-- نموذج إضافة تقييم جديد (Interactive Review Form) -->
+                    <div class="review-form-wrapper" id="review-form-wrapper" style="display: none;">
+                        <form id="company-review-form" class="company-review-form" novalidate>
+                            <input type="hidden" id="review-company-id" name="companyId" />
+                            <h4 class="review-form-title" data-i18n="writeReviewTitle">Submit a Client Review</h4>
+                            
+                            <!-- محدد النجوم التفاعلي (Interactive Star Selector) -->
+                            <div class="star-rating-selector-group">
+                                <label class="filter-label" data-i18n="rateExperienceLabel">Select Your Rating:</label>
+                                <div class="star-rating-stars" id="star-rating-picker" role="radiogroup" aria-label="Rating out of 5 stars">
+                                    <button type="button" class="star-btn is-active" data-star="1" role="radio" aria-checked="false" aria-label="1 star">★</button>
+                                    <button type="button" class="star-btn is-active" data-star="2" role="radio" aria-checked="false" aria-label="2 stars">★</button>
+                                    <button type="button" class="star-btn is-active" data-star="3" role="radio" aria-checked="false" aria-label="3 stars">★</button>
+                                    <button type="button" class="star-btn is-active" data-star="4" role="radio" aria-checked="false" aria-label="4 stars">★</button>
+                                    <button type="button" class="star-btn is-active" data-star="5" role="radio" aria-checked="true" aria-label="5 stars">★</button>
+                                    <input type="hidden" id="review-score-input" name="rating" value="5" />
+                                    <span class="selected-star-label" id="selected-star-label">5.0 / 5.0</span>
+                                </div>
+                            </div>
+
+                            <div class="review-inputs-grid">
+                                <div class="filter-group">
+                                    <label for="review-author-name" class="filter-label" data-i18n="reviewNameLabel">Your Name / Organization</label>
+                                    <input type="text" id="review-author-name" class="filter-input" placeholder="e.g. Eng. Tarek Mansour" required />
+                                </div>
+                                <div class="filter-group">
+                                    <label for="review-author-role" class="filter-label" data-i18n="reviewRoleLabel">Property / Facility Type</label>
+                                    <input type="text" id="review-author-role" class="filter-input" placeholder="e.g. Compound Facilities Director" />
+                                </div>
+                            </div>
+
+                            <div class="filter-group" style="margin-top: 10px;">
+                                <label for="review-comment" class="filter-label" data-i18n="reviewCommentLabel">Your Review &amp; Experience</label>
+                                <textarea id="review-comment" class="filter-input review-textarea" placeholder="Share your experience regarding guard discipline, perimeter response, gatehouse management..." required></textarea>
+                            </div>
+
+                            <div class="review-form-actions">
+                                <button type="button" class="btn-filter-clear" id="btn-cancel-review" data-action="review:cancel" data-i18n="cancelReviewBtn">Cancel</button>
+                                <button type="submit" class="btn-filter-apply" id="btn-submit-review" data-i18n="submitReviewBtn">Publish Review</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- قائمة التقييمات السابقة (Reviews List) -->
+                    <div class="reviews-list-container" id="reviews-list-container"></div>
+                </div>
+
+                <!-- تذييل النافذة (Modal Footer with Hire Now Button) -->
+                <div class="details-modal-footer">
+                    <button type="button" class="btn-filter-clear" data-action="modal:close-details" data-i18n="closeModalBtn">Close</button>
+                    <button type="button" class="btn-hire-card" id="details-btn-hire" data-action="company:hire-from-details">
+                        <span data-i18n="hireNow">Hire Now</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
                 </div>
             </div>
         </div>
