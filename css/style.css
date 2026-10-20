@@ -266,6 +266,7 @@ html {
 }
 
 .modern-nav-link:hover {
+    cursor: pointer;
     color: var(--color-navy);
     background: rgba(11, 25, 44, 0.05);
     transform: translateY(-1px);
