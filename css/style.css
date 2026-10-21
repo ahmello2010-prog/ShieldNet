@@ -733,6 +733,7 @@ body.lang-ar .btn-explore:hover .arrow-icon {
 
 body.lang-ar .modern-navbar {
     direction: rtl;
+    transform: translateX(23px);
 }
 
 body.lang-ar .modern-nav-links {
@@ -2476,7 +2477,9 @@ a.auth-back {
     box-shadow: 0 8px 24px rgba(5, 15, 29, 0.3);
     opacity: 0;
     transform: translateY(-5px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
     pointer-events: none;
 }
 
@@ -2528,7 +2531,9 @@ body.lang-ar .registration-form {
     font-size: 0.8rem;
     font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 .auth-lang-toggle:hover {
@@ -2579,7 +2584,10 @@ body.lang-ar .registration-form {
     color: #fff;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
 }
 
 .account-type-card:hover,
@@ -2617,8 +2625,14 @@ body.lang-ar .registration-form {
 }
 
 @keyframes auth-panel-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .registration-back {
@@ -2751,18 +2765,24 @@ body.lang-ar .registration-form {
    Smooth Hero Left-Triangle & Golden-Divider Retraction
    ========================================================= */
 .left-triangle {
-    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    transition:
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.5s ease;
     will-change: transform, opacity;
 }
 
 .golden-divider {
-    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    transition:
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.4s ease;
     will-change: transform, opacity;
 }
 
 .content-wrapper,
 .ribbons {
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
 }
 
 /* Retracting towards left edge when leaving Home */
@@ -2982,7 +3002,10 @@ body.lang-ar .registration-form {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin 0.3s ease;
+    transition:
+        max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.3s ease,
+        margin 0.3s ease;
     margin-bottom: 0;
     background: #ffffff;
     border-radius: 16px;
@@ -3033,7 +3056,9 @@ body.lang-ar .registration-form {
     color: var(--color-navy);
     font-size: 0.9rem;
     font-family: var(--font-body);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .filter-input:focus,
@@ -3158,7 +3183,10 @@ body.lang-ar .registration-form {
     display: flex;
     flex-direction: column;
     box-shadow: 0 6px 20px rgba(11, 25, 44, 0.05);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
     position: relative;
 }
 
@@ -3171,7 +3199,9 @@ body.lang-ar .registration-form {
 /* Recommended Cards - Subtle Gold Border & Highlight */
 .company-card.is-recommended {
     border: 1.8px solid var(--color-gold);
-    box-shadow: 0 8px 26px rgba(212, 175, 55, 0.16), 0 2px 8px rgba(11, 25, 44, 0.05);
+    box-shadow:
+        0 8px 26px rgba(212, 175, 55, 0.16),
+        0 2px 8px rgba(11, 25, 44, 0.05);
 }
 
 .company-card.is-recommended:hover {
@@ -3777,7 +3807,7 @@ body.lang-ar .unavailable-desc-text {
     .filter-grid {
         grid-template-columns: 1fr;
     }
-    
+
     /* MOBILE: TWO CARDS PER ROW BY DEFAULT */
     .companies-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -4281,7 +4311,9 @@ body.lang-ar .company-details-modal-card {
     color: #cbd5e1;
     cursor: pointer;
     padding: 2px 3px;
-    transition: transform 0.15s ease, color 0.15s ease;
+    transition:
+        transform 0.15s ease,
+        color 0.15s ease;
 }
 
 .star-btn:hover,
@@ -4407,7 +4439,6 @@ body.lang-ar .company-details-modal-card {
         display: none;
     }
 }
-
 
 @media (max-width: 768px) {
     .cta-buttons,
