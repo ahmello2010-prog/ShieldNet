@@ -101,7 +101,7 @@
                 <p class="drawer-nav-label" data-i18n="drawerLabel">Platform Directory</p>
                 <ul class="drawer-links-list">
                     <li>
-                        <a href="/index.html" class="drawer-link">
+                        <a href="/index.html" class="drawer-link" data-action="nav:home">
                             <svg
                                 class="nav-svg-icon"
                                 viewBox="0 0 24 24"
@@ -118,7 +118,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="drawer-link active">
+                        <a href="#" class="drawer-link active" data-action="nav:companies">
                             <svg
                                 class="nav-svg-icon"
                                 viewBox="0 0 24 24"
@@ -748,6 +748,141 @@
             </div>
         </div>
 
+        <!-- نافذة تفاصيل الشركة وتقييمات العملاء وإضافة تقييم (Company Details & Reviews Modal) -->
+        <div
+            class="custom-modal details-dialog"
+            id="company-details-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="details-company-name"
+            aria-hidden="true">
+            <div class="modal-backdrop" data-action="modal:close-details" tabindex="-1"></div>
+            <div class="company-details-modal-card">
+                <button type="button" class="modal-close-btn" data-action="modal:close-details" aria-label="Close modal">
+                    &times;
+                </button>
+
+                <!-- رأس تفاصيل الشركة (Company Header) -->
+                <div class="details-header-section">
+                    <div class="details-company-hero">
+                        <img src="/img/company_aegis.jpg" alt="Company" class="details-company-img" id="details-company-img" />
+                        <div class="details-company-info">
+                            <div class="details-title-row">
+                                <h2 id="details-company-name" class="details-company-name">Aegis Shield Operations</h2>
+                                <span class="recommended-badge" id="details-recommended-badge" style="display: none;">
+                                    <svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                    </svg>
+                                    <span data-i18n="badgeRecommended">Recommended for You</span>
+                                </span>
+                            </div>
+                            <div class="card-location-row" style="margin-top: 4px;">
+                                <svg class="pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span id="details-company-location">New Cairo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="details-company-desc" id="details-company-desc"></p>
+
+                    <div class="card-metrics-grid" style="margin-top: 14px;">
+                        <div class="metric-item">
+                            <span class="metric-label" data-i18n="cardWorkforce">Workforce</span>
+                            <span class="metric-value" id="details-company-workforce">1,450+ Certified Guards</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label" data-i18n="cardMinWage">Min. Wage</span>
+                            <span class="metric-value wage-highlight" id="details-company-wage">EGP 9,500 / mo</span>
+                        </div>
+                    </div>
+
+                    <div class="card-services-list" id="details-company-services" style="margin-top: 12px;"></div>
+                </div>
+
+                <!-- قسم التقييم ومراجعات العملاء (Ratings & Reviews Section) -->
+                <div class="details-reviews-section">
+                    <div class="reviews-header-bar">
+                        <div>
+                            <h3 class="reviews-section-title" data-i18n="reviewsHeading">Client Reviews &amp; Ratings</h3>
+                            <div class="details-rating-summary">
+                                <span class="details-rating-big" id="details-average-score">4.9</span>
+                                <div class="details-rating-stars-col">
+                                    <div class="details-stars-visual" id="details-stars-visual"></div>
+                                    <span class="details-total-reviews" id="details-total-reviews">Based on verified client reviews</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-leave-review" id="btn-toggle-review-form" data-action="review:toggle-form">
+                            <svg class="pen-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                            <span data-i18n="leaveReviewBtn">Leave a Review</span>
+                        </button>
+                    </div>
+
+                    <!-- نموذج إضافة تقييم جديد (Interactive Review Form) -->
+                    <div class="review-form-wrapper" id="review-form-wrapper" style="display: none;">
+                        <form id="company-review-form" class="company-review-form" novalidate>
+                            <input type="hidden" id="review-company-id" name="companyId" />
+                            <h4 class="review-form-title" data-i18n="writeReviewTitle">Submit a Client Review</h4>
+                            
+                            <!-- محدد النجوم التفاعلي (Interactive Star Selector) -->
+                            <div class="star-rating-selector-group">
+                                <label class="filter-label" data-i18n="rateExperienceLabel">Select Your Rating:</label>
+                                <div class="star-rating-stars" id="star-rating-picker" role="radiogroup" aria-label="Rating out of 5 stars">
+                                    <button type="button" class="star-btn is-active" data-star="1" role="radio" aria-checked="false" aria-label="1 star">★</button>
+                                    <button type="button" class="star-btn is-active" data-star="2" role="radio" aria-checked="false" aria-label="2 stars">★</button>
+                                    <button type="button" class="star-btn is-active" data-star="3" role="radio" aria-checked="false" aria-label="3 stars">★</button>
+                                    <button type="button" class="star-btn is-active" data-star="4" role="radio" aria-checked="false" aria-label="4 stars">★</button>
+                                    <button type="button" class="star-btn is-active" data-star="5" role="radio" aria-checked="true" aria-label="5 stars">★</button>
+                                    <input type="hidden" id="review-score-input" name="rating" value="5" />
+                                    <span class="selected-star-label" id="selected-star-label">5.0 / 5.0</span>
+                                </div>
+                            </div>
+
+                            <div class="review-inputs-grid">
+                                <div class="filter-group">
+                                    <label for="review-author-name" class="filter-label" data-i18n="reviewNameLabel">Your Name / Organization</label>
+                                    <input type="text" id="review-author-name" class="filter-input" placeholder="e.g. Eng. Tarek Mansour" required />
+                                </div>
+                                <div class="filter-group">
+                                    <label for="review-author-role" class="filter-label" data-i18n="reviewRoleLabel">Property / Facility Type</label>
+                                    <input type="text" id="review-author-role" class="filter-input" placeholder="e.g. Compound Facilities Director" />
+                                </div>
+                            </div>
+
+                            <div class="filter-group" style="margin-top: 10px;">
+                                <label for="review-comment" class="filter-label" data-i18n="reviewCommentLabel">Your Review &amp; Experience</label>
+                                <textarea id="review-comment" class="filter-input review-textarea" placeholder="Share your experience regarding guard discipline, perimeter response, gatehouse management..." required></textarea>
+                            </div>
+
+                            <div class="review-form-actions">
+                                <button type="button" class="btn-filter-clear" id="btn-cancel-review" data-action="review:cancel" data-i18n="cancelReviewBtn">Cancel</button>
+                                <button type="submit" class="btn-filter-apply" id="btn-submit-review" data-i18n="submitReviewBtn">Publish Review</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- قائمة التقييمات السابقة (Reviews List) -->
+                    <div class="reviews-list-container" id="reviews-list-container"></div>
+                </div>
+
+                <!-- تذييل النافذة (Modal Footer with Hire Now Button) -->
+                <div class="details-modal-footer">
+                    <button type="button" class="btn-filter-clear" data-action="modal:close-details" data-i18n="closeModalBtn">Close</button>
+                    <button type="button" class="btn-hire-card" id="details-btn-hire" data-action="company:hire-from-details">
+                        <span data-i18n="hireNow">Hire Now</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        
         <!-- إشعار تفاعلي فوري عند استجابة الأزرار (Interactive Action Toast) -->
         <div id="action-toast" class="action-toast" role="status" aria-live="polite">
             <span class="toast-icon">✓</span>

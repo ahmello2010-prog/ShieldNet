@@ -95,7 +95,7 @@ const TRANSLATIONS = {
         hireSubmit: "Submit Hire Request",
         hireToastSuccess: "Contract inquiry submitted to {company}. Our dispatch officer will contact you within 2 business hours.",
         hireToastAuthReq: "Please sign in or create an account to submit a hire request.",
-        detailsBtn: "Reviews & Info",
+        detailsBtn: "View Reviews",
         detailsAndReviews: "Details & Reviews",
         reviewsHeading: "Client Ratings & Verified Reviews",
         leaveReviewBtn: "Leave a Review",
@@ -202,7 +202,7 @@ const TRANSLATIONS = {
         hireSubmit: "إرسال طلب التعاقد",
         hireToastSuccess: "تم إرسال طلب التعاقد لشركة {company} بنجاح. سيتواصل معك مسؤول العمليات خلال ساعتين.",
         hireToastAuthReq: "يرجى تسجيل الدخول أو إنشاء حساب لطلب التعاقد الأمني.",
-        detailsBtn: "التقييمات والتفاصيل",
+        detailsBtn: "عرض التقييمات",
         detailsAndReviews: "التفاصيل والتقييمات",
         reviewsHeading: "تقييمات وآراء العملاء المعتمدة",
         leaveReviewBtn: "أضف تقييمك",
@@ -923,8 +923,67 @@ setLanguage(getLanguage());
             return !!mobileDrawer && mobileDrawer.classList.contains("is-open");
         }
 
+        function updateActiveNavigation(page) {
+            const isCompanies = page === "companies";
+            const isHome = !isCompanies;
+
+            // Update mobile sidebar drawer links
+            document.querySelectorAll(".drawer-link").forEach((link) => {
+                const action = link.getAttribute("data-action");
+                const href = (link.getAttribute("href") || "").trim().toLowerCase();
+
+                const isHomeLink =
+                    action === "nav:home" ||
+                    href === "/" ||
+                    href === "/index.html" ||
+                    href === "#home" ||
+                    href.endsWith("/index.html") ||
+                    (href === "#" && action !== "nav:companies");
+
+                const isCompaniesLink =
+                    action === "nav:companies" ||
+                    href === "/companies.html" ||
+                    href === "#companies" ||
+                    href.includes("companies");
+
+                if (isCompaniesLink) {
+                    link.classList.toggle("active", isCompanies);
+                } else if (isHomeLink) {
+                    link.classList.toggle("active", isHome);
+                }
+            });
+
+            // Update desktop navbar links in all top headers
+            document.querySelectorAll(".modern-nav-link").forEach((link) => {
+                const action = link.getAttribute("data-action");
+                const href = (link.getAttribute("href") || "").trim().toLowerCase();
+
+                const isHomeLink =
+                    action === "nav:home" ||
+                    href === "/" ||
+                    href === "/index.html" ||
+                    href === "#home" ||
+                    href.endsWith("/index.html") ||
+                    (href === "#" && action !== "nav:companies");
+
+                const isCompaniesLink =
+                    action === "nav:companies" ||
+                    href === "/companies.html" ||
+                    href === "#companies" ||
+                    href.includes("companies");
+
+                if (isCompaniesLink) {
+                    link.classList.toggle("active", isCompanies);
+                } else if (isHomeLink) {
+                    link.classList.toggle("active", isHome);
+                }
+            });
+        }
+        window.ShieldNetUpdateActiveNav = updateActiveNavigation;
+
         function openMobileDrawer() {
             if (!mobileDrawer || !drawerBackdrop || isDrawerOpen()) return;
+            updateActiveNavigation(currentPage);
             mobileDrawer.classList.add("is-open");
             drawerBackdrop.classList.add("is-active");
             mobileDrawer.setAttribute("aria-hidden", "false");
