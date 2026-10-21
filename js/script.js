@@ -176,6 +176,10 @@ const TRANSLATIONS = {
         knowledgeStatus: "Neural Security Network Active",
         knowledgeHint: "Click any branch or card to explore the full article",
         knowledgeSectionCards: "The Eight Security Articles",
+        knowledgeZoomButton: "Enlarge network",
+        knowledgeZoomTitle: "ShieldNet Knowledge Network",
+        knowledgeZoomHint: "Swipe to explore the full network",
+        knowledgeZoomClose: "Close enlarged network",
         btnReadMore: "Explore Article",
         backToNetwork: "↑ Back to Network",
         prevArticle: "« Previous Topic",
@@ -343,6 +347,10 @@ const TRANSLATIONS = {
         knowledgeStatus: "الشبكة الأمنية التفاعلية متصلة",
         knowledgeHint: "انقر على أي فرع أو بطاقة لقراءة المقال المتخصص",
         knowledgeSectionCards: "الأركان والمقالات الأمنية الثمانية",
+        knowledgeZoomButton: "تكبير الشبكة",
+        knowledgeZoomTitle: "شبكة ShieldNet المعرفية",
+        knowledgeZoomHint: "اسحب لاستكشاف الشبكة كاملة",
+        knowledgeZoomClose: "إغلاق عرض الشبكة المكبر",
         btnReadMore: "عرض المزيد",
         backToNetwork: "↑ العودة إلى شبكة المعرفة",
         prevArticle: "« المقال السابق",
@@ -1378,6 +1386,7 @@ setLanguage(getLanguage());
             if (!container) return;
             const svg = container.querySelector(".octopus-svg");
             if (!svg) return;
+            const shouldScrollToArticle = container.id !== "knowledge-zoom-svg-container";
 
             const armGroups = container.querySelectorAll(".octopus-arm-group");
             armGroups.forEach((group) => {
@@ -1402,12 +1411,12 @@ setLanguage(getLanguage());
                     terminalNode.addEventListener("keydown", (e) => {
                         if (e.key === "Enter" || e.key === " ") {
                             e.preventDefault();
-                            selectKnowledgeTopic(topicId, true);
+                            selectKnowledgeTopic(topicId, shouldScrollToArticle);
                         }
                     });
                     terminalNode.addEventListener("click", (e) => {
                         e.stopPropagation();
-                        selectKnowledgeTopic(topicId, true);
+                        selectKnowledgeTopic(topicId, shouldScrollToArticle);
                     });
                 }
             });
@@ -1440,6 +1449,13 @@ setLanguage(getLanguage());
                     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                     articleReader.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
                 }
+            }
+
+            const zoomModal = document.getElementById("knowledge-zoom-modal");
+            const zoomContainer = document.getElementById("knowledge-zoom-svg-container");
+            if (zoomModal?.classList.contains("is-active") && zoomContainer) {
+                zoomContainer.innerHTML = renderOctopusSvgHtml(currentKnowledgeTopic, lang);
+                bindOctopusEvents(zoomContainer);
             }
         }
 
@@ -1998,10 +2014,24 @@ setLanguage(getLanguage());
                     openModal(policyModal);
                 },
                 "modal:close-policy": () => closeModal(policyModal),
+                "modal:close-knowledge-zoom": () => closeModal(document.getElementById("knowledge-zoom-modal")),
                 "modal:close-hire": () => closeModal(hireModal),
                 "modal:close-unavailable": () => closeModal(document.getElementById("service-unavailable-modal")),
                 "modal:close-details": () => closeModal(document.getElementById("company-details-modal")),
                 "modal:close-all": () => closeAllModals(),
+                "knowledge:open-zoom": () => {
+                    if (window.innerWidth > 992) return;
+                    const modal = document.getElementById("knowledge-zoom-modal");
+                    const zoomContainer = document.getElementById("knowledge-zoom-svg-container");
+                    if (!modal || !zoomContainer) return;
+                    const lang = getLanguage();
+                    zoomContainer.innerHTML = renderOctopusSvgHtml(currentKnowledgeTopic, lang);
+                    bindOctopusEvents(zoomContainer);
+                    openModal(modal);
+                    requestAnimationFrame(() => {
+                        zoomContainer.scrollLeft = Math.max(0, (zoomContainer.scrollWidth - zoomContainer.clientWidth) / 2);
+                    });
+                },
 
                 "company:details": (target) => {
                     const compId = target.getAttribute("data-company-id") || target.closest("[data-company-id]")?.getAttribute("data-company-id");
