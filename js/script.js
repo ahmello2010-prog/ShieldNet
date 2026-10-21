@@ -19,7 +19,6 @@ const TRANSLATIONS = {
         navHome: "Home",
         navCompanies: "Security Companies",
         navKnowledge: "Knowledge",
-        navServices: "Knowledge",
         navAbout: "About Platform",
         navRequests: "My Requests",
         navTerms: "Terms and Conditions",
@@ -171,6 +170,7 @@ const TRANSLATIONS = {
         registrationLogoAlt: "ShieldNet logo",
         closeModalBtn: "Close",
         knowledgeBadge: "Interactive Security Knowledge Network",
+        knowledgePageTitle: "ShieldNet | Security Knowledge Network",
         knowledgeHeading: "ShieldNet <span>Knowledge Network</span>",
         knowledgeSubheading: "An interactive, interconnected encyclopedia exploring physical guarding, electronic surveillance, emergency response, and modern security management.",
         knowledgeStatus: "Neural Security Network Active",
@@ -186,7 +186,6 @@ const TRANSLATIONS = {
         navHome: "الرئيسية",
         navCompanies: "شركات الأمن",
         navKnowledge: "المعرفة",
-        navServices: "المعرفة",
         navAbout: "عن المنصة",
         navRequests: "طلباتي",
         navTerms: "الشروط والأحكام",
@@ -338,6 +337,7 @@ const TRANSLATIONS = {
         registrationLogoAlt: "شعار ShieldNet",
         closeModalBtn: "إغلاق",
         knowledgeBadge: "موسوعة المعرفة الأمنية التفاعلية",
+        knowledgePageTitle: "ShieldNet | موسوعة المعرفة الأمنية",
         knowledgeHeading: "ShieldNet <span>Knowledge Network</span>",
         knowledgeSubheading: "منظومة تفاعلية متكاملة تربط أركان العمل الأمني الميداني والتقني والإداري. استكشف الفروع المعرفية وتصفح المقالات التخصصية المعتمدة لحماية المنشآت والعقارات الكبرى.",
         knowledgeStatus: "الشبكة الأمنية التفاعلية متصلة",
@@ -700,6 +700,12 @@ function setLanguage(lang) {
     document.documentElement.dir = validLang === "ar" ? "rtl" : "ltr";
     document.body.classList.toggle("lang-ar", validLang === "ar");
 
+    if (document.querySelector(".knowledge-main-container")) {
+        document.title = translateText("knowledgePageTitle", {}, validLang);
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute("content", translateText("knowledgePageTitle", {}, validLang));
+    }
+
     const dict = TRANSLATIONS[validLang];
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
@@ -885,11 +891,11 @@ setLanguage(getLanguage());
    ============================================================= */
 (function initHomePage() {
     function start() {
-        // Run on pages containing hero-container, discover-view, or services-view / knowledge-page
+        // Run on pages containing hero-container, discover-view, or knowledge-view / knowledge-page
         const heroContainer = document.getElementById("hero-container");
         const discoverView = document.getElementById("discover-view");
-        const servicesView = document.getElementById("knowledge-view") || document.getElementById("services-view") || document.getElementById("knowledge-page");
-        if (!heroContainer && !discoverView && !servicesView) return;
+        const knowledgeView = document.getElementById("knowledge-view");
+        if (!heroContainer && !discoverView && !knowledgeView) return;
 
         /* ----- DOM references ----- */
         const policyModal = document.getElementById("policy-modal");
@@ -927,13 +933,13 @@ setLanguage(getLanguage());
 
         const RECENT_SEARCHES_KEY = "shieldnet_recent_searches";
 
-        let currentPage = (servicesView && !heroContainer && !discoverView)
+        let currentPage = (knowledgeView && !heroContainer && !discoverView)
             ? "knowledge"
-            : (discoverView && !heroContainer && !servicesView)
+            : (discoverView && !heroContainer && !knowledgeView)
                 ? "companies"
                 : (window.location.hash && window.location.hash.startsWith("#companies"))
                     ? "companies"
-                    : (window.location.hash && (window.location.hash.startsWith("#knowledge") || window.location.hash.startsWith("#services")))
+                    : (window.location.hash && window.location.hash.startsWith("#knowledge"))
                         ? "knowledge"
                         : "home";
         let isNavigating = false;
@@ -1108,7 +1114,7 @@ setLanguage(getLanguage());
 
         function updateActiveNavigation(page) {
             const isCompanies = page === "companies";
-            const isKnowledge = page === "knowledge" || page === "services";
+            const isKnowledge = page === "knowledge";
             const isHome = !isCompanies && !isKnowledge;
 
             const updateLink = (link) => {
@@ -1127,11 +1133,8 @@ setLanguage(getLanguage());
 
                 const isKnowledgeLink =
                     action === "nav:knowledge" ||
-                    action === "nav:services" ||
                     rawHref.includes("knowledge") ||
-                    rawHref.includes("services") ||
-                    rawHref === "#knowledge" ||
-                    rawHref === "#services";
+                    rawHref === "#knowledge";
 
                 const isCompaniesLink =
                     !isKnowledgeLink &&
@@ -1198,8 +1201,8 @@ setLanguage(getLanguage());
             closeMobileDrawer();
 
             // Ensure Knowledge view is completely hidden
-            if (servicesView) {
-                servicesView.style.display = "none";
+            if (knowledgeView) {
+                knowledgeView.style.display = "none";
             }
 
             const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches || skipAnimation;
@@ -1208,7 +1211,7 @@ setLanguage(getLanguage());
             // If heroContainer is not visible (e.g. coming from knowledge view) or reduced motion, transition immediately
             if (reduceMotion || !isHeroVisible) {
                 if (heroContainer) heroContainer.style.display = "none";
-                if (servicesView) servicesView.style.display = "none";
+                if (knowledgeView) knowledgeView.style.display = "none";
                 discoverView.style.display = "block";
                 discoverView.style.opacity = "1";
                 discoverView.style.transform = "none";
@@ -1234,7 +1237,7 @@ setLanguage(getLanguage());
             setTimeout(() => {
                 heroContainer.style.display = "none";
                 heroContainer.classList.remove("is-retracting");
-                if (servicesView) servicesView.style.display = "none";
+                if (knowledgeView) knowledgeView.style.display = "none";
 
                 discoverView.style.display = "block";
                 discoverView.style.opacity = "0";
@@ -1273,8 +1276,8 @@ setLanguage(getLanguage());
             closeMobileDrawer();
 
             // Ensure Knowledge view is completely hidden
-            if (servicesView) {
-                servicesView.style.display = "none";
+            if (knowledgeView) {
+                knowledgeView.style.display = "none";
             }
 
             const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches || skipAnimation;
@@ -1283,7 +1286,7 @@ setLanguage(getLanguage());
             // If discoverView is not visible (e.g. coming from knowledge view) or reduced motion, transition immediately
             if (reduceMotion || !isDiscoverVisible) {
                 if (discoverView) discoverView.style.display = "none";
-                if (servicesView) servicesView.style.display = "none";
+                if (knowledgeView) knowledgeView.style.display = "none";
                 heroContainer.style.display = "flex";
                 currentPage = "home";
                 isNavigating = false;
@@ -1307,7 +1310,7 @@ setLanguage(getLanguage());
                 discoverView.style.display = "none";
                 discoverView.style.opacity = "1";
                 discoverView.style.transform = "none";
-                if (servicesView) servicesView.style.display = "none";
+                if (knowledgeView) knowledgeView.style.display = "none";
 
                 heroContainer.style.display = "flex";
                 heroContainer.classList.add("is-entering");
@@ -1336,8 +1339,8 @@ setLanguage(getLanguage());
            Navigation: Knowledge Network (Octopus Encyclopedia)
            ============================================================= */
         function navigateToKnowledge(skipAnimation = false) {
-            if (currentPage === "knowledge" || currentPage === "services" || isNavigating) return;
-            if (!servicesView) {
+            if (currentPage === "knowledge" || isNavigating) return;
+            if (!knowledgeView) {
                 window.location.href = "/knowledge.html";
                 return;
             }
@@ -1350,9 +1353,9 @@ setLanguage(getLanguage());
             if (heroContainer) heroContainer.style.display = "none";
             if (discoverView) discoverView.style.display = "none";
 
-            servicesView.style.display = "block";
-            servicesView.style.opacity = "1";
-            servicesView.style.transform = "none";
+            knowledgeView.style.display = "block";
+            knowledgeView.style.opacity = "1";
+            knowledgeView.style.transform = "none";
 
             currentPage = "knowledge";
             isNavigating = false;
@@ -1370,7 +1373,6 @@ setLanguage(getLanguage());
 
             initKnowledgeNetworkUI(currentKnowledgeTopic, false);
         }
-        const navigateToServices = navigateToKnowledge;
 
         function bindOctopusEvents(container) {
             if (!container) return;
@@ -2037,10 +2039,6 @@ setLanguage(getLanguage());
                     closeMobileDrawer();
                     navigateToCompanies();
                 },
-                "nav:services": () => {
-                    closeMobileDrawer();
-                    navigateToKnowledge();
-                },
                 "nav:knowledge": () => {
                     closeMobileDrawer();
                     navigateToKnowledge();
@@ -2050,7 +2048,7 @@ setLanguage(getLanguage());
                     if (topicId) selectKnowledgeTopic(topicId, true);
                 },
                 "knowledge:back-to-top": () => {
-                    const topTarget = document.getElementById("octopus-wrapper") || document.getElementById("knowledge-nav-pills") || document.getElementById("knowledge-view") || document.getElementById("services-view");
+                    const topTarget = document.getElementById("octopus-wrapper") || document.getElementById("knowledge-nav-pills") || document.getElementById("knowledge-view");
                     if (topTarget) {
                         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                         topTarget.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -2289,7 +2287,7 @@ setLanguage(getLanguage());
         window.addEventListener("popstate", (e) => {
             if (window.location.hash === "#companies" || (e.state && e.state.page === "companies")) {
                 navigateToCompanies(false);
-            } else if (window.location.hash === "#knowledge" || window.location.hash === "#services" || (e.state && (e.state.page === "knowledge" || e.state.page === "services"))) {
+            } else if (window.location.hash === "#knowledge" || (e.state && e.state.page === "knowledge")) {
                 navigateToKnowledge(false);
             } else {
                 navigateToHome(false);
@@ -2356,15 +2354,15 @@ setLanguage(getLanguage());
             history.replaceState({}, "", `${window.location.pathname}${window.location.hash}`);
         }
 
-        // Check if page loaded directly with #companies or #knowledge or on knowledge.html / services.html / companies.html
+        // Check if page loaded directly with #companies or #knowledge or on knowledge.html / companies.html
         if (window.location.hash && window.location.hash.startsWith("#companies")) {
             navigateToCompanies(true);
-        } else if (window.location.hash && (window.location.hash.startsWith("#knowledge") || window.location.hash.startsWith("#services"))) {
+        } else if (window.location.hash && window.location.hash.startsWith("#knowledge")) {
             navigateToKnowledge(true);
-        } else if (servicesView && !heroContainer && !discoverView) {
+        } else if (knowledgeView && !heroContainer && !discoverView) {
             updateActiveNavigation("knowledge");
             initKnowledgeNetworkUI("fundamentals", false);
-        } else if (discoverView && !heroContainer && !servicesView) {
+        } else if (discoverView && !heroContainer && !knowledgeView) {
             updateActiveNavigation("companies");
             renderCompanies();
             renderRecentSearches();

@@ -337,51 +337,45 @@ export const KNOWLEDGE_TOPICS = [
         `
     },
     {
-        id: "cyber",
+        id: "hiring",
         num: "07",
-        title: "الأمن السيبراني",
-        titleEn: "Cyber-Physical Security",
-        category: "الحماية الرقمية",
-        categoryEn: "Digital Convergence",
-        desc: "حماية غرف الخوادم ومراكز البيانات، التصدي لأساليب الهندسة الاجتماعية، وتأمين أجهزة إنترنت الأشياء الميدانية.",
-        descEn: "Data center physical protection, counter-social engineering tactics, and securing connected IoT devices.",
-        readTime: "قراءة: 6 دقائق",
-        readTimeEn: "6 min read",
-        iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`,
-        intro: "في العصر الرقمي الحديث، تلاشت الحدود الفاصلة بين الأمن المادي والأمن السيبراني. لم تعد الهجمات الرقمية تقتصر على الفضاء الإلكتروني، بل تعتمد في كثير من الأحيان على اختراق مادي لمراكز البيانات أو استغلال ثغرات أجهزة المراقبة المتصلة بالشبكة والهندسة الاجتماعية الميدانية.",
+        title: "توظيف الحراس والتعاقد على خدمات الحراسة",
+        titleEn: "Hiring Guards & Contracting Guarding Services",
+        category: "التوظيف والتعاقد",
+        categoryEn: "Hiring & Contracts",
+        desc: "خطوات تحديد احتياجات الموقع واختيار أفراد الحراسة أو مزود الخدمة وتوضيح شروط التعاقد.",
+        descEn: "Define site needs, select guards or a service provider, and set clear contract terms.",
+        readTime: "قراءة: 5 دقائق",
+        readTimeEn: "5 min read",
+        iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="10" cy="7" r="4"></circle><path d="M20 8v6"></path><path d="M23 11h-6"></path></svg>`,
+        intro: "يعتمد نجاح التعاقد على حراسة مناسبة على فهم احتياجات الموقع قبل نشر الإعلان أو طلب عرض الخدمة. يساعد الوصف الواضح للمهام والورديات والموقع والميزانية على جذب المرشحين أو الشركات الملائمة وتجنب اختلاف التوقعات لاحقاً.",
         contentHtml: `
             <div class="article-lead-summary">
-                <p>تكامل الأمن المادي والسيبراني (Cyber-Physical Security Convergence) يعني أن غرف الخوادم، وكابلات الشبكة، وأجهزة الـ IoT، والكوادر البشرية تشكل خط دفاع رقمي وميداني موحد.</p>
+                <p>ابدأ بتحديد ما يحتاجه الموقع فعلياً: طبيعة المنشأة، أوقات التغطية، عدد المواقع والورديات، والمهام المطلوبة من الحارس.</p>
             </div>
 
-            <h3>1. تأمين مراكز البيانات وغرف السيرفرات (MDF / IDF)</h3>
-            <p>تعتبر غرف الخوادم القلب الرقمي النابض للمنشأة، وتتطلب حماية مادية فائقة تشمل:</p>
+            <h3>1. تحديد متطلبات الوظيفة أو الخدمة</h3>
             <ul>
-                <li><strong>التحكم الصارم بالدخول البيومتري:</strong> قصر الدخول على مسؤولي الشبكات المصرح لهم عبر التحقق المزدوج (Two-Factor Authentication).</li>
-                <li><strong>منع اصطحاب وسائط التخزين:</strong> حظر إدخال الفلاشات (USB) أو الهواتف أو أجهزة التسجيل دون تصريح مسبق وتفتيش أمني.</li>
-                <li><strong>الرقابة البيئية:</strong> مراقبة درجات الحرارة والرطوبة ومستوى الغازات، وتوفير أنظمة إطفاء بالغاز النظيف (FM-200) لحماية الأجهزة من التلف المائي.</li>
-                <li><strong>تأمين منافذ الكابلات:</strong> حماية مسارات كابلات الألياف الضوئية ومنع التجسس الفيزيائي أو قطع الاتصالات.</li>
+                <li>اكتب وصفاً دقيقاً للموقع والمهام، مثل تنظيم الدخول، استقبال الزوار، الدوريات، أو تسجيل الملاحظات.</li>
+                <li>حدد عدد الحراس وأوقات الورديات وتاريخ البدء ومهارات التواصل أو الخبرة المطلوبة.</li>
+                <li>وضح ما إذا كانت الوظيفة مباشرة لدى صاحب العمل أم أن المطلوب التعاقد مع شركة حراسة.</li>
             </ul>
 
             <div class="security-insight-box">
-                <h4>
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                    التصدي للهندسة الاجتماعية الميدانية
-                </h4>
-                <p>يحاول المهاجمون السيبرانيون انتحال صفة «فني صيانة إنترنت»، أو «مندوب توصيل»، أو «مفتش حكومي» لخداع حراس الأمن وتجاوز البوابات لزرع أجهزة تنصت أو فلاشات ملغومة؛ اليقظة والاتصال بجهة العمل للتحقق من أي مهمة صيانة هي الدرع الحقيقي.</p>
+                <h4>وضوح الشروط يحمي الطرفين</h4>
+                <p>اتفق مسبقاً على نطاق العمل والجدول وآلية الإشراف والتواصل والإجازات والاستبدال والتكلفة، واجعل تفاصيل الاتفاق مكتوبة.</p>
             </div>
 
-            <h3>2. تأمين أجهزة المراقبة الذكية وإنترنت الأشياء (IoT)</h3>
-            <p>تعتبر كاميرات المراقبة الشبكية وبوابات الدخول أجهزة كمبيوتر مصغرة قد تشكل ثغرة إذا لم تُحمَ بعناية:</p>
-            <ol>
-                <li>عزل أجهزة المراقبة في شبكة افتراضية مستقلة (VLAN) مفصولة عن شبكة بيانات المنشأة.</li>
-                <li>تغيير كلمات المرور الافتراضية للمصنع فور التركيب واعتماد كلمات مرور معقدة دورية.</li>
-                <li>تحديث البرمجيات الثابتة (Firmware) بانتظام لسد أي ثغرات برمجية معلنة.</li>
-                <li>تشفير تدفقات الفيديو (Video Streams) وحماية مسجلات الشبكة (NVR) من الوصول الخارجي غير المحمي.</li>
-            </ol>
+            <h3>2. تقييم المرشحين أو مزودي الخدمة</h3>
+            <p>قارن الخبرة والمهارات ومدى التوافق مع طبيعة الموقع، واطلب معلومات يمكن التحقق منها عن الشركة أو المرشح وفق الإجراءات النظامية. ناقش التدريب والإشراف وخطة تغطية الغياب قبل اتخاذ القرار.</p>
 
-            <h3>3. التوعية بمخاطر التلصص على الشاشات ومخلفات الورق</h3>
-            <p>تشمل مسؤوليات الحراسة التأكد من غلق شاشات المكاتب بعد ساعات العمل الرسمية (Clean Screen Policy)، والتأكد من إتلاف المستندات التي تتضمن كلمات مرور أو بيانات عملاء بمفارم الورق الأمنية (Clean Desk Policy).</p>
+            <h3>3. مراجعة الاتفاق والبدء بالعمل</h3>
+            <ul>
+                <li>وثق الأجر أو التكلفة، ساعات العمل، المسؤوليات، مدة الاتفاق، وآلية إنهائه أو تجديده.</li>
+                <li>تأكد من فهم متطلبات الموقع وإجراءات الطوارئ والتصعيد قبل بدء الوردية.</li>
+                <li>حدد جهة اتصال للإشراف ومراجعة الأداء ومعالجة الملاحظات.</li>
+                <li>راعِ القوانين والاشتراطات المحلية عند التوظيف أو التعاقد.</li>
+            </ul>
         `
     },
     {
@@ -479,7 +473,42 @@ export function getKnowledgeTopic(topicId) {
     return KNOWLEDGE_TOPICS.find((t) => t.id === topicId) || KNOWLEDGE_TOPICS[0];
 }
 
-export function renderKnowledgeCardsHtml(activeId = "fundamentals", lang = "ar") {
+const ENGLISH_ARTICLES = {
+    fundamentals: {
+        intro: "Professional guards are the first line of protection for essential facilities and residential or commercial properties. Effective guarding combines constant awareness, disciplined conduct, and early recognition of warning signs so that concerns can be addressed before they escalate.",
+        body: `<div class="article-lead-summary"><p>Professional guarding combines observation, lawful conduct, and respectful service. Guards should understand the limits of their authority and follow the procedures established for each site.</p></div><h3>1. Core duties of a security guard</h3><ul><li><strong>Situational awareness:</strong> Scan the environment and notice unusual patterns, unattended items, or vehicles in restricted areas.</li><li><strong>Professional conduct:</strong> Wear the required uniform and identification, remain at the assigned post, and stay attentive.</li><li><strong>Clear communication:</strong> Treat visitors respectfully while applying site rules calmly and consistently.</li><li><strong>Follow site procedures:</strong> Use written operating procedures and escalate sensitive situations through the proper channel.</li></ul><div class="security-insight-box"><h4>Prevention first</h4><p>Early reporting and proportionate action can prevent a minor concern from becoming a larger incident.</p></div><h3>2. Objective observation and screening</h3><p>Assess observable behavior and facts without relying on stereotypes or discriminatory assumptions.</p><ol><li>Note specific behavior, such as attempts to bypass a checkpoint or prolonged observation of a restricted entrance.</li><li>Record relevant physical details accurately and avoid unsupported conclusions.</li><li>Conduct inspections only under applicable rules, with consent or other proper authority, and preserve personal dignity.</li></ol><h3>3. Shift handover checklist</h3><ul><li>Check radios, battery charge, and contact with the control room.</li><li>Review visitor and vehicle logs and note unresolved matters.</li><li>Inspect locks, gates, nearby cameras, and emergency lighting.</li><li>Confirm that fire extinguishers and first-aid supplies are ready.</li></ul>`
+    },
+    surveillance: {
+        intro: "CCTV systems and control rooms provide a facility with visual awareness. Cameras do more than record events: when configured and monitored responsibly, they can help operators identify concerns early and direct an appropriate field response.",
+        body: `<div class="article-lead-summary"><p>Surveillance works best when camera coverage, trained operators, and field procedures support one another. Plan coverage for entrances, corridors, and perimeter areas while identifying blind spots.</p></div><h3>1. Camera types and their uses</h3><ul><li><strong>Fixed bullet and dome cameras:</strong> Provide a consistent view of entrances, corridors, and work areas.</li><li><strong>PTZ cameras:</strong> Allow an operator to pan, tilt, and zoom to follow a developing event.</li><li><strong>Thermal cameras:</strong> Detect heat patterns and can assist with observation in low visibility conditions.</li><li><strong>Plate recognition cameras:</strong> Can compare vehicle plates with authorized lists where lawful and properly configured.</li></ul><div class="security-insight-box"><h4>Design for attentive monitoring</h4><p>Long periods of watching many screens can reduce attention. Use sensible screen layouts, scheduled breaks, and event alerts that help operators focus.</p></div><h3>2. Video analytics</h3><p>Analytics can flag events for human review; alerts should be checked in context before action is taken.</p><ol><li>Virtual tripwires can flag movement across a defined boundary.</li><li>Loitering rules can highlight prolonged presence in selected areas.</li><li>Object detection can help identify unattended items.</li><li>Occupancy alerts can help staff notice unusual congestion near exits.</li></ol><h3>3. Recording and privacy controls</h3><ul><li>Set retention periods according to applicable law and operational need.</li><li>Restrict footage access and exports to authorized personnel.</li><li>Log viewing and disclosure of recordings to preserve accountability.</li></ul>`
+    },
+    emergency: {
+        intro: "A security plan is tested most during the first moments of an emergency. Clear procedures help staff protect life, reduce confusion, and coordinate a measured response while avoiding unnecessary risk.",
+        body: `<div class="article-lead-summary"><p>Emergency procedures should be site-specific, easy to understand, and coordinated with the relevant emergency services.</p></div><h3>1. Prepare before an incident</h3><ul><li>Identify evacuation routes, assembly points, accessible exits, and safe areas.</li><li>Assign roles for raising alarms, guiding occupants, and contacting responders.</li><li>Keep emergency equipment visible, accessible, and inspected.</li><li>Practice procedures and update them after drills or changes to the site.</li></ul><div class="security-insight-box"><h4>Protect people first</h4><p>Do not put staff or occupants at avoidable risk to protect property. Follow training and instructions from emergency services.</p></div><h3>2. Respond and communicate</h3><ol><li>Raise the alarm and share the location, type of incident, and known immediate hazards.</li><li>Direct people toward safe routes without blocking emergency access.</li><li>Provide responders with relevant site information and report missing persons if known.</li><li>Keep communication factual and avoid spreading unverified details.</li></ol><h3>3. Recover and review</h3><p>After the immediate danger has passed, account for people, preserve relevant records, report damage, and review what worked. Resume normal operations only when authorized.</p>`
+    },
+    risk: {
+        intro: "Security risk management helps an organization decide where protection is most needed. A structured assessment connects valuable assets, credible threats, existing weaknesses, and practical controls to guide proportionate decisions.",
+        body: `<div class="article-lead-summary"><p>Risk assessments should be based on evidence and revisited when a site, threat environment, or business operation changes.</p></div><h3>1. A practical assessment cycle</h3><ol><li><strong>Identify assets:</strong> List people, information, equipment, and operations that need protection.</li><li><strong>Identify threats:</strong> Consider plausible events that could affect those assets.</li><li><strong>Find vulnerabilities:</strong> Review weaknesses in layout, procedures, staffing, and technology.</li><li><strong>Estimate risk:</strong> Consider likelihood and potential impact using a consistent method.</li><li><strong>Select controls:</strong> Choose measures that reduce risk and can be maintained.</li></ol><div class="security-insight-box"><h4>Use a layered approach</h4><p>Combine suitable physical, procedural, and technical controls; no single measure removes every risk.</p></div><h3>2. Prioritize and assign ownership</h3><p>Address immediate threats to life first. For each planned control, record an owner, due date, and way to check whether it works.</p><h3>3. Review and improve</h3><p>Track incidents and near misses, test controls, and update the assessment after significant changes. Share findings with decision-makers in clear, actionable language.</p>`
+    },
+    access: {
+        intro: "Access control separates public areas from spaces with restricted use. A well-managed process verifies that each person or vehicle has an appropriate reason and authorization to enter a particular area.",
+        body: `<div class="article-lead-summary"><p>Effective access control combines clear rules, reliable identity checks, visitor management, and a response plan for exceptions.</p></div><h3>1. Define permissions</h3><ul><li>Classify areas by sensitivity and assign access according to job need.</li><li>Use time-limited visitor credentials and identify the host responsible for each visit.</li><li>Review permissions regularly and remove access when it is no longer needed.</li></ul><div class="security-insight-box"><h4>Verify, then admit</h4><p>Check the credential and the reason for entry. Do not allow someone to follow another person through a controlled door without authorization.</p></div><h3>2. Manage vehicles and deliveries</h3><ol><li>Use designated entrances and verify appointments or delivery details.</li><li>Record required details in line with privacy and retention rules.</li><li>Direct vehicles to approved waiting and unloading areas.</li></ol><h3>3. Handle exceptions and system failures</h3><p>Provide a clear escalation route for lost badges, denied entry, and equipment outages. Keep a documented manual process available and reconcile its records when normal service returns.</p>`
+    },
+    reporting: {
+        intro: "Accurate records help teams understand what happened, coordinate follow-up, and improve site procedures. A useful report separates observed facts from assumptions and is completed as soon as practical.",
+        body: `<div class="article-lead-summary"><p>Security records may include shift logs, incident reports, inspection records, and handover notes. Each should have a clear purpose and controlled access.</p></div><h3>1. Record the essential facts</h3><p>For an incident, capture who was involved, what occurred, when and where it happened, and what actions followed. Note sources of information and any witnesses.</p><ul><li>Use precise times and locations.</li><li>Describe what you personally observed separately from what others reported.</li><li>Avoid speculation, blame, and emotionally loaded language.</li><li>Correct errors using the approved amendment process; do not obscure the original record.</li></ul><div class="security-insight-box"><h4>Facts before conclusions</h4><p>Write “I observed the side door standing open at 21:14” rather than guessing who opened it or why.</p></div><h3>2. Preserve records responsibly</h3><p>Protect logs, photographs, and video from unauthorized changes or disclosure. Follow retention rules and document any transfer of evidence or records.</p><h3>3. Use reports to improve operations</h3><p>Review recurring patterns, assign follow-up actions, and record whether corrective measures were completed.</p>`
+    },
+    hiring: {
+        intro: "A successful guarding engagement starts with a clear understanding of the site before advertising a role or requesting a service proposal. Describing duties, shifts, location, and budget helps attract suitable candidates or providers and reduces mismatched expectations.",
+        body: `<div class="article-lead-summary"><p>Start with the site’s actual needs: facility type, coverage hours, number of locations and shifts, and the guard’s required duties.</p></div><h3>1. Define the role or service requirements</h3><ul><li>Describe the site and duties, such as access control, visitor reception, patrols, or incident logging.</li><li>Specify guard count, shift schedule, start date, and relevant communication skills or experience.</li><li>Clarify whether you are hiring directly or seeking a contract with a guarding company.</li></ul><div class="security-insight-box"><h4>Clear terms protect both sides</h4><p>Agree in advance on scope, schedules, supervision, communication, leave and replacement arrangements, and cost. Keep the agreement in writing.</p></div><h3>2. Evaluate candidates or providers</h3><p>Compare experience, skills, and fit for the site. Request information about the provider or candidate that can be verified through appropriate procedures. Discuss training, supervision, and absence coverage before deciding.</p><h3>3. Review the agreement and prepare for deployment</h3><ul><li>Document pay or fees, working hours, responsibilities, term, and renewal or termination process.</li><li>Explain site requirements, emergency procedures, and escalation routes before the first shift.</li><li>Assign a contact for supervision, performance review, and issue resolution.</li><li>Follow local laws and requirements when hiring or contracting.</li></ul>`
+    },
+    glossary: {
+        intro: "Shared terminology helps control rooms, field teams, and managers communicate clearly. This glossary explains common concepts; organizations should define local terms in their own procedures.",
+        body: `<div class="article-lead-summary"><p>Consistent language reduces ambiguity in radio calls, reports, and instructions. Use plain language when an acronym may not be understood by everyone involved.</p></div><h3>Common security terms</h3><div class="glossary-terms-grid"><div class="glossary-term-card"><div class="term-badge-row"><span class="term-code">SOP</span><span class="term-name-ar">Standard Operating Procedure</span></div><p class="term-definition">Written steps that guide routine work and responses at a particular site.</p></div><div class="glossary-term-card"><div class="term-badge-row"><span class="term-code">Perimeter</span><span class="term-name-ar">Outer boundary</span></div><p class="term-definition">The boundary separating a facility from surrounding public or shared areas.</p></div><div class="glossary-term-card"><div class="term-badge-row"><span class="term-code">Tailgating</span><span class="term-name-ar">Unauthorized follow-through</span></div><p class="term-definition">Entering a controlled door immediately behind an authorized person without a separate approval.</p></div><div class="glossary-term-card"><div class="term-badge-row"><span class="term-code">Risk assessment</span><span class="term-name-ar">Threat and vulnerability review</span></div><p class="term-definition">A structured process for identifying assets, threats, weaknesses, and the possible effects of incidents.</p></div><div class="glossary-term-card"><div class="term-badge-row"><span class="term-code">Chain of custody</span><span class="term-name-ar">Evidence handling record</span></div><p class="term-definition">A record of who collected, handled, stored, or transferred evidence and when.</p></div><div class="glossary-term-card"><div class="term-badge-row"><span class="term-code">Duress code</span><span class="term-name-ar">Covert distress signal</span></div><p class="term-definition">A discreet signal used under coercion to request assistance, where the system and procedure support it.</p></div><div class="glossary-term-card"><div class="term-badge-row"><span class="term-code">Use-of-force continuum</span><span class="term-name-ar">Proportionate response</span></div><p class="term-definition">A framework for selecting lawful, necessary, and proportionate actions in response to a threat.</p></div><div class="glossary-term-card"><div class="term-badge-row"><span class="term-code">Red teaming</span><span class="term-name-ar">Authorized security exercise</span></div><p class="term-definition">A planned exercise that tests controls by simulating selected threat behaviors with proper authorization.</p></div></div><h3>Why consistent terms matter</h3><p>Agreeing on terms for locations, alerts, and response steps helps teams understand instructions quickly. Keep local definitions current and train staff to use them consistently.</p>`
+    }
+};
+
+export function renderKnowledgeCardsHtml(activeId = "fundamentals", lang = "en") {
     const isAr = lang === "ar";
     return KNOWLEDGE_TOPICS.map((topic) => {
         const isSelected = topic.id === activeId;
@@ -523,7 +552,7 @@ export function renderKnowledgeCardsHtml(activeId = "fundamentals", lang = "ar")
     }).join("");
 }
 
-export function renderKnowledgePillsHtml(activeId = "fundamentals", lang = "ar") {
+export function renderKnowledgePillsHtml(activeId = "fundamentals", lang = "en") {
     const isAr = lang === "ar";
     return KNOWLEDGE_TOPICS.map((topic) => {
         const isSelected = topic.id === activeId;
@@ -541,7 +570,7 @@ export function renderKnowledgePillsHtml(activeId = "fundamentals", lang = "ar")
     }).join("");
 }
 
-export function renderOctopusSvgHtml(activeId = "fundamentals", lang = "ar") {
+export function renderOctopusSvgHtml(activeId = "fundamentals", lang = "en") {
     const isAr = lang === "ar";
     // 8 Arms coordinates radiating from center (500, 290)
     // Canvas viewBox="0 0 1000 580"
@@ -552,7 +581,7 @@ export function renderOctopusSvgHtml(activeId = "fundamentals", lang = "ar") {
         { id: "risk",         num: "04", angle: 45,   tx: 780, ty: 470, labelOffset: { x: 40, y: 34 },  c1: { x: 620, y: 380 }, c2: { x: 710, y: 430 } },
         { id: "access",       num: "05", angle: 90,   tx: 500, ty: 505, labelOffset: { x: 0, y: 44 },   c1: { x: 505, y: 390 }, c2: { x: 495, y: 450 } },
         { id: "reporting",    num: "06", angle: 135,  tx: 220, ty: 470, labelOffset: { x: -40, y: 34 }, c1: { x: 380, y: 380 }, c2: { x: 290, y: 430 } },
-        { id: "cyber",        num: "07", angle: 180,  tx: 140, ty: 290, labelOffset: { x: 0, y: 44 },   c1: { x: 350, y: 295 }, c2: { x: 240, y: 285 } },
+        { id: "hiring",       num: "07", angle: 180,  tx: 140, ty: 290, labelOffset: { x: 0, y: 44 },   c1: { x: 350, y: 295 }, c2: { x: 240, y: 285 } },
         { id: "glossary",     num: "08", angle: 225,  tx: 220, ty: 110, labelOffset: { x: -40, y: -24 },c1: { x: 380, y: 200 }, c2: { x: 290, y: 150 } }
     ];
 
@@ -639,7 +668,7 @@ export function renderOctopusSvgHtml(activeId = "fundamentals", lang = "ar") {
             id="octopus-interactive-svg" 
             viewBox="0 0 1000 580" 
             preserveAspectRatio="xMidYMid meet" 
-            aria-label="ShieldNet Octopus Knowledge Network Visualization"
+            aria-label="${isAr ? "تصور شبكة ShieldNet الأخطبوطية للمعرفة" : "ShieldNet Octopus Knowledge Network Visualization"}"
             role="region">
             <defs>
                 <linearGradient id="octopus-gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -682,20 +711,21 @@ export function renderOctopusSvgHtml(activeId = "fundamentals", lang = "ar") {
 
                 <!-- Center Text -->
                 <text x="0" y="2" class="octopus-center-text-title">ShieldNet</text>
-                <text x="0" y="16" class="octopus-center-text-sub">${isAr ? "شبكة المعرفة" : "Knowledge"}</text>
+        <text x="0" y="16" class="octopus-center-text-sub">${isAr ? "شبكة المعرفة" : "Knowledge Network"}</text>
             </g>
         </svg>
     `;
 }
 
-export function renderArticleReaderHtml(topicId = "fundamentals", lang = "ar") {
+export function renderArticleReaderHtml(topicId = "fundamentals", lang = "en") {
     const isAr = lang === "ar";
     const topic = getKnowledgeTopic(topicId);
     const title = isAr ? topic.title : topic.titleEn;
     const category = isAr ? topic.category : topic.categoryEn;
     const readTime = isAr ? topic.readTime : topic.readTimeEn;
-    const intro = topic.intro;
-    const content = topic.contentHtml;
+    const article = ENGLISH_ARTICLES[topic.id];
+    const intro = isAr ? topic.intro : article.intro;
+    const content = isAr ? topic.contentHtml : article.body;
 
     // Previous and next topics
     const currentIndex = KNOWLEDGE_TOPICS.findIndex((t) => t.id === topic.id);
