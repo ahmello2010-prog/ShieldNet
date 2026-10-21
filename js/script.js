@@ -927,7 +927,15 @@ setLanguage(getLanguage());
 
         const RECENT_SEARCHES_KEY = "shieldnet_recent_searches";
 
-        let currentPage = servicesView && !heroContainer && !discoverView ? "services" : "home";
+        let currentPage = (servicesView && !heroContainer && !discoverView)
+            ? "knowledge"
+            : (discoverView && !heroContainer && !servicesView)
+                ? "companies"
+                : (window.location.hash && window.location.hash.startsWith("#companies"))
+                    ? "companies"
+                    : (window.location.hash && (window.location.hash.startsWith("#knowledge") || window.location.hash.startsWith("#services")))
+                        ? "knowledge"
+                        : "home";
         let isNavigating = false;
         let currentKnowledgeTopic = "fundamentals";
 
@@ -1103,81 +1111,58 @@ setLanguage(getLanguage());
             const isKnowledge = page === "knowledge" || page === "services";
             const isHome = !isCompanies && !isKnowledge;
 
-            // Update mobile sidebar drawer links
-            document.querySelectorAll(".drawer-link").forEach((link) => {
-                const action = link.getAttribute("data-action");
-                const href = (link.getAttribute("href") || "").trim().toLowerCase();
+            const updateLink = (link) => {
+                if (!link) return;
+                if (
+                    link.classList.contains("nav-link-static") ||
+                    link.classList.contains("nav-lang-btn") ||
+                    link.classList.contains("modern-nav-cta") ||
+                    link.hasAttribute("data-auth")
+                ) {
+                    return;
+                }
 
-                const isHomeLink =
-                    action === "nav:home" ||
-                    href === "/" ||
-                    href === "/index.html" ||
-                    href === "#home" ||
-                    href.endsWith("/index.html") ||
-                    (href === "#" && action !== "nav:companies" && action !== "nav:knowledge" && action !== "nav:services");
-
-                const isCompaniesLink =
-                    action === "nav:companies" ||
-                    href === "/companies.html" ||
-                    href === "#companies" ||
-                    href.includes("companies");
+                const action = (link.getAttribute("data-action") || "").trim().toLowerCase();
+                const rawHref = (link.getAttribute("href") || "").trim().toLowerCase();
 
                 const isKnowledgeLink =
                     action === "nav:knowledge" ||
                     action === "nav:services" ||
-                    href === "/knowledge.html" ||
-                    href === "/services.html" ||
-                    href === "#knowledge" ||
-                    href === "#services" ||
-                    href.includes("knowledge") ||
-                    href.includes("services");
-
-                if (isCompaniesLink) {
-                    link.classList.toggle("active", isCompanies);
-                } else if (isKnowledgeLink) {
-                    link.classList.toggle("active", isKnowledge);
-                } else if (isHomeLink) {
-                    link.classList.toggle("active", isHome);
-                }
-            });
-
-            // Update desktop navbar links in all top headers
-            document.querySelectorAll(".modern-nav-link").forEach((link) => {
-                const action = link.getAttribute("data-action");
-                const href = (link.getAttribute("href") || "").trim().toLowerCase();
-
-                const isHomeLink =
-                    action === "nav:home" ||
-                    href === "/" ||
-                    href === "/index.html" ||
-                    href === "#home" ||
-                    href.endsWith("/index.html") ||
-                    (href === "#" && action !== "nav:companies" && action !== "nav:knowledge" && action !== "nav:services");
+                    rawHref.includes("knowledge") ||
+                    rawHref.includes("services") ||
+                    rawHref === "#knowledge" ||
+                    rawHref === "#services";
 
                 const isCompaniesLink =
-                    action === "nav:companies" ||
-                    href === "/companies.html" ||
-                    href === "#companies" ||
-                    href.includes("companies");
+                    !isKnowledgeLink &&
+                    (action === "nav:companies" ||
+                     rawHref.includes("companies") ||
+                     rawHref === "#companies");
 
-                const isKnowledgeLink =
-                    action === "nav:knowledge" ||
-                    action === "nav:services" ||
-                    href === "/knowledge.html" ||
-                    href === "/services.html" ||
-                    href === "#knowledge" ||
-                    href === "#services" ||
-                    href.includes("knowledge") ||
-                    href.includes("services");
+                const isHomeLink =
+                    !isKnowledgeLink &&
+                    !isCompaniesLink &&
+                    (action === "nav:home" ||
+                     rawHref === "/" ||
+                     rawHref === "/index.html" ||
+                     rawHref.endsWith("/index.html") ||
+                     rawHref === "#home" ||
+                     rawHref === "#" ||
+                     rawHref === "");
 
-                if (isCompaniesLink) {
-                    link.classList.toggle("active", isCompanies);
-                } else if (isKnowledgeLink) {
+                if (isKnowledgeLink) {
                     link.classList.toggle("active", isKnowledge);
+                } else if (isCompaniesLink) {
+                    link.classList.toggle("active", isCompanies);
                 } else if (isHomeLink) {
                     link.classList.toggle("active", isHome);
+                } else {
+                    link.classList.remove("active");
                 }
-            });
+            };
+
+            document.querySelectorAll(".drawer-link").forEach(updateLink);
+            document.querySelectorAll(".modern-nav-link").forEach(updateLink);
         }
         window.ShieldNetUpdateActiveNav = updateActiveNavigation;
 
@@ -1205,22 +1190,31 @@ setLanguage(getLanguage());
         function navigateToCompanies(skipAnimation = false) {
             if (currentPage === "companies" || isNavigating) return;
             if (!discoverView) {
-                window.location.href = "/#companies";
+                window.location.href = "/companies.html";
                 return;
             }
 
             isNavigating = true;
             closeMobileDrawer();
 
-            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches || skipAnimation;
+            // Ensure Knowledge view is completely hidden
+            if (servicesView) {
+                servicesView.style.display = "none";
+            }
 
-            if (reduceMotion || !heroContainer) {
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches || skipAnimation;
+            const isHeroVisible = heroContainer && heroContainer.style.display !== "none";
+
+            // If heroContainer is not visible (e.g. coming from knowledge view) or reduced motion, transition immediately
+            if (reduceMotion || !isHeroVisible) {
                 if (heroContainer) heroContainer.style.display = "none";
+                if (servicesView) servicesView.style.display = "none";
                 discoverView.style.display = "block";
                 discoverView.style.opacity = "1";
                 discoverView.style.transform = "none";
                 currentPage = "companies";
                 isNavigating = false;
+                updateActiveNavigation("companies");
                 window.scrollTo({ top: 0, behavior: "instant" });
                 if (window.location.hash !== "#companies") {
                     history.pushState({ page: "companies" }, "", "#companies");
@@ -1240,6 +1234,7 @@ setLanguage(getLanguage());
             setTimeout(() => {
                 heroContainer.style.display = "none";
                 heroContainer.classList.remove("is-retracting");
+                if (servicesView) servicesView.style.display = "none";
 
                 discoverView.style.display = "block";
                 discoverView.style.opacity = "0";
@@ -1253,6 +1248,7 @@ setLanguage(getLanguage());
 
                 currentPage = "companies";
                 isNavigating = false;
+                updateActiveNavigation("companies");
                 window.scrollTo({ top: 0, behavior: "instant" });
                 if (window.location.hash !== "#companies") {
                     history.pushState({ page: "companies" }, "", "#companies");
@@ -1276,16 +1272,25 @@ setLanguage(getLanguage());
             isNavigating = true;
             closeMobileDrawer();
 
-            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches || skipAnimation;
+            // Ensure Knowledge view is completely hidden
+            if (servicesView) {
+                servicesView.style.display = "none";
+            }
 
-            if (reduceMotion || !discoverView) {
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches || skipAnimation;
+            const isDiscoverVisible = discoverView && discoverView.style.display !== "none";
+
+            // If discoverView is not visible (e.g. coming from knowledge view) or reduced motion, transition immediately
+            if (reduceMotion || !isDiscoverVisible) {
                 if (discoverView) discoverView.style.display = "none";
+                if (servicesView) servicesView.style.display = "none";
                 heroContainer.style.display = "flex";
                 currentPage = "home";
                 isNavigating = false;
+                updateActiveNavigation("home");
                 window.scrollTo({ top: 0, behavior: "instant" });
-                if (window.location.hash === "#companies") {
-                    history.pushState({ page: "home" }, "", "#");
+                if (window.location.hash) {
+                    history.pushState({ page: "home" }, "", window.location.pathname.endsWith("index.html") ? "/index.html" : "/");
                 }
                 const isAr = getLanguage() === "ar";
                 document.title = isAr
@@ -1302,6 +1307,7 @@ setLanguage(getLanguage());
                 discoverView.style.display = "none";
                 discoverView.style.opacity = "1";
                 discoverView.style.transform = "none";
+                if (servicesView) servicesView.style.display = "none";
 
                 heroContainer.style.display = "flex";
                 heroContainer.classList.add("is-entering");
@@ -1312,9 +1318,10 @@ setLanguage(getLanguage());
                         heroContainer.classList.remove("is-entering");
                         currentPage = "home";
                         isNavigating = false;
+                        updateActiveNavigation("home");
                         window.scrollTo({ top: 0, behavior: "instant" });
-                        if (window.location.hash === "#companies") {
-                            history.pushState({ page: "home" }, "", "#");
+                        if (window.location.hash) {
+                            history.pushState({ page: "home" }, "", window.location.pathname.endsWith("index.html") ? "/index.html" : "/");
                         }
                         const isAr = getLanguage() === "ar";
                         document.title = isAr
@@ -2349,7 +2356,7 @@ setLanguage(getLanguage());
             history.replaceState({}, "", `${window.location.pathname}${window.location.hash}`);
         }
 
-        // Check if page loaded directly with #companies or #knowledge or on knowledge.html / services.html
+        // Check if page loaded directly with #companies or #knowledge or on knowledge.html / services.html / companies.html
         if (window.location.hash && window.location.hash.startsWith("#companies")) {
             navigateToCompanies(true);
         } else if (window.location.hash && (window.location.hash.startsWith("#knowledge") || window.location.hash.startsWith("#services"))) {
@@ -2357,6 +2364,12 @@ setLanguage(getLanguage());
         } else if (servicesView && !heroContainer && !discoverView) {
             updateActiveNavigation("knowledge");
             initKnowledgeNetworkUI("fundamentals", false);
+        } else if (discoverView && !heroContainer && !servicesView) {
+            updateActiveNavigation("companies");
+            renderCompanies();
+            renderRecentSearches();
+        } else {
+            updateActiveNavigation("home");
         }
 
         // Check if returning from login with pending hire request
