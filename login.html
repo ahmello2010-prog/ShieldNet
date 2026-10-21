@@ -1,82 +1,53 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Create Account | ShieldNet</title>
-        <meta name="description" content="Sign in or create an account on ShieldNet to connect with verified security professionals." />
+        <title data-i18n="registrationPageTitle">Create an Account | ShieldNet</title>
+        <meta name="description" content="Create a demo account on ShieldNet." />
         <link rel="icon" type="image/jpeg" href="/img/logo.jpg" />
         <link rel="stylesheet" href="/css/style.css" />
     </head>
     <body>
         <section class="auth-view auth-standalone" aria-labelledby="auth-title">
             <div class="auth-shell">
-                <div class="auth-card">
-                    <a href="index.html" class="auth-back">← Back to home</a>
+                <div class="auth-card auth-registration-card">
+                    <div class="auth-top-actions">
+                        <a href="/" class="auth-back" data-i18n="registrationBackHome">← Back to Home</a>
+                        <button type="button" class="auth-lang-toggle lang-label" data-action="action:toggle-lang" data-i18n-aria-label="authLanguageToggle">العربية</button>
+                    </div>
+                    <img src="/img/logo.jpg" alt="ShieldNet logo" data-i18n-alt="registrationLogoAlt" class="auth-logo" />
+                    <h1 id="auth-title" data-i18n="registrationTitle">Join ShieldNet</h1>
+                    <p class="auth-subtitle" id="auth-subtitle" data-i18n="registrationSubtitle">Choose the account type that fits you and start registration.</p>
+                    <p class="auth-demo-note" data-i18n="registrationDemoNote">Registration is currently a demo. Your information is not sent to a server or database, and your password is not stored.</p>
 
-                    <img src="/img/logo.jpg" alt="ShieldNet Security Emblem" class="auth-logo" />
-                    <h1 id="auth-title">Create Your Account</h1>
-                    <p class="auth-subtitle" id="auth-subtitle">
-                        Join Egypt's verified security network. This is a demo: no real data is sent anywhere.
-                    </p>
-
-                    <div class="auth-tabs" role="tablist" aria-label="Account mode">
-                        <button
-                            type="button"
-                            class="auth-tab is-active"
-                            role="tab"
-                            aria-selected="true"
-                            data-mode="signup">
-                            Create Account
+                    <div class="account-type-grid" id="account-type-grid" aria-label="Choose an account type" data-i18n-aria-label="registrationTypeAria">
+                        <button type="button" class="account-type-card" data-account-type="client">
+                            <span class="account-type-icon" aria-hidden="true">♙</span>
+                            <strong data-i18n="registrationClient">Client</strong>
+                            <span data-i18n="registrationClientDesc">For individuals, companies, and property managers</span>
                         </button>
-                        <button type="button" class="auth-tab" role="tab" aria-selected="false" data-mode="signin">
-                            Sign In
+                        <button type="button" class="account-type-card" data-account-type="company">
+                            <span class="account-type-icon" aria-hidden="true">▦</span>
+                            <strong data-i18n="registrationCompany">Security Company</strong>
+                            <span data-i18n="registrationCompanyDesc">For security and guarding providers</span>
+                        </button>
+                        <button type="button" class="account-type-card" data-account-type="guard">
+                            <span class="account-type-icon" aria-hidden="true">⬟</span>
+                            <strong data-i18n="registrationGuard">Security Guard</strong>
+                            <span data-i18n="registrationGuardDesc">For security professionals seeking work</span>
                         </button>
                     </div>
 
-                    <form id="auth-form" class="auth-form" novalidate>
-                        <div class="auth-field" data-only="signup">
-                            <label for="auth-name">Full name</label>
-                            <input
-                                id="auth-name"
-                                name="name"
-                                type="text"
-                                autocomplete="name"
-                                placeholder="e.g. Tarek Mansour" />
-                        </div>
-                        <div class="auth-field">
-                            <label for="auth-email">Email</label>
-                            <input
-                                id="auth-email"
-                                name="email"
-                                type="email"
-                                autocomplete="email"
-                                placeholder="you@example.com" />
-                        </div>
-                        <div class="auth-field">
-                            <label for="auth-password">Password</label>
-                            <input
-                                id="auth-password"
-                                name="password"
-                                type="password"
-                                autocomplete="new-password"
-                                placeholder="At least 6 characters" />
-                        </div>
-                        <div class="auth-field" data-only="signup">
-                            <label for="auth-role">I am a</label>
-                            <select id="auth-role" name="role">
-                                <option value="client">Client / Estate owner</option>
-                                <option value="guard">Security guard</option>
-                                <option value="agency">Guard agency</option>
-                            </select>
-                        </div>
-                        <p class="auth-error" id="auth-error" role="alert" aria-live="polite"></p>
-                        <button type="submit" class="auth-submit" id="auth-submit">Confirm &amp; Continue</button>
-                    </form>
+                    <div id="registration-panel" class="registration-panel" hidden>
+                        <button type="button" class="auth-back registration-back" id="registration-back" data-i18n="registrationBackTypes">← Change account type</button>
+                        <div class="selected-account-indicator" id="selected-account-indicator" aria-live="polite"></div>
+                        <div id="auth-form-container"></div>
+                    </div>
+                    <p class="auth-error" id="auth-error" role="alert" aria-live="polite"></p>
                 </div>
             </div>
         </section>
-
         <script type="module" src="/js/script.js"></script>
     </body>
 </html>

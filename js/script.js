@@ -1,3 +1,5 @@
+import { getSession, startSession, endSession } from "./session.js";
+
 /* =============================================================
    0. I18N - Shared Language System (English / Arabic)
    ============================================================= */
@@ -39,7 +41,7 @@ const TRANSLATIONS = {
         footerColSocial: "Connect With Us",
         footerSocialText: "Follow guard staffing announcements, placement updates, and estate security insights.",
         footerCopyright: "© 2026 ShieldNet. All rights reserved.",
-        toastLogin: "Signed in (Demo Mode): all features unlocked",
+        toastLogin: "Demo account session started; account services are not connected",
         toastLogout: "Logged out: demo mode ended",
         toastLang: "Language changed to English",
         // Discover Security Companies translations
@@ -109,6 +111,55 @@ const TRANSLATIONS = {
         reviewSuccessToast: "Thank you! Your verified review for {company} has been published.",
         basedOnReviews: "Based on {count} verified client reviews",
         reviewsEmptyState: "No reviews submitted yet for this provider. Be the first to leave a review!",
+        registrationPageTitle: "Create an Account | ShieldNet",
+        registrationBackHome: "← Back to Home",
+        registrationTitle: "Join ShieldNet",
+        registrationSubtitle: "Choose the account type that fits you and start registration.",
+        registrationDemoNote: "Registration is currently a demo. Your information is not sent to a server or database, and your password is not stored.",
+        registrationTypeAria: "Choose an account type",
+        registrationClient: "Client",
+        registrationClientDesc: "For individuals, companies, and property managers",
+        registrationCompany: "Security Company",
+        registrationCompanyDesc: "For security and guarding providers",
+        registrationGuard: "Security Guard",
+        registrationGuardDesc: "For security professionals seeking work",
+        registrationBackTypes: "← Change account type",
+        registrationSelected: "Selected account type: {type}",
+        registrationFullName: "Full name",
+        registrationEmail: "Email address",
+        registrationOfficialEmail: "Official email address",
+        registrationPhone: "Phone number",
+        registrationPassword: "Password (at least 6 characters)",
+        registrationConfirmPassword: "Confirm password",
+        registrationLegalName: "Legal company name",
+        registrationContactName: "Account representative's name",
+        registrationLicense: "License or registration number (if available)",
+        registrationAddress: "Head office address",
+        registrationRegion: "Governorate or region",
+        registrationCoverage: "Geographic coverage area",
+        registrationExperience: "Years of experience",
+        registrationQualifications: "Qualifications and professional training",
+        registrationSpecialty: "Security specialty or desired role",
+        registrationCreateButton: "Create Demo Account",
+        registrationRedirecting: "Done — redirecting…",
+        registrationAccountTypePlaceholder: "Choose an account type",
+        registrationShowPassword: "Show password",
+        registrationHidePassword: "Hide password",
+        registrationErrorRequired: "Please enter {field}.",
+        registrationErrorEmail: "Please enter a valid email address.",
+        registrationErrorPhone: "Please enter a valid phone number.",
+        registrationErrorExperience: "Enter years of experience from 0 to 60.",
+        registrationErrorPassword: "Password must be at least 6 characters.",
+        registrationErrorPasswordMismatch: "The passwords do not match.",
+        registrationCompanyCreated: "A demo session was created. Company status: pending review; no real administrative review is connected.",
+        registrationDemoCreated: "A demo session was created. You will return to the homepage; no dedicated dashboard is currently available.",
+        registrationCompanyToast: "Demo company session created. Status: pending review; no real approval is connected.",
+        registrationAccountToast: "Demo session created. No dedicated dashboard or authentication service is connected.",
+        authSigninHint: "Create an account first to continue.",
+        authNoticeClose: "Dismiss notice",
+        authLanguageToggle: "Switch language",
+        authPendingNotice: "The company account is pending review, so verified company permissions remain locked.",
+        registrationLogoAlt: "ShieldNet logo",
         closeModalBtn: "Close"
     },
     ar: {
@@ -146,7 +197,7 @@ const TRANSLATIONS = {
         footerColSocial: "تواصل معنا",
         footerSocialText: "تابع مستجدات التوظيف الأمني وإعلانات التعاقدات وتحديثات حماية المنشآت.",
         footerCopyright: "© 2026 ShieldNet. جميع الحقوق محفوظة.",
-        toastLogin: "تم تسجيل الدخول (وضع تجريبي): تم تفعيل المزايا",
+        toastLogin: "بدأت جلسة تجريبية؛ خدمات الحساب غير متصلة",
         toastLogout: "تم تسجيل الخروج بنجاح",
         toastLang: "تم تحويل لغة الموقع إلى العربية",
         // Discover Security Companies Arabic translations
@@ -216,6 +267,55 @@ const TRANSLATIONS = {
         reviewSuccessToast: "شكراً لك! تم نشر تقييمك لشركة {company} بنجاح.",
         basedOnReviews: "بناءً على {count} تقييم معتمد من العملاء",
         reviewsEmptyState: "لا توجد تقييمات منشورة حتى الآن لهذه الشركة. كن أول من يضيف تقييماً!",
+        registrationPageTitle: "إنشاء حساب | ShieldNet",
+        registrationBackHome: "← العودة إلى الرئيسية",
+        registrationTitle: "انضم إلى ShieldNet",
+        registrationSubtitle: "اختار نوع الحساب المناسب وابدأ التسجيل.",
+        registrationDemoNote: "التسجيل تجريبي حاليًا. لا تُرسل بياناتك إلى خادم أو قاعدة بيانات، ولا يتم حفظ كلمة المرور.",
+        registrationTypeAria: "اختار نوع الحساب",
+        registrationClient: "عميل",
+        registrationClientDesc: "للأفراد والشركات ومديري العقارات",
+        registrationCompany: "شركة أمن وحراسة",
+        registrationCompanyDesc: "لمقدمي خدمات الأمن والحراسة",
+        registrationGuard: "فرد أمن",
+        registrationGuardDesc: "لأفراد الأمن الباحثين عن عمل",
+        registrationBackTypes: "← تغيير نوع الحساب",
+        registrationSelected: "نوع الحساب المختار: {type}",
+        registrationFullName: "الاسم الكامل",
+        registrationEmail: "البريد الإلكتروني",
+        registrationOfficialEmail: "البريد الإلكتروني الرسمي",
+        registrationPhone: "رقم الهاتف",
+        registrationPassword: "كلمة المرور (6 أحرف على الأقل)",
+        registrationConfirmPassword: "تأكيد كلمة المرور",
+        registrationLegalName: "الاسم القانوني للشركة",
+        registrationContactName: "اسم المسؤول عن الحساب",
+        registrationLicense: "رقم الترخيص أو التسجيل (إن وجد)",
+        registrationAddress: "عنوان المقر",
+        registrationRegion: "المحافظة أو المنطقة",
+        registrationCoverage: "نطاق التغطية الجغرافي",
+        registrationExperience: "سنوات الخبرة",
+        registrationQualifications: "المؤهلات والتدريبات المهنية",
+        registrationSpecialty: "التخصص الأمني أو الوظيفة المطلوبة",
+        registrationCreateButton: "إنشاء حساب تجريبي",
+        registrationRedirecting: "تم — جارٍ الانتقال…",
+        registrationAccountTypePlaceholder: "اختار نوع الحساب",
+        registrationShowPassword: "إظهار كلمة المرور",
+        registrationHidePassword: "إخفاء كلمة المرور",
+        registrationErrorRequired: "من فضلك أدخل {field}.",
+        registrationErrorEmail: "من فضلك أدخل بريدًا إلكترونيًا صحيحًا.",
+        registrationErrorPhone: "من فضلك أدخل رقم هاتف صحيحًا.",
+        registrationErrorExperience: "أدخل عدد سنوات خبرة من 0 إلى 60.",
+        registrationErrorPassword: "يجب ألا تقل كلمة المرور عن 6 أحرف.",
+        registrationErrorPasswordMismatch: "كلمتا المرور غير متطابقتين.",
+        registrationCompanyCreated: "تم إنشاء جلسة تجريبية. حالة الشركة: قيد المراجعة، ولا توجد مراجعة إدارية فعلية متصلة.",
+        registrationDemoCreated: "تم إنشاء جلسة تجريبية. ستعود إلى الصفحة الرئيسية؛ لا توجد لوحة حساب مخصصة حاليًا.",
+        registrationCompanyToast: "تم إنشاء جلسة تجريبية للشركة. الحالة: قيد المراجعة، ولا يوجد اعتماد فعلي.",
+        registrationAccountToast: "تم إنشاء جلسة تجريبية. لا توجد لوحة مخصصة أو خدمة مصادقة متصلة حاليًا.",
+        authSigninHint: "قم بإنشاء حساب أولًا للمتابعة.",
+        authNoticeClose: "إغلاق التنبيه",
+        authLanguageToggle: "تغيير اللغة",
+        authPendingNotice: "حساب الشركة قيد المراجعة، لذلك تظل صلاحيات الشركة المعتمدة مغلقة.",
+        registrationLogoAlt: "شعار ShieldNet",
         closeModalBtn: "إغلاق"
     }
 };
@@ -545,6 +645,19 @@ function getLanguage() {
     return "en";
 }
 
+function resolveTranslationVariable(value, dict) {
+    if (value && typeof value === "object" && value.key) return dict[value.key] || value.key;
+    return value;
+}
+
+function translateText(key, variables = {}, lang = getLanguage()) {
+    const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
+    const value = String(dict[key] || key);
+    return value.replace(/\{([a-zA-Z0-9_]+)\}/g, (match, name) =>
+        Object.prototype.hasOwnProperty.call(variables, name) ? resolveTranslationVariable(variables[name], dict) : match
+    );
+}
+
 function setLanguage(lang) {
     const validLang = lang === "ar" ? "ar" : "en";
     try {
@@ -554,6 +667,7 @@ function setLanguage(lang) {
     }
 
     document.documentElement.lang = validLang;
+    document.documentElement.dir = validLang === "ar" ? "rtl" : "ltr";
     document.body.classList.toggle("lang-ar", validLang === "ar");
 
     const dict = TRANSLATIONS[validLang];
@@ -561,10 +675,24 @@ function setLanguage(lang) {
     document.querySelectorAll("[data-i18n]").forEach((el) => {
         const key = el.getAttribute("data-i18n");
         if (dict && dict[key]) {
+            let translated = dict[key];
+            const rawVariables = el.getAttribute("data-i18n-vars");
+            if (rawVariables) {
+                try {
+                    const variables = JSON.parse(rawVariables);
+                    translated = translated.replace(/\{([a-zA-Z0-9_]+)\}/g, (match, name) =>
+                        Object.prototype.hasOwnProperty.call(variables, name)
+                            ? resolveTranslationVariable(variables[name], dict)
+                            : match
+                    );
+                } catch (e) {
+                    // Keep the base translation if optional interpolation data is malformed.
+                }
+            }
             if (el.hasAttribute("data-i18n-html")) {
-                el.innerHTML = dict[key];
+                el.innerHTML = translated;
             } else {
-                el.textContent = dict[key];
+                el.textContent = translated;
             }
         }
     });
@@ -578,6 +706,16 @@ function setLanguage(lang) {
 
     document.querySelectorAll(".lang-label").forEach((el) => {
         el.textContent = dict.langToggle;
+    });
+
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-aria-label");
+        if (dict[key]) el.setAttribute("aria-label", dict[key]);
+    });
+
+    document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-alt");
+        if (dict[key]) el.setAttribute("alt", dict[key]);
     });
 
     applyAuthUI();
@@ -603,46 +741,22 @@ const SESSION_KEY = "shieldnet_demo_session";
 const LOGIN_URL = "/login.html";
 const HOME_URL = "/";
 
-function getSession() {
-    try {
-        const raw = localStorage.getItem(SESSION_KEY);
-        return raw ? JSON.parse(raw) : null;
-    } catch (err) {
-        return null;
-    }
-}
-
 function isLoggedIn() {
     return !!getSession();
 }
 
-function startSession(data = {}) {
-    const session = { demo: true, name: "Demo User", startedAt: Date.now(), ...data };
-    try {
-        localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-    } catch (err) {
-        console.warn("[ShieldNet] Could not persist demo session:", err);
-    }
-    return session;
-}
-
-function endSession() {
-    try {
-        localStorage.removeItem(SESSION_KEY);
-    } catch (err) {
-        console.warn("[ShieldNet] Could not clear demo session:", err);
-    }
-}
-
 // Updates every auth-aware element on the current page
 function applyAuthUI() {
-    const on = isLoggedIn();
+    const session = getSession();
+    const on = !!session;
+    const canUseLockedFeatures = on && !(session.role === "company" && session.accountStatus === "pending_verification");
     const lang = getLanguage();
     const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
     document.body.classList.toggle("demo-on", on);
+    document.body.classList.toggle("demo-pending", !!on && !canUseLockedFeatures);
 
     document.querySelectorAll('[data-auth="locked"]').forEach((el) => {
-        el.classList.toggle("is-locked", !on);
+        el.classList.toggle("is-locked", !canUseLockedFeatures);
     });
     document.querySelectorAll('[data-auth="signin"]').forEach((el) => {
         el.textContent = on ? dict.navLogOut : dict.navSignIn;
@@ -676,15 +790,40 @@ document.addEventListener(
                 applyAuthUI();
                 emitAuthEvent("logout");
             } else {
-                startSession();
-                applyAuthUI();
-                emitAuthEvent("login");
+                const parent = el.parentElement;
+                if (!parent) return;
+                let notice = parent.querySelector(":scope > .auth-inline-notice");
+                if (!notice) {
+                    if (getComputedStyle(el).position === "static") el.style.position = "relative";
+                    notice = document.createElement("div");
+                    notice.className = "auth-inline-notice";
+                    notice.setAttribute("role", "status");
+                    const message = document.createElement("span");
+                    message.dataset.i18n = "authSigninHint";
+                    message.textContent = translateText("authSigninHint");
+                    const closeButton = document.createElement("button");
+                    closeButton.type = "button";
+                    closeButton.setAttribute("data-i18n-aria-label", "authNoticeClose");
+                    closeButton.setAttribute("aria-label", translateText("authNoticeClose"));
+                    closeButton.textContent = "×";
+                    notice.append(message, closeButton);
+                    closeButton.addEventListener("click", () => notice.remove());
+                    el.insertAdjacentElement("afterend", notice);
+                    setLanguage(getLanguage());
+                }
+                notice.classList.remove("is-visible");
+                requestAnimationFrame(() => notice.classList.add("is-visible"));
             }
             return;
         }
 
         // signup + locked
         if (isLoggedIn()) {
+            const session = getSession();
+            if (kind === "locked" && session.role === "company" && session.accountStatus === "pending_verification") {
+                emitAuthEvent("pending");
+                return;
+            }
             window.location.hash = "#"; // temporary destination
             emitAuthEvent("navigate");
         } else {
@@ -1945,8 +2084,11 @@ setLanguage(getLanguage());
         document.addEventListener("shieldnet:auth", (e) => {
             closeMobileDrawer();
             const type = e.detail && e.detail.type;
-            if (type === "login") showToast("Signed in (Demo Mode): all features unlocked");
+            if (type === "login") showToast(TRANSLATIONS[getLanguage()].toastLogin);
             if (type === "logout") showToast("Logged out: demo mode ended");
+            if (type === "pending") {
+                showToast(translateText("authPendingNotice"));
+            }
         });
 
         document.addEventListener("keydown", (e) => {
@@ -1992,6 +2134,12 @@ setLanguage(getLanguage());
 
         renderRecentSearches();
 
+        const registrationResult = new URLSearchParams(window.location.search).get("registration");
+        if (registrationResult) {
+            showToast(translateText(registrationResult === "company-pending" ? "registrationCompanyToast" : "registrationAccountToast"));
+            history.replaceState({}, "", `${window.location.pathname}${window.location.hash}`);
+        }
+
         // Check if page loaded directly with #companies
         if (window.location.hash && window.location.hash.startsWith("#companies")) {
             navigateToCompanies(true);
@@ -2033,126 +2181,238 @@ setLanguage(getLanguage());
 })();
 
 /* =============================================================
-   3. LOGIN - login.html (create account / sign in)
+   3. LOGIN - role-aware demo registration (no password persistence)
    ============================================================= */
 (function initLoginPage() {
-    function start() {
-        const form = document.getElementById("auth-form");
-        // Only run on the login page
-        if (!form) return;
+    const formHost = document.getElementById("auth-form-container");
+    if (!formHost) return;
 
-        // Already in demo mode -> nothing to do here
-        if (isLoggedIn()) {
-            window.location.replace(HOME_URL);
+    if (isLoggedIn()) {
+        window.location.replace(HOME_URL);
+        return;
+    }
+
+    const panel = document.getElementById("registration-panel");
+    const picker = document.getElementById("account-type-grid");
+    const error = document.getElementById("auth-error");
+    const indicator = document.getElementById("selected-account-indicator");
+    document.querySelector(".auth-lang-toggle")?.addEventListener("click", toggleLanguage);
+    const accountTypes = {
+        client: {
+            labelKey: "registrationClient",
+            fields: [
+                ["fullName", "registrationFullName", "text", true],
+                ["email", "registrationEmail", "email", true],
+                ["phone", "registrationPhone", "tel", true],
+                ["password", "registrationPassword", "password", true],
+                ["confirmPassword", "registrationConfirmPassword", "password", true]
+            ]
+        },
+        company: {
+            labelKey: "registrationCompany",
+            fields: [
+                ["legalName", "registrationLegalName", "text", true],
+                ["email", "registrationOfficialEmail", "email", true],
+                ["phone", "registrationPhone", "tel", true],
+                ["contactName", "registrationContactName", "text", true],
+                ["license", "registrationLicense", "text", false],
+                ["address", "registrationAddress", "text", true],
+                ["region", "registrationRegion", "text", true],
+                ["coverage", "registrationCoverage", "text", true],
+                ["password", "registrationPassword", "password", true],
+                ["confirmPassword", "registrationConfirmPassword", "password", true]
+            ]
+        },
+        guard: {
+            labelKey: "registrationGuard",
+            fields: [
+                ["fullName", "registrationFullName", "text", true],
+                ["email", "registrationEmail", "email", true],
+                ["phone", "registrationPhone", "tel", true],
+                ["region", "registrationRegion", "text", true],
+                ["experience", "registrationExperience", "number", true],
+                ["qualifications", "registrationQualifications", "textarea", true],
+                ["specialty", "registrationSpecialty", "text", true],
+                ["password", "registrationPassword", "password", true],
+                ["confirmPassword", "registrationConfirmPassword", "password", true]
+            ]
+        }
+    };
+
+    let chosenType = "";
+    let submitting = false;
+
+    function makeField(field) {
+        const [name, labelKey, type, required, options] = field;
+        const id = `registration-${name}`;
+        const wrapper = document.createElement("div");
+        wrapper.className = "auth-field registration-field";
+        const labelEl = document.createElement("label");
+        labelEl.htmlFor = id;
+        const labelText = document.createElement("span");
+        labelText.dataset.i18n = labelKey;
+        labelText.textContent = translateText(labelKey);
+        labelEl.appendChild(labelText);
+        if (required) {
+            const requiredMark = document.createElement("span");
+            requiredMark.textContent = " *";
+            requiredMark.setAttribute("aria-hidden", "true");
+            labelEl.appendChild(requiredMark);
+        }
+        let input;
+        if (type === "select") {
+            input = document.createElement("select");
+            const placeholder = new Option(translateText("registrationAccountTypePlaceholder"), "");
+            placeholder.dataset.i18n = "registrationAccountTypePlaceholder";
+            input.add(placeholder);
+            options.forEach(([value, key]) => {
+                const option = new Option(translateText(key), value);
+                option.dataset.i18n = key;
+                input.add(option);
+            });
+        } else if (type === "textarea") {
+            input = document.createElement("textarea");
+            input.rows = 3;
+        } else {
+            input = document.createElement("input");
+            input.type = type === "password" ? "password" : type;
+            if (type === "number") {
+                input.min = "0";
+                input.max = "60";
+            }
+        }
+        input.id = id;
+        input.name = name;
+        input.autocomplete = type === "password" ? "new-password" : name === "fullName" ? "name" : name === "email" ? "email" : name === "phone" ? "tel" : "off";
+        input.required = required;
+        if (type === "tel") input.inputMode = "tel";
+        wrapper.append(labelEl, input);
+        if (type === "password") {
+            const reveal = document.createElement("button");
+            reveal.type = "button";
+            reveal.className = "password-toggle";
+            reveal.dataset.i18n = "registrationShowPassword";
+            reveal.textContent = translateText("registrationShowPassword");
+            reveal.setAttribute("aria-controls", id);
+            reveal.addEventListener("click", () => {
+                const showing = input.type === "text";
+                input.type = showing ? "password" : "text";
+                const key = showing ? "registrationShowPassword" : "registrationHidePassword";
+                reveal.dataset.i18n = key;
+                reveal.textContent = translateText(key);
+            });
+            wrapper.appendChild(reveal);
+        }
+        return wrapper;
+    }
+
+    function chooseType(type) {
+        chosenType = type;
+        submitting = false;
+        error.textContent = "";
+        error.removeAttribute("data-i18n");
+        error.removeAttribute("data-i18n-vars");
+        picker.hidden = true;
+        panel.hidden = false;
+        indicator.dataset.i18n = "registrationSelected";
+        const selectedType = { key: accountTypes[type].labelKey };
+        indicator.dataset.i18nVars = JSON.stringify({ type: selectedType });
+        indicator.textContent = translateText("registrationSelected", { type: selectedType });
+        formHost.replaceChildren();
+        const form = document.createElement("form");
+        form.id = "auth-form";
+        form.className = "auth-form registration-form";
+        form.noValidate = true;
+        accountTypes[type].fields.forEach((field) => form.appendChild(makeField(field)));
+        const submit = document.createElement("button");
+        submit.type = "submit";
+        submit.className = "auth-submit";
+        submit.dataset.i18n = "registrationCreateButton";
+        submit.textContent = translateText("registrationCreateButton");
+        form.appendChild(submit);
+        formHost.appendChild(form);
+
+        form.addEventListener("submit", submitRegistration);
+        setLanguage(getLanguage());
+        form.querySelector("input")?.focus();
+    }
+
+    function submitRegistration(event) {
+        event.preventDefault();
+        if (submitting) return;
+        const form = event.currentTarget;
+        const values = Object.fromEntries(new FormData(form).entries());
+        values.email = String(values.email || "").trim();
+        for (const field of accountTypes[chosenType].fields) {
+            const [name, labelKey, , required] = field;
+            if (required && !String(values[name] || "").trim()) {
+                setRegistrationError("registrationErrorRequired", { field: { key: labelKey } });
+                form.elements[name]?.focus();
+                return;
+            }
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email || "")) {
+            setRegistrationError("registrationErrorEmail");
+            form.elements.email.focus();
+            return;
+        }
+        if (values.phone && values.phone.replace(/\D/g, "").length < 7) {
+            setRegistrationError("registrationErrorPhone");
+            form.elements.phone.focus();
+            return;
+        }
+        if (chosenType === "guard" && (!Number.isFinite(Number(values.experience)) || Number(values.experience) < 0 || Number(values.experience) > 60)) {
+            setRegistrationError("registrationErrorExperience");
+            form.elements.experience.focus();
+            return;
+        }
+        if ((values.password || "").length < 6) {
+            setRegistrationError("registrationErrorPassword");
+            form.elements.password.focus();
+            return;
+        }
+        if (values.password !== values.confirmPassword) {
+            setRegistrationError("registrationErrorPasswordMismatch");
+            form.elements.confirmPassword.focus();
             return;
         }
 
-        const title = document.getElementById("auth-title");
-        const subtitle = document.getElementById("auth-subtitle");
-        const submitBtn = document.getElementById("auth-submit");
-        const errorEl = document.getElementById("auth-error");
-        const tabs = document.querySelectorAll(".auth-tab");
-        const signupOnly = document.querySelectorAll('[data-only="signup"]');
-        const nameInput = document.getElementById("auth-name");
-        const emailInput = document.getElementById("auth-email");
-        const passInput = document.getElementById("auth-password");
-        const roleInput = document.getElementById("auth-role");
-
-        const copy = {
-            signup: {
-                title: "Create Your Account",
-                subtitle: "Join Egypt's verified security network. This is a demo: no real data is sent anywhere.",
-                button: "Confirm & Continue",
-                autocomplete: "new-password",
-                page: "Create Account"
-            },
-            signin: {
-                title: "Welcome Back",
-                subtitle: "Sign in to continue. This is a demo: any valid email and password will work.",
-                button: "Sign In",
-                autocomplete: "current-password",
-                page: "Sign In"
-            }
-        };
-
-        let mode = "signup";
-        let submitting = false;
-
-        function setMode(next) {
-            mode = next;
-            const c = copy[mode];
-            title.textContent = c.title;
-            subtitle.textContent = c.subtitle;
-            submitBtn.textContent = c.button;
-            passInput.setAttribute("autocomplete", c.autocomplete);
-            signupOnly.forEach((el) => el.classList.toggle("is-hidden", mode !== "signup"));
-            tabs.forEach((tab) => {
-                const active = tab.dataset.mode === mode;
-                tab.classList.toggle("is-active", active);
-                tab.setAttribute("aria-selected", String(active));
-            });
-            document.title = `${c.page} | ShieldNet`;
-            errorEl.textContent = "";
-        }
-
-        function validate() {
-            if (mode === "signup" && nameInput.value.trim().length < 2) {
-                nameInput.focus();
-                return "Please enter your full name.";
-            }
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
-                emailInput.focus();
-                return "Please enter a valid email address.";
-            }
-            if (passInput.value.length < 6) {
-                passInput.focus();
-                return "Password must be at least 6 characters.";
-            }
-            return "";
-        }
-
-        tabs.forEach((tab) => tab.addEventListener("click", () => setMode(tab.dataset.mode)));
-
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            if (submitting) return;
-
-            const problem = validate();
-            if (problem) {
-                errorEl.textContent = problem;
-                return;
-            }
-            errorEl.textContent = "";
-
-            const email = emailInput.value.trim();
-            const name = mode === "signup" ? nameInput.value.trim() : email.split("@")[0];
-
-            // Same demo session the Sign In button creates -> everything unlocks on the home page
-            startSession({ name, email, role: mode === "signup" ? roleInput.value : "client" });
-
-            submitting = true;
-            submitBtn.disabled = true;
-            submitBtn.textContent = "✓ Confirmed, redirecting…";
-            setTimeout(() => {
-                const params = new URLSearchParams(window.location.search);
-                const company = params.get("company");
-                const action = params.get("action");
-                if (action === "hire" && company) {
-                    window.location.assign(`/#companies?hire=${encodeURIComponent(company)}`);
-                } else {
-                    window.location.assign(HOME_URL);
-                }
-            }, 700);
+        const displayName = values.fullName || values.contactName || values.legalName;
+        const isCompany = chosenType === "company";
+        // Deliberately persist only the minimum demo identity; never store either password.
+        startSession({
+            name: displayName,
+            email: values.email.trim(),
+            role: chosenType,
+            accountStatus: isCompany ? "pending_verification" : "demo"
         });
-
-        if (new URLSearchParams(window.location.search).get("mode") === "signin") {
-            setMode("signin");
-        }
+        submitting = true;
+        const successKey = isCompany ? "registrationCompanyCreated" : "registrationDemoCreated";
+        error.dataset.i18n = successKey;
+        error.textContent = translateText(successKey);
+        const submit = form.querySelector("[type=submit]");
+        submit.disabled = true;
+        submit.dataset.i18n = "registrationRedirecting";
+        submit.textContent = translateText("registrationRedirecting");
+        setLanguage(getLanguage());
+        setTimeout(() => window.location.assign(`${HOME_URL}?registration=${isCompany ? "company-pending" : chosenType}`), 1400);
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", start);
-    } else {
-        start();
+    document.querySelectorAll("[data-account-type]").forEach((button) => {
+        button.addEventListener("click", () => chooseType(button.dataset.accountType));
+    });
+    document.getElementById("registration-back").addEventListener("click", () => {
+        panel.hidden = true;
+        picker.hidden = false;
+        error.textContent = "";
+        error.removeAttribute("data-i18n");
+        error.removeAttribute("data-i18n-vars");
+        chosenType = "";
+    });
+
+    function setRegistrationError(key, variables = {}) {
+        error.dataset.i18n = key;
+        error.dataset.i18nVars = JSON.stringify(variables);
+        error.textContent = translateText(key, variables);
     }
 })();
