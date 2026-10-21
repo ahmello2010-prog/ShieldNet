@@ -102,10 +102,9 @@
                                 <span data-i18n="navCompanies">Security Companies</span>
                             </a>
                             <a
-                                href="javascript:void(0)"
-                                class="modern-nav-link nav-link-static"
-                                aria-disabled="true"
-                                onclick="event.preventDefault();">
+                                href="/knowledge.html"
+                                class="modern-nav-link"
+                                data-action="nav:knowledge">
                                 <svg
                                     class="nav-svg-icon"
                                     viewBox="0 0 24 24"
@@ -115,10 +114,10 @@
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                     aria-hidden="true">
-                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 1-4 4v14a3 3 0 0 1 3-3h7z"></path>
                                 </svg>
-                                <span data-i18n="navServices">Services</span>
+                                <span data-i18n="navKnowledge">المعرفة</span>
                             </a>
                             <a
                                 href="javascript:void(0)"
@@ -327,10 +326,9 @@
                                 <span data-i18n="navCompanies">Security Companies</span>
                             </a>
                             <a
-                                href="javascript:void(0)"
-                                class="modern-nav-link nav-link-static"
-                                aria-disabled="true"
-                                onclick="event.preventDefault();">
+                                href="/knowledge.html"
+                                class="modern-nav-link"
+                                data-action="nav:knowledge">
                                 <svg
                                     class="nav-svg-icon"
                                     viewBox="0 0 24 24"
@@ -340,10 +338,10 @@
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                     aria-hidden="true">
-                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 1-4 4v14a3 3 0 0 1 3-3h7z"></path>
                                 </svg>
-                                <span data-i18n="navServices">Services</span>
+                                <span data-i18n="navKnowledge">المعرفة</span>
                             </a>
                             <a
                                 href="javascript:void(0)"
@@ -529,6 +527,94 @@
             </div>
         </section>
 
+        <!-- صفحة موسوعة شبكة المعرفة الأمنية (Knowledge View: ShieldNet Knowledge Network) -->
+        <section class="knowledge-view services-view knowledge-page" id="knowledge-view" style="display: none;" aria-label="ShieldNet Knowledge Network">
+            <header class="discover-top-header">
+                <div class="discover-nav-container">
+                    <a href="#" class="discover-brand" data-action="nav:home" aria-label="ShieldNet Home">
+                        <img src="/img/logo.jpg" alt="ShieldNet Emblem" class="discover-brand-logo" />
+                        <h2>Shield<span>Net</span></h2>
+                    </a>
+
+                    <nav class="modern-navbar discover-modern-navbar" aria-label="Platform Full Navigation">
+                        <div class="modern-nav-links">
+                            <a href="#" class="modern-nav-link" data-action="nav:home">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span data-i18n="navHome">Home</span>
+                            </a>
+                            <a href="#" class="modern-nav-link" data-action="nav:companies">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span data-i18n="navCompanies">Security Companies</span>
+                            </a>
+                            <a href="#" class="modern-nav-link active" data-action="nav:knowledge">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 1-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span data-i18n="navKnowledge">المعرفة</span>
+                            </a>
+                            <a href="javascript:void(0)" class="modern-nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                                <span data-i18n="navAbout">About Platform</span>
+                            </a>
+                            <a href="javascript:void(0)" class="modern-nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                <span data-i18n="navContact">Contact Us</span>
+                            </a>
+                            <a href="javascript:void(0)" class="modern-nav-link nav-link-static" aria-disabled="true" onclick="event.preventDefault();">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                <span data-i18n="navTerms">Terms and Conditions</span>
+                            </a>
+                        </div>
+                        <div class="modern-nav-actions">
+                            <button type="button" class="modern-nav-lang-btn nav-lang-btn" data-action="action:toggle-lang" aria-label="Switch Language">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                <span class="lang-label" data-i18n="langToggle">العربية</span>
+                            </button>
+                            <a href="#" class="modern-nav-cta" data-auth="signin" data-i18n="navSignIn">Sign In</a>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="knowledge-main-container">
+                <div class="knowledge-hero-header">
+                    <div class="knowledge-badge">
+                        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <span data-i18n="knowledgeBadge">موسوعة المعرفة الأمنية التفاعلية</span>
+                    </div>
+                    <div class="knowledge-title-wrap">
+                        <h1 class="knowledge-heading">
+                            ShieldNet <span>Knowledge Network</span>
+                        </h1>
+                        <p class="knowledge-subheading" data-i18n="knowledgeSubheading">
+                            منظومة تفاعلية متكاملة تربط أركان العمل الأمني الميداني والتقني والإداري. استكشف الفروع المعرفية وتصفح المقالات التخصصية المعتمدة لحماية المنشآت والعقارات الكبرى.
+                        </p>
+                    </div>
+                </div>
+
+                <section class="octopus-wrapper" id="octopus-wrapper" aria-label="Octopus Knowledge Network Diagram">
+                    <div class="octopus-header-bar">
+                        <div class="octopus-status-indicator">
+                            <span class="octopus-status-dot" aria-hidden="true"></span>
+                            <span data-i18n="knowledgeStatus">الشبكة الأمنية التفاعلية متصلة</span>
+                        </div>
+                        <span class="octopus-hint-text" data-i18n="knowledgeHint">
+                            انقر على أي فرع أو بطاقة لقراءة المقال المتخصص
+                        </span>
+                    </div>
+                    <div class="octopus-svg-container" id="octopus-svg-container"></div>
+                </section>
+
+                <nav class="knowledge-nav-pills" id="knowledge-nav-pills" aria-label="Quick Article Navigation"></nav>
+
+                <div class="knowledge-section-title">
+                    <h2 data-i18n="knowledgeSectionCards">الأركان والمقالات الأمنية الثمانية</h2>
+                </div>
+
+                <div class="knowledge-cards-grid" id="knowledge-cards-grid" role="list"></div>
+
+                <section class="article-reader-section" id="article-reader-section" aria-live="polite" aria-label="Article Reader"></section>
+            </div>
+        </section>
+
         <!-- تذييل الصفحة بالكامل: شريط أزرق داكن متكامل مع وسائل التواصل والروابط وحقوق التطوير -->
         <footer class="site-footer">
             <div class="footer-container">
@@ -554,6 +640,13 @@
                     <div class="footer-col links-col">
                         <h4 data-i18n="footerColLegal">Guard Network & Legal</h4>
                         <ul class="footer-menu">
+                            <li>
+                                <a
+                                    href="/knowledge.html"
+                                    class="footer-nav-link"
+                                    data-action="nav:knowledge"
+                                    data-i18n="navKnowledge">المعرفة</a>
+                            </li>
                             <li>
                                 <a
                                     href="#"
@@ -777,10 +870,9 @@
                     </li>
                     <li>
                         <a
-                            href="javascript:void(0)"
-                            class="drawer-link nav-link-static"
-                            aria-disabled="true"
-                            onclick="event.preventDefault();">
+                            href="/knowledge.html"
+                            class="drawer-link"
+                            data-action="nav:knowledge">
                             <svg
                                 class="nav-svg-icon"
                                 viewBox="0 0 24 24"
@@ -790,10 +882,10 @@
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 aria-hidden="true">
-                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 1-4 4v14a3 3 0 0 1 3-3h7z"></path>
                             </svg>
-                            <span data-i18n="navServices">Services</span>
+                            <span data-i18n="navKnowledge">المعرفة</span>
                         </a>
                     </li>
                     <li>

@@ -1,4 +1,12 @@
 import { getSession, startSession, endSession } from "./session.js";
+import {
+    KNOWLEDGE_TOPICS,
+    getKnowledgeTopic,
+    renderKnowledgeCardsHtml,
+    renderKnowledgePillsHtml,
+    renderOctopusSvgHtml,
+    renderArticleReaderHtml
+} from "./knowledge.js";
 
 /* =============================================================
    0. I18N - Shared Language System (English / Arabic)
@@ -10,7 +18,8 @@ const TRANSLATIONS = {
         langToggle: "العربية",
         navHome: "Home",
         navCompanies: "Security Companies",
-        navServices: "Services",
+        navKnowledge: "Knowledge",
+        navServices: "Knowledge",
         navAbout: "About Platform",
         navRequests: "My Requests",
         navTerms: "Terms and Conditions",
@@ -160,13 +169,24 @@ const TRANSLATIONS = {
         authLanguageToggle: "Switch language",
         authPendingNotice: "The company account is pending review, so verified company permissions remain locked.",
         registrationLogoAlt: "ShieldNet logo",
-        closeModalBtn: "Close"
+        closeModalBtn: "Close",
+        knowledgeBadge: "Interactive Security Knowledge Network",
+        knowledgeHeading: "ShieldNet <span>Knowledge Network</span>",
+        knowledgeSubheading: "An interactive, interconnected encyclopedia exploring physical guarding, electronic surveillance, emergency response, and modern security management.",
+        knowledgeStatus: "Neural Security Network Active",
+        knowledgeHint: "Click any branch or card to explore the full article",
+        knowledgeSectionCards: "The Eight Security Articles",
+        btnReadMore: "Explore Article",
+        backToNetwork: "↑ Back to Network",
+        prevArticle: "« Previous Topic",
+        nextArticle: "Next Topic »"
     },
     ar: {
         langToggle: "English",
         navHome: "الرئيسية",
         navCompanies: "شركات الأمن",
-        navServices: "الخدمات",
+        navKnowledge: "المعرفة",
+        navServices: "المعرفة",
         navAbout: "عن المنصة",
         navRequests: "طلباتي",
         navTerms: "الشروط والأحكام",
@@ -316,7 +336,17 @@ const TRANSLATIONS = {
         authLanguageToggle: "تغيير اللغة",
         authPendingNotice: "حساب الشركة قيد المراجعة، لذلك تظل صلاحيات الشركة المعتمدة مغلقة.",
         registrationLogoAlt: "شعار ShieldNet",
-        closeModalBtn: "إغلاق"
+        closeModalBtn: "إغلاق",
+        knowledgeBadge: "موسوعة المعرفة الأمنية التفاعلية",
+        knowledgeHeading: "ShieldNet <span>Knowledge Network</span>",
+        knowledgeSubheading: "منظومة تفاعلية متكاملة تربط أركان العمل الأمني الميداني والتقني والإداري. استكشف الفروع المعرفية وتصفح المقالات التخصصية المعتمدة لحماية المنشآت والعقارات الكبرى.",
+        knowledgeStatus: "الشبكة الأمنية التفاعلية متصلة",
+        knowledgeHint: "انقر على أي فرع أو بطاقة لقراءة المقال المتخصص",
+        knowledgeSectionCards: "الأركان والمقالات الأمنية الثمانية",
+        btnReadMore: "عرض المزيد",
+        backToNetwork: "↑ العودة إلى شبكة المعرفة",
+        prevArticle: "« المقال السابق",
+        nextArticle: "المقال التالي »"
     }
 };
 
@@ -727,6 +757,10 @@ function setLanguage(lang) {
     if (typeof window.ShieldNetRenderRecentSearches === "function") {
         window.ShieldNetRenderRecentSearches();
     }
+
+    if (typeof window.ShieldNetRenderKnowledge === "function") {
+        window.ShieldNetRenderKnowledge();
+    }
 }
 
 function toggleLanguage() {
@@ -851,10 +885,11 @@ setLanguage(getLanguage());
    ============================================================= */
 (function initHomePage() {
     function start() {
-        // Only run on pages containing hero-container or discover-view
+        // Run on pages containing hero-container, discover-view, or services-view / knowledge-page
         const heroContainer = document.getElementById("hero-container");
         const discoverView = document.getElementById("discover-view");
-        if (!heroContainer && !discoverView) return;
+        const servicesView = document.getElementById("knowledge-view") || document.getElementById("services-view") || document.getElementById("knowledge-page");
+        if (!heroContainer && !discoverView && !servicesView) return;
 
         /* ----- DOM references ----- */
         const policyModal = document.getElementById("policy-modal");
@@ -892,8 +927,9 @@ setLanguage(getLanguage());
 
         const RECENT_SEARCHES_KEY = "shieldnet_recent_searches";
 
-        let currentPage = "home";
+        let currentPage = servicesView && !heroContainer && !discoverView ? "services" : "home";
         let isNavigating = false;
+        let currentKnowledgeTopic = "fundamentals";
 
         // Filter state
         let currentFilters = {
@@ -1064,7 +1100,8 @@ setLanguage(getLanguage());
 
         function updateActiveNavigation(page) {
             const isCompanies = page === "companies";
-            const isHome = !isCompanies;
+            const isKnowledge = page === "knowledge" || page === "services";
+            const isHome = !isCompanies && !isKnowledge;
 
             // Update mobile sidebar drawer links
             document.querySelectorAll(".drawer-link").forEach((link) => {
@@ -1077,7 +1114,7 @@ setLanguage(getLanguage());
                     href === "/index.html" ||
                     href === "#home" ||
                     href.endsWith("/index.html") ||
-                    (href === "#" && action !== "nav:companies");
+                    (href === "#" && action !== "nav:companies" && action !== "nav:knowledge" && action !== "nav:services");
 
                 const isCompaniesLink =
                     action === "nav:companies" ||
@@ -1085,8 +1122,20 @@ setLanguage(getLanguage());
                     href === "#companies" ||
                     href.includes("companies");
 
+                const isKnowledgeLink =
+                    action === "nav:knowledge" ||
+                    action === "nav:services" ||
+                    href === "/knowledge.html" ||
+                    href === "/services.html" ||
+                    href === "#knowledge" ||
+                    href === "#services" ||
+                    href.includes("knowledge") ||
+                    href.includes("services");
+
                 if (isCompaniesLink) {
                     link.classList.toggle("active", isCompanies);
+                } else if (isKnowledgeLink) {
+                    link.classList.toggle("active", isKnowledge);
                 } else if (isHomeLink) {
                     link.classList.toggle("active", isHome);
                 }
@@ -1103,7 +1152,7 @@ setLanguage(getLanguage());
                     href === "/index.html" ||
                     href === "#home" ||
                     href.endsWith("/index.html") ||
-                    (href === "#" && action !== "nav:companies");
+                    (href === "#" && action !== "nav:companies" && action !== "nav:knowledge" && action !== "nav:services");
 
                 const isCompaniesLink =
                     action === "nav:companies" ||
@@ -1111,8 +1160,20 @@ setLanguage(getLanguage());
                     href === "#companies" ||
                     href.includes("companies");
 
+                const isKnowledgeLink =
+                    action === "nav:knowledge" ||
+                    action === "nav:services" ||
+                    href === "/knowledge.html" ||
+                    href === "/services.html" ||
+                    href === "#knowledge" ||
+                    href === "#services" ||
+                    href.includes("knowledge") ||
+                    href.includes("services");
+
                 if (isCompaniesLink) {
                     link.classList.toggle("active", isCompanies);
+                } else if (isKnowledgeLink) {
+                    link.classList.toggle("active", isKnowledge);
                 } else if (isHomeLink) {
                     link.classList.toggle("active", isHome);
                 }
@@ -1263,6 +1324,125 @@ setLanguage(getLanguage());
                 });
             }, 240);
         }
+
+        /* =============================================================
+           Navigation: Knowledge Network (Octopus Encyclopedia)
+           ============================================================= */
+        function navigateToKnowledge(skipAnimation = false) {
+            if (currentPage === "knowledge" || currentPage === "services" || isNavigating) return;
+            if (!servicesView) {
+                window.location.href = "/knowledge.html";
+                return;
+            }
+
+            isNavigating = true;
+            closeMobileDrawer();
+
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches || skipAnimation;
+
+            if (heroContainer) heroContainer.style.display = "none";
+            if (discoverView) discoverView.style.display = "none";
+
+            servicesView.style.display = "block";
+            servicesView.style.opacity = "1";
+            servicesView.style.transform = "none";
+
+            currentPage = "knowledge";
+            isNavigating = false;
+            updateActiveNavigation("knowledge");
+            window.scrollTo({ top: 0, behavior: "instant" });
+
+            if (window.location.hash !== "#knowledge" && !window.location.pathname.includes("knowledge")) {
+                history.pushState({ page: "knowledge" }, "", "#knowledge");
+            }
+
+            const isAr = getLanguage() === "ar";
+            document.title = isAr
+                ? "ShieldNet | موسوعة المعرفة الأمنية"
+                : "ShieldNet Knowledge Network | Security Encyclopedia";
+
+            initKnowledgeNetworkUI(currentKnowledgeTopic, false);
+        }
+        const navigateToServices = navigateToKnowledge;
+
+        function bindOctopusEvents(container) {
+            if (!container) return;
+            const svg = container.querySelector(".octopus-svg");
+            if (!svg) return;
+
+            const armGroups = container.querySelectorAll(".octopus-arm-group");
+            armGroups.forEach((group) => {
+                const topicId = group.getAttribute("data-topic-id");
+
+                group.addEventListener("mouseenter", () => {
+                    svg.classList.add("has-focus");
+                    const card = document.getElementById(`k-card-${topicId}`);
+                    if (card) card.classList.add("is-selected");
+                });
+
+                group.addEventListener("mouseleave", () => {
+                    svg.classList.remove("has-focus");
+                    const card = document.getElementById(`k-card-${topicId}`);
+                    if (card && topicId !== currentKnowledgeTopic) {
+                        card.classList.remove("is-selected");
+                    }
+                });
+
+                const terminalNode = group.querySelector(".octopus-terminal-node");
+                if (terminalNode) {
+                    terminalNode.addEventListener("keydown", (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            selectKnowledgeTopic(topicId, true);
+                        }
+                    });
+                    terminalNode.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        selectKnowledgeTopic(topicId, true);
+                    });
+                }
+            });
+        }
+
+        function initKnowledgeNetworkUI(topicId = currentKnowledgeTopic, shouldScroll = false) {
+            currentKnowledgeTopic = topicId;
+            const lang = getLanguage();
+            const octopusContainer = document.getElementById("octopus-svg-container");
+            const pillsNav = document.getElementById("knowledge-nav-pills");
+            const cardsGrid = document.getElementById("knowledge-cards-grid");
+            const articleReader = document.getElementById("article-reader-section");
+
+            if (octopusContainer) {
+                octopusContainer.innerHTML = renderOctopusSvgHtml(currentKnowledgeTopic, lang);
+                bindOctopusEvents(octopusContainer);
+            }
+
+            if (pillsNav) {
+                pillsNav.innerHTML = renderKnowledgePillsHtml(currentKnowledgeTopic, lang);
+            }
+
+            if (cardsGrid) {
+                cardsGrid.innerHTML = renderKnowledgeCardsHtml(currentKnowledgeTopic, lang);
+            }
+
+            if (articleReader) {
+                articleReader.innerHTML = renderArticleReaderHtml(currentKnowledgeTopic, lang);
+                if (shouldScroll) {
+                    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                    articleReader.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+                }
+            }
+        }
+
+        function selectKnowledgeTopic(topicId, shouldScroll = true) {
+            if (!topicId) return;
+            currentKnowledgeTopic = topicId;
+            initKnowledgeNetworkUI(currentKnowledgeTopic, shouldScroll);
+        }
+
+        window.ShieldNetRenderKnowledge = () => {
+            initKnowledgeNetworkUI(currentKnowledgeTopic, false);
+        };
 
         /* =============================================================
            Filtering & Company Cards Rendering
@@ -1850,6 +2030,25 @@ setLanguage(getLanguage());
                     closeMobileDrawer();
                     navigateToCompanies();
                 },
+                "nav:services": () => {
+                    closeMobileDrawer();
+                    navigateToKnowledge();
+                },
+                "nav:knowledge": () => {
+                    closeMobileDrawer();
+                    navigateToKnowledge();
+                },
+                "knowledge:select-topic": (target) => {
+                    const topicId = target.getAttribute("data-topic-id") || target.closest("[data-topic-id]")?.getAttribute("data-topic-id");
+                    if (topicId) selectKnowledgeTopic(topicId, true);
+                },
+                "knowledge:back-to-top": () => {
+                    const topTarget = document.getElementById("octopus-wrapper") || document.getElementById("knowledge-nav-pills") || document.getElementById("knowledge-view") || document.getElementById("services-view");
+                    if (topTarget) {
+                        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                        topTarget.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+                    }
+                },
                 "action:explore-guards": () => {
                     closeMobileDrawer();
                     navigateToCompanies();
@@ -1914,6 +2113,14 @@ setLanguage(getLanguage());
                 if (element.classList.contains("btn-details-card")) return "company:details";
                 if (element.classList.contains("card-rating-row")) return "company:details";
                 if (element.classList.contains("btn-expand-mobile")) return "card:toggle-expand";
+
+                if (element.classList.contains("btn-card-read-more") || element.classList.contains("knowledge-pill-btn") || element.classList.contains("octopus-terminal-node") || element.classList.contains("article-nav-btn")) {
+                    return element.getAttribute("data-action") || "knowledge:select-topic";
+                }
+                const kCard = element.closest(".knowledge-card");
+                if (kCard && !element.closest("a")) {
+                    return "knowledge:select-topic";
+                }
 
                 return null;
             }
@@ -2075,6 +2282,8 @@ setLanguage(getLanguage());
         window.addEventListener("popstate", (e) => {
             if (window.location.hash === "#companies" || (e.state && e.state.page === "companies")) {
                 navigateToCompanies(false);
+            } else if (window.location.hash === "#knowledge" || window.location.hash === "#services" || (e.state && (e.state.page === "knowledge" || e.state.page === "services"))) {
+                navigateToKnowledge(false);
             } else {
                 navigateToHome(false);
             }
@@ -2140,9 +2349,14 @@ setLanguage(getLanguage());
             history.replaceState({}, "", `${window.location.pathname}${window.location.hash}`);
         }
 
-        // Check if page loaded directly with #companies
+        // Check if page loaded directly with #companies or #knowledge or on knowledge.html / services.html
         if (window.location.hash && window.location.hash.startsWith("#companies")) {
             navigateToCompanies(true);
+        } else if (window.location.hash && (window.location.hash.startsWith("#knowledge") || window.location.hash.startsWith("#services"))) {
+            navigateToKnowledge(true);
+        } else if (servicesView && !heroContainer && !discoverView) {
+            updateActiveNavigation("knowledge");
+            initKnowledgeNetworkUI("fundamentals", false);
         }
 
         // Check if returning from login with pending hire request
