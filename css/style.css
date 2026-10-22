@@ -2732,6 +2732,10 @@ body.lang-ar .registration-form {
 }
 
 @media (max-width: 640px) {
+    /* Expressive Concept Image Showcase */
+    .concept-image-showcase {
+        display: none;
+    }
     .auth-shell {
         align-items: flex-start;
         padding: 14px 10px;
@@ -6708,9 +6712,6 @@ body.lang-ar .about-quote-box {
 }
 
 @media (max-width: 640px) {
-    .concept-image-showcase {
-        display: none;
-    }
     .about-container {
         padding: 24px 16px 54px;
         gap: 40px;
@@ -6786,6 +6787,195 @@ body.lang-ar .about-quote-box {
     .about-principle-card,
     .about-visual-node-row {
         transition: none !important;
+    }
+}
+
+/* =============================================================
+   CONTACT PAGE (contact.html)
+   Same navy base and layout language as the rest of the platform,
+   with a warm amber-brown accent in place of gold to give this page its own
+   identity. To change the palette, edit only the variables below.
+   ============================================================= */
+
+.contact-view {
+    --contact-accent: #b7791f;
+    --contact-accent-dark: #8a5a14;
+    --contact-accent-soft: rgba(183, 121, 31, 0.12);
+    --contact-accent-border: rgba(183, 121, 31, 0.45);
+    --contact-card-border: #eadfcb;
+    --contact-bg-from: #fbf7ef;
+    --contact-bg-to: #f3ebdb;
+
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(circle at 88% 0%, rgba(183, 121, 31, 0.1), transparent 42%),
+        linear-gradient(180deg, var(--contact-bg-from) 0%, var(--contact-bg-to) 100%);
+    color: var(--color-navy);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Re-tint the shared About components inside this page only */
+.contact-view .about-badge {
+    background: var(--contact-accent-soft);
+    border-color: var(--contact-accent-border);
+}
+
+.contact-view .about-badge .badge-svg-icon {
+    color: var(--contact-accent);
+}
+
+.contact-view .about-section-title span {
+    color: var(--contact-accent);
+}
+
+.contact-container {
+    max-width: 960px;
+    margin-inline: auto;
+    padding: 56px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(36px, 5vw, 56px);
+}
+
+.contact-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.contact-social {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.contact-social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 20px;
+    background: #ffffff;
+    border: 1px solid var(--contact-card-border);
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(11, 25, 44, 0.04);
+    color: var(--color-navy);
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+/* Primary channel (email) gets an accent edge */
+.contact-info-grid .contact-card {
+    border-inline-start: 4px solid var(--contact-accent);
+}
+
+a.contact-card:hover {
+    border-color: var(--contact-accent-border);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(183, 121, 31, 0.12);
+}
+
+a.contact-card:focus-visible {
+    outline: 2px solid var(--contact-accent);
+    outline-offset: 3px;
+}
+
+.contact-card.is-placeholder {
+    cursor: default;
+}
+
+.contact-card.is-placeholder:hover {
+    transform: none;
+    border-color: var(--contact-card-border);
+    box-shadow: 0 4px 16px rgba(11, 25, 44, 0.04);
+}
+
+.contact-card-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--contact-accent-soft);
+    border: 1.2px solid var(--contact-accent-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--contact-accent-dark);
+}
+
+.contact-card-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.contact-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.contact-card-label {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: var(--contact-accent-dark);
+}
+
+.contact-card-value {
+    font-size: 1.02rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.contact-card-hint {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #475569;
+}
+
+.contact-soon-tag {
+    margin-inline-start: auto;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    background: var(--contact-accent-soft);
+    border: 1px solid var(--contact-accent-border);
+    color: var(--contact-accent-dark);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+body.lang-ar .contact-view,
+html[dir="rtl"] .contact-view {
+    text-align: right;
+}
+
+@media (max-width: 640px) {
+    .contact-container {
+        padding: 28px 16px 56px;
+    }
+
+    .contact-card {
+        padding: 18px 16px;
+    }
+
+    .contact-soon-tag {
+        font-size: 0.78rem;
     }
 }
 
@@ -6881,4 +7071,109 @@ body.lang-ar .about-quote-box {
     html {
         font-size: 14px;
     }
+}
+
+/* =====================================================================
+   Terms and Conditions draft page
+   ===================================================================== */
+.terms-view {
+    min-height: 70vh;
+    padding: 34px 0 72px;
+    color: #17283b;
+    background: #f4f7fb;
+}
+
+.terms-container {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.terms-document { min-width: 0; }
+.terms-hero { max-width: 850px; margin: 0 auto 28px; text-align: center; }
+.terms-eyebrow { color: #b7791f; font-size: .82rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.terms-hero h1 { margin: 10px 0; color: #102a43; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; }
+.terms-hero > p { margin: 0 auto 12px; max-width: 720px; color: #536579; font-size: 1.05rem; line-height: 1.8; }
+.terms-hero .terms-updated { margin-top: 15px; font-size: .9rem; }
+
+.terms-draft-notice,
+.terms-caution,
+.terms-owner-action {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 18px 20px;
+    border: 1px solid #e8c783;
+    border-inline-start: 5px solid #c58a2b;
+    border-radius: 12px;
+    background: #fff8e9;
+    color: #473717;
+}
+.terms-draft-notice { max-width: 1000px; margin: 0 auto 34px; }
+.terms-draft-notice svg { flex: 0 0 25px; width: 25px; height: 25px; margin-top: 3px; color: #a86d14; }
+.terms-draft-notice h2 { margin: 0 0 6px; font-size: 1.08rem; }
+.terms-draft-notice p,
+.terms-caution p { margin: 0; line-height: 1.8; }
+.terms-layout { display: grid; grid-template-columns: minmax(230px, 285px) minmax(0, 1fr); gap: 26px; align-items: start; }
+.terms-toc,
+.terms-article { border: 1px solid #dce5ee; border-radius: 16px; background: #fff; box-shadow: 0 8px 26px rgba(16, 42, 67, .045); }
+.terms-toc { position: sticky; top: 22px; max-height: calc(100vh - 44px); overflow-y: auto; padding: 20px; }
+.terms-toc h2 { margin: 0 0 12px; color: #102a43; font-size: 1.08rem; }
+.terms-toc ol { margin: 0; padding-inline-start: 23px; color: #7c8b9a; }
+.terms-toc li { padding: 3px 0; line-height: 1.5; }
+.terms-toc a { color: #40566c; text-decoration: none; font-size: .88rem; }
+.terms-toc a:hover,
+.terms-toc a:focus-visible { color: #a86d14; text-decoration: underline; }
+.terms-article { padding: clamp(22px, 4vw, 42px); }
+.terms-section { scroll-margin-top: 24px; padding: 0 0 25px; margin: 0 0 25px; border-bottom: 1px solid #e7edf3; }
+.terms-section:last-child { margin-bottom: 0; }
+.terms-section h2,
+.terms-document-footer h2 { margin: 0 0 12px; color: #102a43; font-size: 1.3rem; line-height: 1.5; }
+.terms-section h3 { margin: 20px 0 8px; color: #263f56; font-size: 1.05rem; }
+.terms-section p,
+.terms-section li,
+.terms-section dd,
+.terms-document-footer p { color: #3e5062; font-size: .98rem; line-height: 1.9; }
+.terms-section p { margin: 0 0 12px; }
+.terms-section ul { margin: 10px 0 0; padding-inline-start: 24px; }
+.terms-section li { margin: 5px 0; padding-inline-start: 3px; }
+.terms-section dl { display: grid; grid-template-columns: minmax(125px, .35fr) 1fr; gap: 9px 16px; margin: 0; }
+.terms-section dt { color: #183b57; font-weight: 800; }
+.terms-section dd { margin: 0; }
+.terms-caution,
+.terms-owner-action { display: block; margin: 14px 0; line-height: 1.8; }
+.terms-owner-action { border-color: #e7b8a7; border-inline-start-color: #bd654b; background: #fff5f1; color: #5c3329; }
+.terms-commission-table-wrap { max-width: 100%; overflow-x: auto; margin: 16px 0; }
+.terms-commission-table { width: 100%; border-collapse: collapse; text-align: start; }
+.terms-commission-table th,
+.terms-commission-table td { padding: 11px 13px; border: 1px solid #dce5ee; line-height: 1.6; }
+.terms-commission-table th { background: #edf3f8; color: #173550; }
+.terms-document-footer { padding-top: 24px; scroll-margin-top: 24px; }
+.terms-document-footer h2 { font-size: 1.15rem; }
+.terms-back-top { display: inline-flex; margin-top: 8px; padding: 10px 15px; border-radius: 9px; background: #173b59; color: #fff; font-weight: 700; text-decoration: none; }
+.terms-back-top:hover,
+.terms-back-top:focus-visible { background: #b7791f; outline: 2px solid #b7791f; outline-offset: 2px; }
+.terms-loading-note { color: #536579; text-align: center; }
+html[dir="rtl"] .terms-view { text-align: right; }
+html[dir="ltr"] .terms-view { text-align: left; }
+
+@media (max-width: 900px) {
+    .terms-layout { grid-template-columns: 1fr; }
+    .terms-toc { position: static; max-height: none; }
+    .terms-toc ol { columns: 2; column-gap: 30px; }
+}
+@media (max-width: 600px) {
+    .terms-view { padding: 24px 0 48px; }
+    .terms-container { width: min(100% - 28px, 720px); }
+    .terms-hero { margin-bottom: 20px; }
+    .terms-hero > p { font-size: .98rem; }
+    .terms-draft-notice { padding: 15px; margin-bottom: 20px; }
+    .terms-toc { padding: 16px; }
+    .terms-toc ol { columns: 1; }
+    .terms-article { padding: 20px 17px; }
+    .terms-section dl { grid-template-columns: 1fr; gap: 2px; }
+    .terms-section dd { margin-bottom: 10px; }
+    .terms-section p,
+    .terms-section li,
+    .terms-section dd { font-size: .96rem; }
+    .terms-commission-table { min-width: 500px; }
 }

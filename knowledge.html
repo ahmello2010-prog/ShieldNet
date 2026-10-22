@@ -157,9 +157,10 @@
                     </li>
                     <li>
                         <a
-                            href="/about.html"
-                            class="drawer-link"
-                            data-action="nav:about">
+                            href="javascript:void(0)"
+                            class="drawer-link nav-link-static"
+                            aria-disabled="true"
+                            onclick="event.preventDefault();">
                             <svg
                                 class="nav-svg-icon"
                                 viewBox="0 0 24 24"
@@ -202,10 +203,8 @@
                     </li>
                     <li>
                         <a
-                            href="javascript:void(0)"
-                            class="drawer-link nav-link-static"
-                            aria-disabled="true"
-                            onclick="event.preventDefault();">
+                            href="/contact.html" data-action="nav:contact"
+                            class="drawer-link">
                             <svg
                                 class="nav-svg-icon"
                                 viewBox="0 0 24 24"
@@ -287,9 +286,10 @@
                                 <span data-i18n="navKnowledge">Knowledge</span>
                             </a>
                             <a
-                                href="/about.html"
-                                class="modern-nav-link"
-                                data-action="nav:about">
+                                href="javascript:void(0)"
+                                class="modern-nav-link nav-link-static"
+                                aria-disabled="true"
+                                onclick="event.preventDefault();">
                                 <svg
                                     class="nav-svg-icon"
                                     viewBox="0 0 24 24"
@@ -306,10 +306,8 @@
                                 <span data-i18n="navAbout">About Platform</span>
                             </a>
                             <a
-                                href="javascript:void(0)"
-                                class="modern-nav-link nav-link-static"
-                                aria-disabled="true"
-                                onclick="event.preventDefault();">
+                                href="/contact.html" data-action="nav:contact"
+                                class="modern-nav-link">
                                 <svg
                                     class="nav-svg-icon"
                                     viewBox="0 0 24 24"
@@ -478,11 +476,6 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/about.html" class="footer-nav-link" data-action="nav:about" data-i18n="navAbout">
-                                    About Platform
-                                </a>
-                            </li>
-                            <li>
                                 <a href="/knowledge.html" class="footer-nav-link" data-action="nav:knowledge" data-i18n="navKnowledge">
                                     Knowledge
                                 </a>
@@ -493,7 +486,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="footer-nav-link" data-action="modal:open-policy" data-policy="terms" data-i18n="footerTerms">
+                                <a href="/terms.html" class="footer-nav-link" data-action="nav:terms" data-i18n="footerTerms">
                                     Terms of Service
                                 </a>
                             </li>

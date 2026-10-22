@@ -7,6 +7,7 @@ import {
     renderOctopusSvgHtml,
     renderArticleReaderHtml
 } from "./knowledge.js";
+import { TERMS_DOCUMENTS } from "./terms-content.js";
 
 /* =============================================================
    0. I18N - Shared Language System (English / Arabic)
@@ -93,7 +94,8 @@ const TRANSLATIONS = {
         serviceUnavailableTitle: "Notice: No Services Available Currently",
         serviceUnavailableSubtitle: "Operational Capacity & Dispatch Update",
         serviceUnavailableMsg: "No services are available at the moment. Please check back soon.",
-        serviceUnavailableDesc: "All security personnel, guard details, and dispatch units are fully booked for current contracted properties. Operational capacity is currently being updated with our certified partners. Please check back soon.",
+        serviceUnavailableDesc:
+            "All security personnel, guard details, and dispatch units are fully booked for current contracted properties. Operational capacity is currently being updated with our certified partners. Please check back soon.",
         serviceUnavailableBtn: "Understood, Check Back Later",
         selectedCompanyLabel: "Selected Security Provider:",
         hireModalTitle: "Request Security Guarding Proposal",
@@ -103,7 +105,8 @@ const TRANSLATIONS = {
         hireFieldDate: "Deployment Start Date",
         hireFieldNotes: "Specific Requirements / Instructions",
         hireSubmit: "Submit Hire Request",
-        hireToastSuccess: "Contract inquiry submitted to {company}. Our dispatch officer will contact you within 2 business hours.",
+        hireToastSuccess:
+            "Contract inquiry submitted to {company}. Our dispatch officer will contact you within 2 business hours.",
         hireToastAuthReq: "Please sign in or create an account to submit a hire request.",
         detailsBtn: "View Reviews",
         detailsAndReviews: "Details & Reviews",
@@ -123,7 +126,8 @@ const TRANSLATIONS = {
         registrationBackHome: "← Back to Home",
         registrationTitle: "Join ShieldNet",
         registrationSubtitle: "Choose the account type that fits you and start registration.",
-        registrationDemoNote: "Registration is currently a demo. Your information is not sent to a server or database, and your password is not stored.",
+        registrationDemoNote:
+            "Registration is currently a demo. Your information is not sent to a server or database, and your password is not stored.",
         registrationTypeAria: "Choose an account type",
         registrationClient: "Client",
         registrationClientDesc: "For individuals, companies, and property managers",
@@ -159,10 +163,14 @@ const TRANSLATIONS = {
         registrationErrorExperience: "Enter years of experience from 0 to 60.",
         registrationErrorPassword: "Password must be at least 6 characters.",
         registrationErrorPasswordMismatch: "The passwords do not match.",
-        registrationCompanyCreated: "A demo session was created. Company status: pending review; no real administrative review is connected.",
-        registrationDemoCreated: "A demo session was created. You will return to the homepage; no dedicated dashboard is currently available.",
-        registrationCompanyToast: "Demo company session created. Status: pending review; no real approval is connected.",
-        registrationAccountToast: "Demo session created. No dedicated dashboard or authentication service is connected.",
+        registrationCompanyCreated:
+            "A demo session was created. Company status: pending review; no real administrative review is connected.",
+        registrationDemoCreated:
+            "A demo session was created. You will return to the homepage; no dedicated dashboard is currently available.",
+        registrationCompanyToast:
+            "Demo company session created. Status: pending review; no real approval is connected.",
+        registrationAccountToast:
+            "Demo session created. No dedicated dashboard or authentication service is connected.",
         authSigninHint: "Create an account first to continue.",
         authNoticeClose: "Dismiss notice",
         authLanguageToggle: "Switch language",
@@ -172,7 +180,8 @@ const TRANSLATIONS = {
         knowledgeBadge: "Interactive Security Knowledge Network",
         knowledgePageTitle: "ShieldNet | Security Knowledge Network",
         knowledgeHeading: "ShieldNet <span>Knowledge Network</span>",
-        knowledgeSubheading: "An interactive, interconnected encyclopedia exploring physical guarding, electronic surveillance, emergency response, and modern security management.",
+        knowledgeSubheading:
+            "An interactive, interconnected encyclopedia exploring physical guarding, electronic surveillance, emergency response, and modern security management.",
         knowledgeStatus: "Neural Security Network Active",
         knowledgeHint: "Click any branch or card to explore the full article",
         knowledgeSectionCards: "The Eight Security Articles",
@@ -184,11 +193,26 @@ const TRANSLATIONS = {
         backToNetwork: "↑ Back to Network",
         prevArticle: "« Previous Topic",
         nextArticle: "Next Topic »",
+        contactPageTitle: "Contact ShieldNet | Get in Touch",
+        contactMetaDesc: "Contact the ShieldNet team for inquiries, partnerships, and feedback.",
+        contactBadge: "Contact Us",
+        contactTitle: "Contact <span>ShieldNet</span>",
+        contactLead:
+            "We welcome your inquiries, strategic partnerships, and feedback during our pre-launch preparation phase.",
+        contactEmailLabel: "Email",
+        contactEmailHint: "Send us your inquiry by email.",
+        contactSocialTitle: "Follow <span>Us</span>",
+        contactSocialLead: "Our official channels will appear here as soon as they go live.",
+        contactSoon: "Coming soon",
+        termsPageTitle: "Terms and Conditions | ShieldNet",
+        termsMetaDesc: "Draft terms and conditions for using ShieldNet in Egypt. This document requires review by qualified Egyptian counsel before adoption.",
         aboutPageTitle: "ShieldNet | About Us - Toward a More Connected Security Future",
-        aboutMetaDesc: "The story and vision behind ShieldNet: uniting clients, security providers, and professional guards into one organized digital network.",
+        aboutMetaDesc:
+            "The story and vision behind ShieldNet: uniting clients, security providers, and professional guards into one organized digital network.",
         aboutBadge: "About ShieldNet Platform",
         aboutHeroTitle: "Toward a More Connected Future for Security in Egypt",
-        aboutHeroLead: "The concept behind ShieldNet originates from the need for a digital environment that brings together all stakeholders in the security sector, facilitating access to relevant services, opportunities, and knowledge. We are building a platform that helps clients, security companies, and security personnel connect and navigate suitable options with greater clarity and structure.",
+        aboutHeroLead:
+            "The concept behind ShieldNet originates from the need for a digital environment that brings together all stakeholders in the security sector, facilitating access to relevant services, opportunities, and knowledge. We are building a platform that helps clients, security companies, and security personnel connect and navigate suitable options with greater clarity and structure.",
         aboutHeroSubphrase: "A single network connecting security needs with accessible solutions.",
         aboutCtaExplore: "Explore Security Companies",
         aboutCtaKnowledge: "Explore Security Knowledge",
@@ -197,16 +221,21 @@ const TRANSLATIONS = {
         aboutHeroNetworkNodeGuards: "Verified Guards",
         aboutProblemBadge: "The Challenge & Motivation",
         aboutProblemHeading: "Why We Are Building ShieldNet",
-        aboutProblemIntro: "The security sector encompasses multiple parties—clients, security companies, and field personnel. Navigating services and discovering career opportunities can be complicated when information is fragmented. We are developing ShieldNet to provide an organized, structured digital environment.",
+        aboutProblemIntro:
+            "The security sector encompasses multiple parties—clients, security companies, and field personnel. Navigating services and discovering career opportunities can be complicated when information is fragmented. We are developing ShieldNet to provide an organized, structured digital environment.",
         aboutProblemCard1Title: "Access to Services",
-        aboutProblemCard1Desc: "Helping users and facility managers discover security providers, evaluate specialties and geographic coverage, and understand available options to make well-informed decisions.",
+        aboutProblemCard1Desc:
+            "Helping users and facility managers discover security providers, evaluate specialties and geographic coverage, and understand available options to make well-informed decisions.",
         aboutProblemCard2Title: "Stakeholder Connectivity",
-        aboutProblemCard2Desc: "Creating a digital environment that bridges the gap between service seekers and providers, establishing clear and structured communication channels across the ecosystem.",
+        aboutProblemCard2Desc:
+            "Creating a digital environment that bridges the gap between service seekers and providers, establishing clear and structured communication channels across the ecosystem.",
         aboutProblemCard3Title: "Access to Opportunities & Insights",
-        aboutProblemCard3Desc: "Making relevant professional opportunities easier to discover for security personnel, while providing an accessible knowledge network that elevates awareness of modern security practices.",
+        aboutProblemCard3Desc:
+            "Making relevant professional opportunities easier to discover for security personnel, while providing an accessible knowledge network that elevates awareness of modern security practices.",
         aboutConceptBadge: "Platform Model",
         aboutConceptHeading: "From Fragmented Needs to a Connected Network",
-        aboutConceptIntro: "ShieldNet is architected as the central nexus connecting the three primary pillars of Egypt's security ecosystem into one synchronized environment:",
+        aboutConceptIntro:
+            "ShieldNet is architected as the central nexus connecting the three primary pillars of Egypt's security ecosystem into one synchronized environment:",
         aboutNetworkImageAlt: "ShieldNet Unified Security Network & Command Operations Center",
         aboutNetworkTag: "Command Operations Center & Integrated Security Network",
         aboutNetworkChip: "Unified Digital Security Ecosystem",
@@ -215,48 +244,64 @@ const TRANSLATIONS = {
         aboutGroup3DescShort: "Trained Field Security Cadres",
         aboutGroup1Badge: "Demand Pillar",
         aboutGroup1Title: "Clients & Facility Seekers",
-        aboutGroup1Desc: "Residential compound owners, corporate towers, and commercial estates seeking reliable, verified guarding solutions tailored to their facilities.",
+        aboutGroup1Desc:
+            "Residential compound owners, corporate towers, and commercial estates seeking reliable, verified guarding solutions tailored to their facilities.",
         aboutGroup2Badge: "Supply Pillar",
         aboutGroup2Title: "Security Companies & Providers",
-        aboutGroup2Desc: "Licensed guarding providers, CCTV command operations, and rapid response units seeking to showcase their capabilities and geographic reach.",
+        aboutGroup2Desc:
+            "Licensed guarding providers, CCTV command operations, and rapid response units seeking to showcase their capabilities and geographic reach.",
         aboutGroup3Badge: "Human Capital",
         aboutGroup3Title: "Security Personnel & Job Seekers",
-        aboutGroup3Desc: "Qualified security guards and field officers seeking career stability, transparent opportunities, and professional development.",
-        aboutConceptNotice: "This architectural model illustrates the intended operational network that ShieldNet is actively building ahead of public launch.",
+        aboutGroup3Desc:
+            "Qualified security guards and field officers seeking career stability, transparent opportunities, and professional development.",
+        aboutConceptNotice:
+            "This architectural model illustrates the intended operational network that ShieldNet is actively building ahead of public launch.",
         aboutVisionMissionBadge: "Direction & Purpose",
         aboutVisionHeading: "Our Vision",
-        aboutVisionText: "Contributing to building a more connected and organized security market by facilitating access to relevant services, opportunities, and knowledge.",
+        aboutVisionText:
+            "Contributing to building a more connected and organized security market by facilitating access to relevant services, opportunities, and knowledge.",
         aboutMissionHeading: "Our Mission",
-        aboutMissionText: "Developing a digital platform that brings security sector stakeholders together in a clear, user-friendly environment, prioritizing transparency, privacy, and a practical experience that meets user needs.",
+        aboutMissionText:
+            "Developing a digital platform that brings security sector stakeholders together in a clear, user-friendly environment, prioritizing transparency, privacy, and a practical experience that meets user needs.",
         aboutPrinciplesBadge: "Core Values",
         aboutPrinciplesHeading: "The Principles We Build Upon",
-        aboutPrinciplesIntro: "We adhere to measured, professional standards that guide every milestone in ShieldNet's development.",
+        aboutPrinciplesIntro:
+            "We adhere to measured, professional standards that guide every milestone in ShieldNet's development.",
         aboutPrinciple1Title: "Trust & Transparency",
-        aboutPrinciple1Desc: "Presenting information clearly and helping users understand available options without exaggerated promises.",
+        aboutPrinciple1Desc:
+            "Presenting information clearly and helping users understand available options without exaggerated promises.",
         aboutPrinciple2Title: "Privacy",
-        aboutPrinciple2Desc: "Respecting user privacy and handling data responsibly in accordance with the actual guidelines and controls applied by the platform.",
+        aboutPrinciple2Desc:
+            "Respecting user privacy and handling data responsibly in accordance with the actual guidelines and controls applied by the platform.",
         aboutPrinciple3Title: "Ease of Access",
-        aboutPrinciple3Desc: "Structuring services, information, and opportunities to help users find what they are looking for seamlessly.",
+        aboutPrinciple3Desc:
+            "Structuring services, information, and opportunities to help users find what they are looking for seamlessly.",
         aboutPrinciple4Title: "Continuous Development",
-        aboutPrinciple4Desc: "Building and refining the platform incrementally, guided by user feedback and experiential quality.",
+        aboutPrinciple4Desc:
+            "Building and refining the platform incrementally, guided by user feedback and experiential quality.",
         aboutStageBadge: "Current Phase",
         aboutStageHeading: "We Are in the Building Phase",
-        aboutStageLead: "ShieldNet is currently preparing its platform and developing an experience designed to connect the security sector more systematically. This phase provides the opportunity to establish clear foundations, refine the user experience, and prepare services aligned with user needs.",
+        aboutStageLead:
+            "ShieldNet is currently preparing its platform and developing an experience designed to connect the security sector more systematically. This phase provides the opportunity to establish clear foundations, refine the user experience, and prepare services aligned with user needs.",
         aboutMilestone1Title: "Vision & Architecture",
         aboutMilestone1Status: "Completed",
-        aboutMilestone1Desc: "Formulating the foundational concept and mapping stakeholder needs across Egypt's security sector.",
+        aboutMilestone1Desc:
+            "Formulating the foundational concept and mapping stakeholder needs across Egypt's security sector.",
         aboutMilestone2Title: "Knowledge & Directory",
         aboutMilestone2Status: "In Active Preparation",
         aboutMilestone2Desc: "Structuring vetted company profiles and authoring the interactive security encyclopedia.",
         aboutMilestone3Title: "Connection Workflows",
         aboutMilestone3Status: "In Development",
-        aboutMilestone3Desc: "Designing clean inquiry channels and structured matchmaking protocols for pre-launch validation.",
+        aboutMilestone3Desc:
+            "Designing clean inquiry channels and structured matchmaking protocols for pre-launch validation.",
         aboutMilestone4Title: "Phased Platform Launch",
         aboutMilestone4Status: "Upcoming Next",
-        aboutMilestone4Desc: "Gradual deployment of operational features following thorough validation with industry stakeholders.",
+        aboutMilestone4Desc:
+            "Gradual deployment of operational features following thorough validation with industry stakeholders.",
         aboutCtaBadge: "Explore ShieldNet",
         aboutCtaHeading: "Be Part of the ShieldNet Network",
-        aboutCtaText: "Explore the ShieldNet concept and discover what the platform is building for the security sector.",
+        aboutCtaText:
+            "Explore the ShieldNet concept and discover what the platform is building for the security sector.",
         aboutCtaBtnCompanies: "Explore Security Companies",
         aboutCtaBtnKnowledge: "Explore Security Knowledge",
         aboutCtaBtnTerms: "Platform Terms & Privacy",
@@ -341,7 +386,8 @@ const TRANSLATIONS = {
         serviceUnavailableTitle: "تنبيه: لا توجد خدمات متاحة حالياً",
         serviceUnavailableSubtitle: "إشعار الجدولة والطاقة الاستيعابية",
         serviceUnavailableMsg: "لا يوجد خدمات متاحة الآن، عُد قريباً.",
-        serviceUnavailableDesc: "نعتذر عن عدم إمكانية تقديم الخدمة في الوقت الراهن نظراً لاكتمال حجز الكوادر الأمنية ووحدات الحراسة الميدانية لجميع المواقع المتعاقد عليها. يجري حالياً تحديث الجداول الاستيعابية والتعاقدات مع الشركات المعتمدة. يرجى التحقق مرة أخرى قريباً.",
+        serviceUnavailableDesc:
+            "نعتذر عن عدم إمكانية تقديم الخدمة في الوقت الراهن نظراً لاكتمال حجز الكوادر الأمنية ووحدات الحراسة الميدانية لجميع المواقع المتعاقد عليها. يجري حالياً تحديث الجداول الاستيعابية والتعاقدات مع الشركات المعتمدة. يرجى التحقق مرة أخرى قريباً.",
         serviceUnavailableBtn: "حسناً، عُد قريباً",
         selectedCompanyLabel: "الشركة الأمنية المختارة:",
         hireModalTitle: "طلب عرض أسعار وتعاقد أمني",
@@ -371,7 +417,8 @@ const TRANSLATIONS = {
         registrationBackHome: "← العودة إلى الرئيسية",
         registrationTitle: "انضم إلى ShieldNet",
         registrationSubtitle: "اختار نوع الحساب المناسب وابدأ التسجيل.",
-        registrationDemoNote: "التسجيل تجريبي حاليًا. لا تُرسل بياناتك إلى خادم أو قاعدة بيانات، ولا يتم حفظ كلمة المرور.",
+        registrationDemoNote:
+            "التسجيل تجريبي حاليًا. لا تُرسل بياناتك إلى خادم أو قاعدة بيانات، ولا يتم حفظ كلمة المرور.",
         registrationTypeAria: "اختار نوع الحساب",
         registrationClient: "عميل",
         registrationClientDesc: "للأفراد والشركات ومديري العقارات",
@@ -407,7 +454,8 @@ const TRANSLATIONS = {
         registrationErrorExperience: "أدخل عدد سنوات خبرة من 0 إلى 60.",
         registrationErrorPassword: "يجب ألا تقل كلمة المرور عن 6 أحرف.",
         registrationErrorPasswordMismatch: "كلمتا المرور غير متطابقتين.",
-        registrationCompanyCreated: "تم إنشاء جلسة تجريبية. حالة الشركة: قيد المراجعة، ولا توجد مراجعة إدارية فعلية متصلة.",
+        registrationCompanyCreated:
+            "تم إنشاء جلسة تجريبية. حالة الشركة: قيد المراجعة، ولا توجد مراجعة إدارية فعلية متصلة.",
         registrationDemoCreated: "تم إنشاء جلسة تجريبية. ستعود إلى الصفحة الرئيسية؛ لا توجد لوحة حساب مخصصة حاليًا.",
         registrationCompanyToast: "تم إنشاء جلسة تجريبية للشركة. الحالة: قيد المراجعة، ولا يوجد اعتماد فعلي.",
         registrationAccountToast: "تم إنشاء جلسة تجريبية. لا توجد لوحة مخصصة أو خدمة مصادقة متصلة حاليًا.",
@@ -420,7 +468,8 @@ const TRANSLATIONS = {
         knowledgeBadge: "موسوعة المعرفة الأمنية التفاعلية",
         knowledgePageTitle: "ShieldNet | موسوعة المعرفة الأمنية",
         knowledgeHeading: "ShieldNet <span>Knowledge Network</span>",
-        knowledgeSubheading: "منظومة تفاعلية متكاملة تربط أركان العمل الأمني الميداني والتقني والإداري. استكشف الفروع المعرفية وتصفح المقالات التخصصية المعتمدة لحماية المنشآت والعقارات الكبرى.",
+        knowledgeSubheading:
+            "منظومة تفاعلية متكاملة تربط أركان العمل الأمني الميداني والتقني والإداري. استكشف الفروع المعرفية وتصفح المقالات التخصصية المعتمدة لحماية المنشآت والعقارات الكبرى.",
         knowledgeStatus: "الشبكة الأمنية التفاعلية متصلة",
         knowledgeHint: "انقر على أي فرع أو بطاقة لقراءة المقال المتخصص",
         knowledgeSectionCards: "الأركان والمقالات الأمنية الثمانية",
@@ -432,11 +481,25 @@ const TRANSLATIONS = {
         backToNetwork: "↑ العودة إلى شبكة المعرفة",
         prevArticle: "« المقال السابق",
         nextArticle: "المقال التالي »",
+        contactPageTitle: "تواصل مع ShieldNet | يسعدنا سماعك",
+        contactMetaDesc: "تواصل مع فريق ShieldNet للاستفسارات والشراكات المهنية والملاحظات.",
+        contactBadge: "تواصل معنا",
+        contactTitle: "تواصل مع <span>ShieldNet</span>",
+        contactLead: "نرحب باستفساراتكم ومقترحاتكم والشراكات المهنية خلال مرحلة التجهيز والتحضير الحالية للمنصة.",
+        contactEmailLabel: "البريد الإلكتروني",
+        contactEmailHint: "راسلنا باستفسارك عبر البريد الإلكتروني.",
+        contactSocialTitle: "تابعنا <span>على المنصات</span>",
+        contactSocialLead: "ستظهر قنواتنا الرسمية هنا فور إطلاقها.",
+        contactSoon: "قريبًا",
+        termsPageTitle: "الشروط والأحكام | ShieldNet",
+        termsMetaDesc: "مسودة الشروط والأحكام لاستخدام ShieldNet في مصر، وتتطلب مراجعة قانونية متخصصة قبل اعتمادها.",
         aboutPageTitle: "ShieldNet | من نحن - نحو مستقبل أكثر ترابطًا للأمن في مصر",
-        aboutMetaDesc: "تعرّف على قصة ShieldNet ورؤيتها لربط أطراف القطاع الأمني من عملاء وشركات وأفراد حراسة في منصة رقمية موحدة.",
+        aboutMetaDesc:
+            "تعرّف على قصة ShieldNet ورؤيتها لربط أطراف القطاع الأمني من عملاء وشركات وأفراد حراسة في منصة رقمية موحدة.",
         aboutBadge: "عن منصة ShieldNet",
         aboutHeroTitle: "نحو مستقبل أكثر ترابطًا للأمن في مصر",
-        aboutHeroLead: "تبدأ فكرة ShieldNet من الحاجة إلى بيئة رقمية تجمع أطراف القطاع الأمني، وتسهّل الوصول إلى الخدمات والفرص والمعلومات ذات الصلة. نعمل على تطوير منصة تساعد العملاء وشركات الأمن وأفراد الأمن على التواصل والوصول إلى الخيارات المناسبة بصورة أكثر تنظيمًا ووضوحًا.",
+        aboutHeroLead:
+            "تبدأ فكرة ShieldNet من الحاجة إلى بيئة رقمية تجمع أطراف القطاع الأمني، وتسهّل الوصول إلى الخدمات والفرص والمعلومات ذات الصلة. نعمل على تطوير منصة تساعد العملاء وشركات الأمن وأفراد الأمن على التواصل والوصول إلى الخيارات المناسبة بصورة أكثر تنظيمًا ووضوحًا.",
         aboutHeroSubphrase: "شبكة واحدة، تربط احتياجات الأمن بإمكانيات الوصول إليها.",
         aboutCtaExplore: "استكشف شركات الأمن",
         aboutCtaKnowledge: "تعرّف على الموسوعة الأمنية",
@@ -445,16 +508,21 @@ const TRANSLATIONS = {
         aboutHeroNetworkNodeGuards: "أفراد الحراسة المعتمدون",
         aboutProblemBadge: "التحدي والدافع",
         aboutProblemHeading: "لماذا نعمل على ShieldNet؟",
-        aboutProblemIntro: "يشمل القطاع الأمني أطرافًا متعددة من عملاء وشركات وكوادر ميدانية، وقد يصبح البحث عن خدمات مناسبة أو استكشاف فرص مهنية معقدًا عندما تكون المعلومات مشتتة. نهدف إلى تقديم بيئة رقمية منظمة وموثوقة تسهل هذه العمليات.",
+        aboutProblemIntro:
+            "يشمل القطاع الأمني أطرافًا متعددة من عملاء وشركات وكوادر ميدانية، وقد يصبح البحث عن خدمات مناسبة أو استكشاف فرص مهنية معقدًا عندما تكون المعلومات مشتتة. نهدف إلى تقديم بيئة رقمية منظمة وموثوقة تسهل هذه العمليات.",
         aboutProblemCard1Title: "الوصول إلى الخدمات",
-        aboutProblemCard1Desc: "مساعدة المستخدمين وأصحاب المنشآت على استكشاف مقدمي الخدمات الأمنية، ومقارنة التخصصات ونطاقات التغطية، وفهم الخيارات المتاحة لاتخاذ قرارات مدروسة.",
+        aboutProblemCard1Desc:
+            "مساعدة المستخدمين وأصحاب المنشآت على استكشاف مقدمي الخدمات الأمنية، ومقارنة التخصصات ونطاقات التغطية، وفهم الخيارات المتاحة لاتخاذ قرارات مدروسة.",
         aboutProblemCard2Title: "الترابط بين الأطراف",
-        aboutProblemCard2Desc: "خلق بيئة رقمية تقرب المسافات بين طالبي الخدمات ومقدميها، وتوفر قنوات تواصل واضحة ومنظمة تلبي تطلعات القطاع.",
+        aboutProblemCard2Desc:
+            "خلق بيئة رقمية تقرب المسافات بين طالبي الخدمات ومقدميها، وتوفر قنوات تواصل واضحة ومنظمة تلبي تطلعات القطاع.",
         aboutProblemCard3Title: "الوصول إلى الفرص والمعلومات",
-        aboutProblemCard3Desc: "تسهيل اكتشاف الفرص المهنية المناسبة لحراس الأمن، وإتاحة موسوعة معرفية متخصصة ترفع مستوى الوعي بالإجراءات والمعايير الأمنية الحديثة.",
+        aboutProblemCard3Desc:
+            "تسهيل اكتشاف الفرص المهنية المناسبة لحراس الأمن، وإتاحة موسوعة معرفية متخصصة ترفع مستوى الوعي بالإجراءات والمعايير الأمنية الحديثة.",
         aboutConceptBadge: "نموذج المنصة",
         aboutConceptHeading: "من احتياجات متفرقة إلى شبكة مترابطة",
-        aboutConceptIntro: "صُمم نموذج ShieldNet ليكون نقطة الالتقاء المركزية التي تجمع الأطراف الثلاثة الرئيسية في منظومة واحدة متكاملة:",
+        aboutConceptIntro:
+            "صُمم نموذج ShieldNet ليكون نقطة الالتقاء المركزية التي تجمع الأطراف الثلاثة الرئيسية في منظومة واحدة متكاملة:",
         aboutNetworkImageAlt: "غرفة العمليات وشبكة الربط الأمني الموحدة في منصة ShieldNet",
         aboutNetworkTag: "مركز العمليات وشبكة الربط الأمني",
         aboutNetworkChip: "منظومة أمنية رقمية متكاملة",
@@ -463,36 +531,45 @@ const TRANSLATIONS = {
         aboutGroup3DescShort: "الكوادر الأمنية الميدانية المدربة",
         aboutGroup1Badge: "طرف الطلب",
         aboutGroup1Title: "العملاء والجهات الباحثة عن خدمات أمنية",
-        aboutGroup1Desc: "أصحاب المجمعات السكنية، المقرات الإدارية، والمنشآت التجارية الباحثون عن حلول حراسة ملائمة وموثوقة.",
+        aboutGroup1Desc:
+            "أصحاب المجمعات السكنية، المقرات الإدارية، والمنشآت التجارية الباحثون عن حلول حراسة ملائمة وموثوقة.",
         aboutHubBadge: "المركز الرقمي",
         aboutHubTitle: "منصة ShieldNet",
         aboutHubDesc: "البيئة الرقمية المركزية المنظمة لتنسيق الاحتياجات والخدمات.",
         aboutGroup2Badge: "طرف الخدمة",
         aboutGroup2Title: "شركات الأمن ومقدمو الخدمات",
-        aboutGroup2Desc: "الشركات المعتمدة، غرف المراقبة CCTV، وفرق التدخل السريع الراغبة في استعراض جاهزيتها ونطاق تغطيتها.",
+        aboutGroup2Desc:
+            "الشركات المعتمدة، غرف المراقبة CCTV، وفرق التدخل السريع الراغبة في استعراض جاهزيتها ونطاق تغطيتها.",
         aboutGroup3Badge: "الكوادر الميدانية",
         aboutGroup3Title: "أفراد الأمن والباحثون عن فرص مهنية",
-        aboutGroup3Desc: "حراس الأمن المؤهلون والضباط الميدانيون الباحثون عن بيئة عمل مستقرة ومسارات مهنية واضحة ومسؤولة.",
-        aboutConceptNotice: "يوضح هذا النموذج التخطيطي الرؤية التشغيلية التي تعمل المنصة على تجهيزها وإعدادها لمرحلة الإطلاق.",
+        aboutGroup3Desc:
+            "حراس الأمن المؤهلون والضباط الميدانيون الباحثون عن بيئة عمل مستقرة ومسارات مهنية واضحة ومسؤولة.",
+        aboutConceptNotice:
+            "يوضح هذا النموذج التخطيطي الرؤية التشغيلية التي تعمل المنصة على تجهيزها وإعدادها لمرحلة الإطلاق.",
         aboutVisionMissionBadge: "التوجه والهدف",
         aboutVisionHeading: "رؤيتنا",
-        aboutVisionText: "المساهمة في بناء سوق أمني أكثر ترابطًا وتنظيمًا، من خلال تسهيل الوصول إلى الخدمات والفرص والمعلومات ذات الصلة.",
+        aboutVisionText:
+            "المساهمة في بناء سوق أمني أكثر ترابطًا وتنظيمًا، من خلال تسهيل الوصول إلى الخدمات والفرص والمعلومات ذات الصلة.",
         aboutMissionHeading: "رسالتنا",
-        aboutMissionText: "تطوير منصة رقمية تجمع أطراف القطاع الأمني في بيئة واضحة وسهلة الاستخدام، مع الاهتمام بالشفافية والخصوصية وتقديم تجربة عملية تلبي احتياجات المستخدمين.",
+        aboutMissionText:
+            "تطوير منصة رقمية تجمع أطراف القطاع الأمني في بيئة واضحة وسهلة الاستخدام، مع الاهتمام بالشفافية والخصوصية وتقديم تجربة عملية تلبي احتياجات المستخدمين.",
         aboutPrinciplesBadge: "قيم العمل",
         aboutPrinciplesHeading: "المبادئ التي نبني عليها",
         aboutPrinciplesIntro: "نلتزم بمجموعة من المعايير المهنية التي توجه تطوير ShieldNet في كل خطوة.",
         aboutPrinciple1Title: "الثقة والشفافية",
-        aboutPrinciple1Desc: "تقديم المعلومات بصورة واضحة، ومساعدة المستخدمين على فهم الخيارات المتاحة دون مبالغة في الوعود.",
+        aboutPrinciple1Desc:
+            "تقديم المعلومات بصورة واضحة، ومساعدة المستخدمين على فهم الخيارات المتاحة دون مبالغة في الوعود.",
         aboutPrinciple2Title: "الخصوصية",
-        aboutPrinciple2Desc: "مراعاة خصوصية المستخدمين والتعامل مع البيانات بمسؤولية وفقًا للضوابط والآليات التي تطبقها المنصة فعليًا.",
+        aboutPrinciple2Desc:
+            "مراعاة خصوصية المستخدمين والتعامل مع البيانات بمسؤولية وفقًا للضوابط والآليات التي تطبقها المنصة فعليًا.",
         aboutPrinciple3Title: "سهولة الوصول",
         aboutPrinciple3Desc: "تنظيم الخدمات والمعلومات والفرص بطريقة تساعد المستخدمين على الوصول إلى ما يبحثون عنه.",
         aboutPrinciple4Title: "التطوير المستمر",
         aboutPrinciple4Desc: "بناء المنصة وتحسينها تدريجيًا مع مراعاة احتياجات المستخدمين وجودة التجربة.",
         aboutStageBadge: "المرحلة الحالية",
         aboutStageHeading: "نحن في مرحلة البناء",
-        aboutStageLead: "تعمل ShieldNet حاليًا على تجهيز منصتها وتطوير تجربة تهدف إلى ربط أطراف القطاع الأمني بصورة أكثر تنظيمًا. تمثل هذه المرحلة فرصة لبناء أساس واضح، وتحسين تجربة الاستخدام، والاستعداد لتقديم خدمات تتوافق مع احتياجات المستخدمين.",
+        aboutStageLead:
+            "تعمل ShieldNet حاليًا على تجهيز منصتها وتطوير تجربة تهدف إلى ربط أطراف القطاع الأمني بصورة أكثر تنظيمًا. تمثل هذه المرحلة فرصة لبناء أساس واضح، وتحسين تجربة الاستخدام، والاستعداد لتقديم خدمات تتوافق مع احتياجات المستخدمين.",
         aboutMilestone1Title: "الرؤية وهيكلة النموذج",
         aboutMilestone1Status: "مكتمل",
         aboutMilestone1Desc: "صياغة المفهوم الأساسي وتحديد احتياجات أطراف القطاع الأمني في مصر.",
@@ -514,6 +591,9 @@ const TRANSLATIONS = {
         aboutCtaBtnHome: "العودة إلى الرئيسية"
     }
 };
+
+TRANSLATIONS.en.termsDocument = TERMS_DOCUMENTS.en;
+TRANSLATIONS.ar.termsDocument = TERMS_DOCUMENTS.ar;
 
 /* =============================================================
    0.1 SECURITY COMPANIES DATA (Six Companies, 2 Recommended)
@@ -654,8 +734,10 @@ const DEFAULT_REVIEWS = {
             authorRole: "Facilities Director, Katameya Heights",
             rating: 5,
             date: "2026-09-15",
-            comment: "Outstanding 24/7 CCTV monitoring and rapid response unit. Our perimeter defense incidents dropped to zero within the first month.",
-            commentAr: "مراقبة متواصلة 24/7 واستجابة سريعة استثنائية. انخفضت التجاوزات عند الأسوار إلى الصفر منذ الشهر الأول."
+            comment:
+                "Outstanding 24/7 CCTV monitoring and rapid response unit. Our perimeter defense incidents dropped to zero within the first month.",
+            commentAr:
+                "مراقبة متواصلة 24/7 واستجابة سريعة استثنائية. انخفضت التجاوزات عند الأسوار إلى الصفر منذ الشهر الأول."
         },
         {
             id: "rev_a2",
@@ -683,7 +765,8 @@ const DEFAULT_REVIEWS = {
             authorRole: "Head of Protocol, Multinational Diplomatic Delegation",
             rating: 5,
             date: "2026-09-28",
-            comment: "Pinnacle of executive protection in Egypt. Flawless armored motorcade coordination and situational awareness.",
+            comment:
+                "Pinnacle of executive protection in Egypt. Flawless armored motorcade coordination and situational awareness.",
             commentAr: "قمة الاحترافية في الحراسة الدبلوماسية والشخصية، وتنسيق دقيق للمواكب وملاحظة أمنية فائقة."
         },
         {
@@ -692,7 +775,8 @@ const DEFAULT_REVIEWS = {
             authorRole: "Summit Executive Producer",
             rating: 5,
             date: "2026-08-14",
-            comment: "Handled VIP close protection for international speakers without a single hitch. Highly recommended.",
+            comment:
+                "Handled VIP close protection for international speakers without a single hitch. Highly recommended.",
             commentAr: "أداروا حماية كبار الضيوف والشخصيات في القمة الدولية بأعلى درجات السلاسة والاحترافية."
         }
     ],
@@ -723,7 +807,8 @@ const DEFAULT_REVIEWS = {
             authorRole: "Corporate Real Estate VP, Financial Center",
             rating: 5,
             date: "2026-09-18",
-            comment: "Flawless turnstile badge management and smart lobby reception security. Perfect for financial corporate headquarters.",
+            comment:
+                "Flawless turnstile badge management and smart lobby reception security. Perfect for financial corporate headquarters.",
             commentAr: "إدارة إلكترونية ممتازة لبوابات الدخول وأمن استقبال احترافي يليق بالمقرات المصرفية."
         },
         {
@@ -743,7 +828,8 @@ const DEFAULT_REVIEWS = {
             authorRole: "Logistics Terminal Director, Ain Sokhna",
             rating: 5,
             date: "2026-09-11",
-            comment: "Tough perimeter surveillance, zero cargo discrepancies recorded at weighbridges. Dependable night shifts.",
+            comment:
+                "Tough perimeter surveillance, zero cargo discrepancies recorded at weighbridges. Dependable night shifts.",
             commentAr: "تأمين صارم للأسوار ونقاط الشاحنات مع انعدام أي فروقات في البضائع. حراسة ليلية يعتمد عليها."
         },
         {
@@ -849,7 +935,9 @@ function translateText(key, variables = {}, lang = getLanguage()) {
     const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
     const value = String(dict[key] || key);
     return value.replace(/\{([a-zA-Z0-9_]+)\}/g, (match, name) =>
-        Object.prototype.hasOwnProperty.call(variables, name) ? resolveTranslationVariable(variables[name], dict) : match
+        Object.prototype.hasOwnProperty.call(variables, name)
+            ? resolveTranslationVariable(variables[name], dict)
+            : match
     );
 }
 
@@ -869,6 +957,22 @@ function setLanguage(lang) {
         document.title = translateText("knowledgePageTitle", {}, validLang);
         const ogTitle = document.querySelector('meta[property="og:title"]');
         if (ogTitle) ogTitle.setAttribute("content", translateText("knowledgePageTitle", {}, validLang));
+    } else if (document.getElementById("contact-view")) {
+        document.title = translateText("contactPageTitle", {}, validLang);
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute("content", translateText("contactPageTitle", {}, validLang));
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute("content", translateText("contactMetaDesc", {}, validLang));
+        const ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc) ogDesc.setAttribute("content", translateText("contactMetaDesc", {}, validLang));
+    } else if (document.getElementById("terms-view")) {
+        document.title = translateText("termsPageTitle", {}, validLang);
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute("content", translateText("termsPageTitle", {}, validLang));
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute("content", translateText("termsMetaDesc", {}, validLang));
+        const ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc) ogDesc.setAttribute("content", translateText("termsMetaDesc", {}, validLang));
     } else if (document.getElementById("about-view")) {
         document.title = translateText("aboutPageTitle", {}, validLang);
         const ogTitle = document.querySelector('meta[property="og:title"]');
@@ -962,7 +1066,8 @@ function isLoggedIn() {
 function applyAuthUI() {
     const session = getSession();
     const on = !!session;
-    const canUseLockedFeatures = on && !(session.role === "company" && session.accountStatus === "pending_verification");
+    const canUseLockedFeatures =
+        on && !(session.role === "company" && session.accountStatus === "pending_verification");
     const lang = getLanguage();
     const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
     document.body.classList.toggle("demo-on", on);
@@ -1064,12 +1169,14 @@ setLanguage(getLanguage());
    ============================================================= */
 (function initHomePage() {
     function start() {
-        // Run on pages containing hero-container, discover-view, knowledge-view / knowledge-page, or about-view
+        // Run on the shared platform pages that use navigation and account actions.
         const heroContainer = document.getElementById("hero-container");
         const discoverView = document.getElementById("discover-view");
         const knowledgeView = document.getElementById("knowledge-view");
         const aboutView = document.getElementById("about-view");
-        if (!heroContainer && !discoverView && !knowledgeView && !aboutView) return;
+        const contactView = document.getElementById("contact-view");
+        const termsView = document.getElementById("terms-view");
+        if (!heroContainer && !discoverView && !knowledgeView && !aboutView && !contactView && !termsView) return;
 
         /* ----- DOM references ----- */
         const policyModal = document.getElementById("policy-modal");
@@ -1107,19 +1214,24 @@ setLanguage(getLanguage());
 
         const RECENT_SEARCHES_KEY = "shieldnet_recent_searches";
 
-        let currentPage = (aboutView && !heroContainer && !discoverView && !knowledgeView)
-            ? "about"
-            : (knowledgeView && !heroContainer && !discoverView)
-                ? "knowledge"
-                : (discoverView && !heroContainer && !knowledgeView)
-                    ? "companies"
-                    : (window.location.hash && window.location.hash.startsWith("#companies"))
+        let currentPage =
+            termsView && !heroContainer && !discoverView && !knowledgeView && !aboutView && !contactView
+                ? "terms"
+                : contactView && !heroContainer && !discoverView && !knowledgeView && !aboutView
+                  ? "contact"
+                : aboutView && !heroContainer && !discoverView && !knowledgeView
+                  ? "about"
+                  : knowledgeView && !heroContainer && !discoverView
+                    ? "knowledge"
+                    : discoverView && !heroContainer && !knowledgeView
+                      ? "companies"
+                      : window.location.hash && window.location.hash.startsWith("#companies")
                         ? "companies"
-                        : (window.location.hash && window.location.hash.startsWith("#knowledge"))
-                            ? "knowledge"
-                            : (window.location.hash && window.location.hash.startsWith("#about"))
-                                ? "about"
-                                : "home";
+                        : window.location.hash && window.location.hash.startsWith("#knowledge")
+                          ? "knowledge"
+                          : window.location.hash && window.location.hash.startsWith("#about")
+                            ? "about"
+                            : "home";
         let isNavigating = false;
         let currentKnowledgeTopic = "fundamentals";
 
@@ -1233,10 +1345,6 @@ setLanguage(getLanguage());
                 terms: {
                     title: "Security Guard Staffing Terms",
                     html: "<p>ShieldNet operates as a premier professional network connecting verified physical security guards and protection officers with commercial estates and private properties. All candidates undergo credential auditing before deployment.</p>"
-                },
-                contact: {
-                    title: "Contact ShieldNet Team",
-                    html: "<p>We welcome your inquiries, strategic partnerships, and feedback during our pre-launch preparation phase.</p><p style=\"margin-top:12px;font-size:0.95rem;\"><strong>Email:</strong> contact@shieldnet.eg</p><p style=\"margin-top:6px;font-size:0.95rem;\"><strong>Headquarters:</strong> Cairo, Arab Republic of Egypt</p>"
                 }
             },
             ar: {
@@ -1247,10 +1355,6 @@ setLanguage(getLanguage());
                 terms: {
                     title: "شروط التوظيف والتعاقد الأمني",
                     html: "<p>تعمل ShieldNet كمنصة مهنية رائدة تربط بين حراس الأمن المعتمدين وفِرق الحماية المؤهلة مع المنشآت التجارية والمجمعات السكنية. يخضع جميع الحراس لتدقيق مهني صارم قبل الاعتماد.</p>"
-                },
-                contact: {
-                    title: "تواصل مع فريق ShieldNet",
-                    html: "<p>نرحب باستفساراتكم ومقترحاتكم والشراكات المهنية خلال مرحلة التجهيز والتحضير الحالية للمنصة.</p><p style=\"margin-top:12px;font-size:0.95rem;\"><strong>البريد الإلكتروني:</strong> contact@shieldnet.eg</p><p style=\"margin-top:6px;font-size:0.95rem;\"><strong>المقر:</strong> القاهرة، جمهورية مصر العربية</p>"
                 }
             }
         };
@@ -1302,6 +1406,8 @@ setLanguage(getLanguage());
             const isCompanies = page === "companies";
             const isKnowledge = page === "knowledge";
             const isAbout = page === "about";
+            const isContact = page === "contact";
+            const isTerms = page === "terms";
             const isHome = page === "home";
 
             const updateLink = (link) => {
@@ -1330,32 +1436,41 @@ setLanguage(getLanguage());
                 }
 
                 const isKnowledgeLink =
-                    action === "nav:knowledge" ||
-                    rawHref.includes("knowledge") ||
-                    rawHref === "#knowledge";
+                    action === "nav:knowledge" || rawHref.includes("knowledge") || rawHref === "#knowledge";
 
                 const isCompaniesLink =
                     !isKnowledgeLink &&
-                    (action === "nav:companies" ||
-                     rawHref.includes("companies") ||
-                     rawHref === "#companies");
+                    (action === "nav:companies" || rawHref.includes("companies") || rawHref === "#companies");
 
                 const isAboutLink =
                     !isKnowledgeLink &&
                     !isCompaniesLink &&
-                    (action === "nav:about" ||
-                     rawHref.includes("about") ||
-                     rawHref === "#about");
+                    (action === "nav:about" || rawHref.includes("about") || rawHref === "#about");
+
+                const isContactLink =
+                    !isKnowledgeLink &&
+                    !isCompaniesLink &&
+                    !isAboutLink &&
+                    (action === "nav:contact" || rawHref.includes("contact"));
+
+                const isTermsLink =
+                    !isKnowledgeLink &&
+                    !isCompaniesLink &&
+                    !isAboutLink &&
+                    !isContactLink &&
+                    (action === "nav:terms" || rawHref.includes("terms"));
 
                 const isHomeLink =
                     !isKnowledgeLink &&
                     !isCompaniesLink &&
                     !isAboutLink &&
+                    !isContactLink &&
+                    !isTermsLink &&
                     (action === "nav:home" ||
-                     rawHref === "/" ||
-                     rawHref === "/index.html" ||
-                     rawHref.endsWith("/index.html") ||
-                     rawHref === "#home");
+                        rawHref === "/" ||
+                        rawHref === "/index.html" ||
+                        rawHref.endsWith("/index.html") ||
+                        rawHref === "#home");
 
                 if (isKnowledgeLink) {
                     link.classList.toggle("active", isKnowledge);
@@ -1363,6 +1478,10 @@ setLanguage(getLanguage());
                     link.classList.toggle("active", isCompanies);
                 } else if (isAboutLink) {
                     link.classList.toggle("active", isAbout);
+                } else if (isContactLink) {
+                    link.classList.toggle("active", isContact);
+                } else if (isTermsLink) {
+                    link.classList.toggle("active", isTerms);
                 } else if (isHomeLink) {
                     link.classList.toggle("active", isHome);
                 } else {
@@ -1429,9 +1548,7 @@ setLanguage(getLanguage());
                     history.pushState({ page: "companies" }, "", "#companies");
                 }
                 const isAr = getLanguage() === "ar";
-                document.title = isAr
-                    ? "استكشف شركات الأمن | ShieldNet"
-                    : "Discover Security Companies | ShieldNet";
+                document.title = isAr ? "استكشف شركات الأمن | ShieldNet" : "Discover Security Companies | ShieldNet";
                 renderCompanies();
                 renderRecentSearches();
                 return;
@@ -1463,9 +1580,7 @@ setLanguage(getLanguage());
                     history.pushState({ page: "companies" }, "", "#companies");
                 }
                 const isAr = getLanguage() === "ar";
-                document.title = isAr
-                    ? "استكشف شركات الأمن | ShieldNet"
-                    : "Discover Security Companies | ShieldNet";
+                document.title = isAr ? "استكشف شركات الأمن | ShieldNet" : "Discover Security Companies | ShieldNet";
                 renderCompanies();
                 renderRecentSearches();
             }, 580);
@@ -1499,7 +1614,11 @@ setLanguage(getLanguage());
                 updateActiveNavigation("home");
                 window.scrollTo({ top: 0, behavior: "instant" });
                 if (window.location.hash) {
-                    history.pushState({ page: "home" }, "", window.location.pathname.endsWith("index.html") ? "/index.html" : "/");
+                    history.pushState(
+                        { page: "home" },
+                        "",
+                        window.location.pathname.endsWith("index.html") ? "/index.html" : "/"
+                    );
                 }
                 const isAr = getLanguage() === "ar";
                 document.title = isAr
@@ -1520,7 +1639,7 @@ setLanguage(getLanguage());
 
                 heroContainer.style.display = "flex";
                 heroContainer.classList.add("is-entering");
-                
+
                 requestAnimationFrame(() => {
                     heroContainer.offsetHeight; // Force reflow
                     requestAnimationFrame(() => {
@@ -1530,7 +1649,11 @@ setLanguage(getLanguage());
                         updateActiveNavigation("home");
                         window.scrollTo({ top: 0, behavior: "instant" });
                         if (window.location.hash) {
-                            history.pushState({ page: "home" }, "", window.location.pathname.endsWith("index.html") ? "/index.html" : "/");
+                            history.pushState(
+                                { page: "home" },
+                                "",
+                                window.location.pathname.endsWith("index.html") ? "/index.html" : "/"
+                            );
                         }
                         const isAr = getLanguage() === "ar";
                         document.title = isAr
@@ -1592,6 +1715,20 @@ setLanguage(getLanguage());
                 return;
             }
             window.location.href = "/about.html";
+        }
+
+        /* =============================================================
+           Navigation: Contact Us (contact.html standalone page)
+           ============================================================= */
+        function navigateToContact() {
+            closeMobileDrawer();
+            if (contactView) {
+                currentPage = "contact";
+                updateActiveNavigation("contact");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                return;
+            }
+            window.location.href = "/contact.html";
         }
 
         function bindOctopusEvents(container) {
@@ -1818,9 +1955,7 @@ setLanguage(getLanguage());
                     const compServices = isAr ? comp.servicesAr : comp.services;
 
                     const ratingStats = getCompanyRatingStats(comp.id);
-                    const reviewsCountLabel = isAr
-                        ? `${ratingStats.count} تقييم`
-                        : `${ratingStats.count} reviews`;
+                    const reviewsCountLabel = isAr ? `${ratingStats.count} تقييم` : `${ratingStats.count} reviews`;
 
                     const recommendedHtml = comp.recommended
                         ? `
@@ -1942,7 +2077,10 @@ setLanguage(getLanguage());
             // Authentication Check
             if (!isLoggedIn()) {
                 try {
-                    localStorage.setItem("shieldnet_pending_hire", JSON.stringify({ id: company.id, name: company.name }));
+                    localStorage.setItem(
+                        "shieldnet_pending_hire",
+                        JSON.stringify({ id: company.id, name: company.name })
+                    );
                 } catch (e) {
                     // ignore
                 }
@@ -2171,7 +2309,11 @@ setLanguage(getLanguage());
                 const comment = document.getElementById("review-comment")?.value.trim();
 
                 if (!author || !comment) {
-                    showToast(getLanguage() === "ar" ? "يرجى إدخال الاسم ونص التقييم" : "Please enter your name and review text");
+                    showToast(
+                        getLanguage() === "ar"
+                            ? "يرجى إدخال الاسم ونص التقييم"
+                            : "Please enter your name and review text"
+                    );
                     return;
                 }
 
@@ -2241,12 +2383,17 @@ setLanguage(getLanguage());
                     bindOctopusEvents(zoomContainer);
                     openModal(modal);
                     requestAnimationFrame(() => {
-                        zoomContainer.scrollLeft = Math.max(0, (zoomContainer.scrollWidth - zoomContainer.clientWidth) / 2);
+                        zoomContainer.scrollLeft = Math.max(
+                            0,
+                            (zoomContainer.scrollWidth - zoomContainer.clientWidth) / 2
+                        );
                     });
                 },
 
                 "company:details": (target) => {
-                    const compId = target.getAttribute("data-company-id") || target.closest("[data-company-id]")?.getAttribute("data-company-id");
+                    const compId =
+                        target.getAttribute("data-company-id") ||
+                        target.closest("[data-company-id]")?.getAttribute("data-company-id");
                     if (compId) openCompanyDetailsModal(compId);
                 },
                 "review:toggle-form": () => {
@@ -2264,7 +2411,8 @@ setLanguage(getLanguage());
                     if (w) w.style.display = "none";
                 },
                 "company:hire-from-details": (target) => {
-                    const compId = target.getAttribute("data-company-id") || document.getElementById("review-company-id")?.value;
+                    const compId =
+                        target.getAttribute("data-company-id") || document.getElementById("review-company-id")?.value;
                     closeModal(document.getElementById("company-details-modal"));
                     if (compId) handleHireCompany(compId);
                 },
@@ -2289,12 +2437,25 @@ setLanguage(getLanguage());
                     closeMobileDrawer();
                     navigateToAbout();
                 },
+                "nav:contact": () => {
+                    closeMobileDrawer();
+                    navigateToContact();
+                },
+                "nav:terms": () => {
+                    closeMobileDrawer();
+                    window.location.href = "/terms.html";
+                },
                 "knowledge:select-topic": (target) => {
-                    const topicId = target.getAttribute("data-topic-id") || target.closest("[data-topic-id]")?.getAttribute("data-topic-id");
+                    const topicId =
+                        target.getAttribute("data-topic-id") ||
+                        target.closest("[data-topic-id]")?.getAttribute("data-topic-id");
                     if (topicId) selectKnowledgeTopic(topicId, true);
                 },
                 "knowledge:back-to-top": () => {
-                    const topTarget = document.getElementById("octopus-wrapper") || document.getElementById("knowledge-nav-pills") || document.getElementById("knowledge-view");
+                    const topTarget =
+                        document.getElementById("octopus-wrapper") ||
+                        document.getElementById("knowledge-nav-pills") ||
+                        document.getElementById("knowledge-view");
                     if (topTarget) {
                         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                         topTarget.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -2310,7 +2471,9 @@ setLanguage(getLanguage());
                 },
 
                 "company:hire": (target) => {
-                    const companyId = target.getAttribute("data-company-id") || target.closest("[data-company-id]")?.getAttribute("data-company-id");
+                    const companyId =
+                        target.getAttribute("data-company-id") ||
+                        target.closest("[data-company-id]")?.getAttribute("data-company-id");
                     if (companyId) handleHireCompany(companyId);
                 },
 
@@ -2321,9 +2484,7 @@ setLanguage(getLanguage());
                     target.setAttribute("aria-expanded", String(isExpanded));
                     const lang = getLanguage();
                     const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
-                    target.textContent = isExpanded
-                        ? dict.showLess || "Show Less"
-                        : dict.showMore || "Show More";
+                    target.textContent = isExpanded ? dict.showLess || "Show Less" : dict.showMore || "Show More";
                 }
             },
 
@@ -2365,7 +2526,12 @@ setLanguage(getLanguage());
                 if (element.classList.contains("card-rating-row")) return "company:details";
                 if (element.classList.contains("btn-expand-mobile")) return "card:toggle-expand";
 
-                if (element.classList.contains("btn-card-read-more") || element.classList.contains("knowledge-pill-btn") || element.classList.contains("octopus-terminal-node") || element.classList.contains("article-nav-btn")) {
+                if (
+                    element.classList.contains("btn-card-read-more") ||
+                    element.classList.contains("knowledge-pill-btn") ||
+                    element.classList.contains("octopus-terminal-node") ||
+                    element.classList.contains("article-nav-btn")
+                ) {
                     return element.getAttribute("data-action") || "knowledge:select-topic";
                 }
                 const kCard = element.closest(".knowledge-card");
@@ -2535,6 +2701,12 @@ setLanguage(getLanguage());
                 navigateToCompanies(false);
             } else if (window.location.hash === "#knowledge" || (e.state && e.state.page === "knowledge")) {
                 navigateToKnowledge(false);
+            } else if (contactView || window.location.pathname.includes("contact.html")) {
+                currentPage = "contact";
+                updateActiveNavigation("contact");
+            } else if (termsView || window.location.pathname.includes("terms.html")) {
+                currentPage = "terms";
+                updateActiveNavigation("terms");
             } else if (aboutView || window.location.pathname.includes("about.html")) {
                 currentPage = "about";
                 updateActiveNavigation("about");
@@ -2599,7 +2771,11 @@ setLanguage(getLanguage());
 
         const registrationResult = new URLSearchParams(window.location.search).get("registration");
         if (registrationResult) {
-            showToast(translateText(registrationResult === "company-pending" ? "registrationCompanyToast" : "registrationAccountToast"));
+            showToast(
+                translateText(
+                    registrationResult === "company-pending" ? "registrationCompanyToast" : "registrationAccountToast"
+                )
+            );
             history.replaceState({}, "", `${window.location.pathname}${window.location.hash}`);
         }
 
@@ -2608,7 +2784,21 @@ setLanguage(getLanguage());
             navigateToCompanies(true);
         } else if (window.location.hash && window.location.hash.startsWith("#knowledge")) {
             navigateToKnowledge(true);
-        } else if (aboutView || window.location.pathname.includes("about.html") || window.location.pathname.endsWith("/about")) {
+        } else if (termsView || window.location.pathname.includes("terms.html")) {
+            currentPage = "terms";
+            updateActiveNavigation("terms");
+        } else if (
+            contactView ||
+            window.location.pathname.includes("contact.html") ||
+            window.location.pathname.endsWith("/contact")
+        ) {
+            currentPage = "contact";
+            updateActiveNavigation("contact");
+        } else if (
+            aboutView ||
+            window.location.pathname.includes("about.html") ||
+            window.location.pathname.endsWith("/about")
+        ) {
             currentPage = "about";
             updateActiveNavigation("about");
         } else if (knowledgeView && !heroContainer && !discoverView) {
@@ -2763,7 +2953,16 @@ setLanguage(getLanguage());
         }
         input.id = id;
         input.name = name;
-        input.autocomplete = type === "password" ? "new-password" : name === "fullName" ? "name" : name === "email" ? "email" : name === "phone" ? "tel" : "off";
+        input.autocomplete =
+            type === "password"
+                ? "new-password"
+                : name === "fullName"
+                  ? "name"
+                  : name === "email"
+                    ? "email"
+                    : name === "phone"
+                      ? "tel"
+                      : "off";
         input.required = required;
         if (type === "tel") input.inputMode = "tel";
         wrapper.append(labelEl, input);
@@ -2841,7 +3040,12 @@ setLanguage(getLanguage());
             form.elements.phone.focus();
             return;
         }
-        if (chosenType === "guard" && (!Number.isFinite(Number(values.experience)) || Number(values.experience) < 0 || Number(values.experience) > 60)) {
+        if (
+            chosenType === "guard" &&
+            (!Number.isFinite(Number(values.experience)) ||
+                Number(values.experience) < 0 ||
+                Number(values.experience) > 60)
+        ) {
             setRegistrationError("registrationErrorExperience");
             form.elements.experience.focus();
             return;
@@ -2875,7 +3079,10 @@ setLanguage(getLanguage());
         submit.dataset.i18n = "registrationRedirecting";
         submit.textContent = translateText("registrationRedirecting");
         setLanguage(getLanguage());
-        setTimeout(() => window.location.assign(`${HOME_URL}?registration=${isCompany ? "company-pending" : chosenType}`), 1400);
+        setTimeout(
+            () => window.location.assign(`${HOME_URL}?registration=${isCompany ? "company-pending" : chosenType}`),
+            1400
+        );
     }
 
     document.querySelectorAll("[data-account-type]").forEach((button) => {
