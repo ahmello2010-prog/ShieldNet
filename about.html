@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title data-i18n="aboutPageTitle">ShieldNet | من نحن - نحو مستقبل أكثر ترابطًا للأمن في مصر</title>
+        <meta
+            name="description"
+            data-i18n-attr="content:aboutMetaDesc"
+            content="تعرّف على قصة ShieldNet ورؤيتها لربط أطراف القطاع الأمني من عملاء وشركات وأفراد حراسة في منصة رقمية موحدة." />
+        <meta
+            property="og:title"
+            content="ShieldNet | من نحن - نحو مستقبل أكثر ترابطًا للأمن في مصر" />
+        <meta
+            property="og:description"
+            content="تعرّف على قصة ShieldNet ورؤيتها لربط أطراف القطاع الأمني من عملاء وشركات وأفراد حراسة في منصة رقمية موحدة." />
+        <link rel="icon" type="image/jpeg" href="/img/logo.jpg" />
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body>
+        <!-- شريط علوي ثابت في الهواتف يحتوي على زر القائمة والشعار (Fixed Mobile Header Bar) -->
+        <header class="mobile-fixed-header" id="mobile-fixed-header">
+            <button
+                class="mobile-menu-btn"
+                id="mobile-menu-btn"
+                type="button"
+                data-action="nav:toggle-drawer"
+                aria-label="Open mobile navigation menu">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+            <div class="mobile-fixed-brand">
+                <img src="/img/logo.jpg" alt="ShieldNet" class="fixed-bar-logo" />
+                <h2>Shield<span>Net</span></h2>
+            </div>
+            <div class="mobile-fixed-actions">
+                <a href="#" class="mobile-fixed-cta" data-auth="signin" data-i18n="navSignIn">Sign In</a>
+            </div>
+        </header>
+
+        <!-- خلفية معتمة للقائمة الجانبية في الهاتف -->
+        <div
+            class="mobile-drawer-backdrop"
+            id="mobile-drawer-backdrop"
+            data-action="nav:close-drawer"
+            aria-hidden="true"></div>
+
+        <!-- القائمة الجانبية المنسدلة للهاتف (Mobile Sidebar Drawer) -->
+        <aside
+            class="mobile-nav-drawer"
+            id="mobile-nav-drawer"
+            aria-label="Mobile Directory Navigation"
+            aria-hidden="true">
+            <div class="drawer-header">
+                <div class="drawer-branding">
+                    <img src="/img/logo.jpg" alt="ShieldNet Emblem" class="drawer-logo-img" />
+                    <div class="drawer-brand-text">
+                        <h3>Shield<span>Net</span></h3>
+                        <span class="drawer-subtext" data-i18n="subtextNetwork">Guard Staffing Network</span>
+                    </div>
+                </div>
+                <button
+                    class="drawer-close-btn"
+                    id="drawer-close-btn"
+                    type="button"
+                    data-action="nav:close-drawer"
+                    aria-label="Close menu">
+                    &times;
+                </button>
+            </div>
+
+            <!-- بطاقة معاينة الصورة المعمارية والأمنية داخل القائمة الجانبية -->
+            <div class="drawer-banner-preview">
+                <img src="/img/hero.webp" alt="Security Headquarters" class="drawer-preview-img" />
+                <div class="drawer-preview-overlay"></div>
+                <div class="drawer-preview-badge">
+                    <span class="badge-dot"></span> <span data-i18n="badgeGuards">100% Vetted Guards</span>
+                </div>
+            </div>
+
+            <!-- زر تبديل اللغة داخل القائمة الجانبية -->
+            <button
+                type="button"
+                class="drawer-lang-btn nav-lang-btn"
+                data-action="action:toggle-lang"
+                aria-label="Switch Language">
+                <svg
+                    class="nav-svg-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span class="lang-label" data-i18n="langToggle">العربية</span>
+            </button>
+
+            <!-- روابط القائمة الجانبية -->
+            <nav class="drawer-nav">
+                <p class="drawer-nav-label" data-i18n="drawerLabel">Platform Directory</p>
+                <ul class="drawer-links-list">
+                    <li>
+                        <a href="/index.html" class="drawer-link" data-action="nav:home">
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            <span data-i18n="navHome">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/companies.html" class="drawer-link" data-action="nav:companies">
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span data-i18n="navCompanies">Security Companies</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/knowledge.html" class="drawer-link" data-action="nav:knowledge">
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 1-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                            <span data-i18n="navKnowledge">Knowledge</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about.html" class="drawer-link active" data-action="nav:about">
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span data-i18n="navAbout">About Platform</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="drawer-link nav-link-static" data-action="modal:open-policy" data-policy="terms">
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            <span data-i18n="navTerms">Terms and Conditions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="drawer-link nav-link-static" data-action="modal:open-policy" data-policy="contact">
+                            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            <span data-i18n="navContact">Contact Us</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="drawer-footer-cta">
+                <a href="#" class="btn btn-explore btn-drawer" data-auth="signup" data-i18n="heroCreate">Create Account</a>
+            </div>
+        </aside>
+
+        <!-- الصفحة الرئيسية: عن المنصة (About Us View) -->
+        <main class="about-view" id="about-view" aria-label="About ShieldNet">
+            <!-- شريط تنقل علوي بكامل عرض الصفحة (Desktop Top Navbar) -->
+            <header class="discover-top-header">
+                <div class="discover-nav-container">
+                    <a href="/index.html" class="discover-brand" data-action="nav:home" aria-label="ShieldNet Home">
+                        <img src="/img/logo.jpg" alt="ShieldNet Emblem" class="discover-brand-logo" />
+                        <h2>Shield<span>Net</span></h2>
+                    </a>
+
+                    <nav class="modern-navbar discover-modern-navbar" aria-label="Platform Navigation">
+                        <div class="modern-nav-links">
+                            <a href="/index.html" class="modern-nav-link" data-action="nav:home">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                                <span data-i18n="navHome">Home</span>
+                            </a>
+                            <a href="/companies.html" class="modern-nav-link" data-action="nav:companies">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span data-i18n="navCompanies">Security Companies</span>
+                            </a>
+                            <a href="/knowledge.html" class="modern-nav-link" data-action="nav:knowledge">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 1-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                                <span data-i18n="navKnowledge">Knowledge</span>
+                            </a>
+                            <a href="/about.html" class="modern-nav-link active" data-action="nav:about">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <span data-i18n="navAbout">About Platform</span>
+                            </a>
+                            <a href="#" class="modern-nav-link nav-link-static" data-action="modal:open-policy" data-policy="terms">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                </svg>
+                                <span data-i18n="navTerms">Terms and Conditions</span>
+                            </a>
+                            <a href="#" class="modern-nav-link nav-link-static" data-action="modal:open-policy" data-policy="contact">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                                <span data-i18n="navContact">Contact Us</span>
+                            </a>
+                        </div>
+                        <div class="modern-nav-actions">
+                            <button
+                                type="button"
+                                class="modern-nav-lang-btn nav-lang-btn"
+                                data-action="action:toggle-lang"
+                                aria-label="Switch Language">
+                                <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                                <span class="lang-label" data-i18n="langToggle">العربية</span>
+                            </button>
+                            <a href="#" class="modern-nav-cta" data-auth="signin" data-i18n="navSignIn">Sign In</a>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+
+            <!-- محتوى صفحة من نحن المتكامل -->
+            <div class="about-container">
+                <!-- =========================================================
+                     Section A: Hero — The ShieldNet Story
+                     ========================================================= -->
+                <section class="about-hero" aria-labelledby="about-hero-title">
+                    <div class="about-hero-content">
+                        <div class="about-badge">
+                            <svg class="badge-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span data-i18n="aboutBadge">عن منصة ShieldNet</span>
+                        </div>
+
+                        <h1 class="about-hero-heading" id="about-hero-title" data-i18n="aboutHeroTitle">
+                            نحو مستقبل أكثر ترابطًا للأمن في مصر
+                        </h1>
+
+                        <p class="about-hero-lead" data-i18n="aboutHeroLead">
+                            تبدأ فكرة ShieldNet من الحاجة إلى بيئة رقمية تجمع أطراف القطاع الأمني، وتسهّل الوصول إلى الخدمات والفرص والمعلومات ذات الصلة. نعمل على تطوير منصة تساعد العملاء وشركات الأمن وأفراد الأمن على التواصل والوصول إلى الخيارات المناسبة بصورة أكثر تنظيمًا ووضوحًا.
+                        </p>
+
+                        <!-- العبارة الداعمة المركزة -->
+                        <div class="about-quote-box" role="region" aria-label="Core ShieldNet Premise">
+                            <svg class="about-quote-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <polyline points="9 12 11 14 15 10"></polyline>
+                            </svg>
+                            <p class="about-quote-text" data-i18n="aboutHeroSubphrase">
+                                شبكة واحدة، تربط احتياجات الأمن بإمكانيات الوصول إليها.
+                            </p>
+                        </div>
+
+                        <!-- أزرار التفاعل المباشرة لوجهات حقيقية -->
+                        <div class="about-hero-actions">
+                            <a href="/companies.html" class="btn btn-explore" data-action="nav:companies" data-i18n="aboutCtaExplore">
+                                استكشف شركات الأمن
+                            </a>
+                            <a href="/knowledge.html" class="btn btn-register" data-action="nav:knowledge" data-i18n="aboutCtaKnowledge">
+                                تعرّف على الموسوعة الأمنية
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- الرسم البياني المعماري لترابط الأطراف الثلاثة -->
+                    <div class="about-hero-visual" role="img" aria-label="ShieldNet stakeholder integration concept diagram">
+                        <div class="about-visual-header">
+                            <div class="about-visual-brand">
+                                <img src="/img/logo.jpg" alt="ShieldNet Emblem" class="about-visual-logo" />
+                                <h3 class="about-visual-brand-title">Shield<span>Net</span> Core</h3>
+                            </div>
+                            <span class="about-visual-status-pill">
+                                <span class="about-visual-status-dot"></span>
+                                <span data-i18n="aboutStageBadge">مرحلة البناء والتجهيز</span>
+                            </span>
+                        </div>
+
+                        <div class="about-visual-nodes">
+                            <div class="about-visual-node-row">
+                                <div class="about-visual-node-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M3 21h18"></path>
+                                        <path d="M5 21V7l8-4v18"></path>
+                                        <path d="M19 21V11l-6-4"></path>
+                                        <path d="M9 9v.01"></path>
+                                        <path d="M9 12v.01"></path>
+                                        <path d="M9 15v.01"></path>
+                                        <path d="M9 18v.01"></path>
+                                    </svg>
+                                </div>
+                                <div class="about-visual-node-meta">
+                                    <h4 class="about-visual-node-name" data-i18n="aboutHeroNetworkNodeClients">العملاء والمنشآت</h4>
+                                    <p class="about-visual-node-detail" data-i18n="aboutGroup1Desc">مجمعات سكنية ومقرات تجارية تبحث عن حراسة موثوقة</p>
+                                </div>
+                            </div>
+
+                            <div class="about-visual-node-row">
+                                <div class="about-visual-node-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                </div>
+                                <div class="about-visual-node-meta">
+                                    <h4 class="about-visual-node-name" data-i18n="aboutHeroNetworkNodeCompanies">شركات الأمن</h4>
+                                    <p class="about-visual-node-detail" data-i18n="aboutGroup2Desc">مقدمو خدمات الحراسة وأنظمة المراقبة وغرف CCTV</p>
+                                </div>
+                            </div>
+
+                            <div class="about-visual-node-row">
+                                <div class="about-visual-node-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <div class="about-visual-node-meta">
+                                    <h4 class="about-visual-node-name" data-i18n="aboutHeroNetworkNodeGuards">أفراد الحراسة المعتمدون</h4>
+                                    <p class="about-visual-node-detail" data-i18n="aboutGroup3Desc">كوادر مدربة تبحث عن استقرار مهني وفرص ملائمة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================================================
+                     Section B: The Problem We Aim to Address
+                     ========================================================= -->
+                <section class="about-problem-section" aria-labelledby="about-problem-title">
+                    <div class="about-section-header">
+                        <div class="about-badge">
+                            <svg class="badge-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            <span data-i18n="aboutProblemBadge">التحدي والدافع</span>
+                        </div>
+                        <h2 class="about-section-title" id="about-problem-title" data-i18n="aboutProblemHeading">
+                            لماذا نعمل على ShieldNet؟
+                        </h2>
+                        <p class="about-section-desc" data-i18n="aboutProblemIntro">
+                            يشمل القطاع الأمني أطرافًا متعددة من عملاء وشركات وكوادر ميدانية، وقد يصبح البحث عن خدمات مناسبة أو استكشاف فرص مهنية معقدًا عندما تكون المعلومات مشتتة. نهدف إلى تقديم بيئة رقمية منظمة وموثوقة تسهل هذه العمليات.
+                        </p>
+                    </div>
+
+                    <div class="about-problem-grid">
+                        <!-- Card 1 -->
+                        <article class="about-problem-card">
+                            <div class="about-card-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </div>
+                            <h3 class="about-problem-card-title" data-i18n="aboutProblemCard1Title">الوصول إلى الخدمات</h3>
+                            <p class="about-problem-card-desc" data-i18n="aboutProblemCard1Desc">
+                                مساعدة المستخدمين وأصحاب المنشآت على استكشاف مقدمي الخدمات الأمنية، ومقارنة التخصصات ونطاقات التغطية، وفهم الخيارات المتاحة لاتخاذ قرارات مدروسة.
+                            </p>
+                        </article>
+
+                        <!-- Card 2 -->
+                        <article class="about-problem-card">
+                            <div class="about-card-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <h3 class="about-problem-card-title" data-i18n="aboutProblemCard2Title">الترابط بين الأطراف</h3>
+                            <p class="about-problem-card-desc" data-i18n="aboutProblemCard2Desc">
+                                خلق بيئة رقمية تقرب المسافات بين طالبي الخدمات ومقدميها، وتوفر قنوات تواصل واضحة ومنظمة تلبي تطلعات القطاع.
+                            </p>
+                        </article>
+
+                        <!-- Card 3 -->
+                        <article class="about-problem-card">
+                            <div class="about-card-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 1-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="about-problem-card-title" data-i18n="aboutProblemCard3Title">الوصول إلى الفرص والمعلومات</h3>
+                            <p class="about-problem-card-desc" data-i18n="aboutProblemCard3Desc">
+                                تسهيل اكتشاف الفرص المهنية المناسبة لحراس الأمن، وإتاحة موسوعة معرفية متخصصة ترفع مستوى الوعي بالإجراءات والمعايير الأمنية الحديثة.
+                            </p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- =========================================================
+                     Section C: The ShieldNet Concept & Diagram
+                     ========================================================= -->
+                <section class="about-concept-section" aria-labelledby="about-concept-title">
+                    <div class="about-section-header">
+                        <div class="about-badge">
+                            <svg class="badge-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                            </svg>
+                            <span data-i18n="aboutConceptBadge">نموذج المنصة</span>
+                        </div>
+                        <h2 class="about-section-title" id="about-concept-title" data-i18n="aboutConceptHeading">
+                            من احتياجات متفرقة إلى شبكة مترابطة
+                        </h2>
+                        <p class="about-section-desc" data-i18n="aboutConceptIntro">
+                            صُمم نموذج ShieldNet ليكون نقطة الالتقاء المركزية التي تجمع الأطراف الثلاثة الرئيسية في منظومة واحدة متكاملة:
+                        </p>
+                    </div>
+
+                    <div class="about-concept-container">
+                        <!-- صورة تعبيرية فائقة الدقة تمثل شبكة الربط والعمليات الأمنية الموحدة -->
+                        <div class="concept-image-showcase" role="region" aria-label="ShieldNet Unified Security Network & Operations Center">
+                            <div class="concept-image-wrapper">
+                                <img
+                                    src="/src/assets/images/shieldnet_security_network_1792662014639.jpg"
+                                    alt="غرفة العمليات وشبكة الربط الأمني الموحدة في منصة ShieldNet"
+                                    class="concept-showcase-img"
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer"
+                                    data-i18n-alt="aboutNetworkImageAlt" />
+                                <div class="concept-image-overlay" aria-hidden="true"></div>
+                                <div class="concept-image-top-bar">
+                                    <div class="concept-image-tag">
+                                        <span class="concept-status-dot"></span>
+                                        <span data-i18n="aboutNetworkTag">مركز العمليات وشبكة الربط الأمني</span>
+                                    </div>
+                                    <div class="concept-image-chip">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="concept-chip-icon">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                            <polyline points="9 12 11 14 15 10"></polyline>
+                                        </svg>
+                                        <span data-i18n="aboutNetworkChip">منظومة أمنية رقمية متكاملة</span>
+                                    </div>
+                                </div>
+
+                                <div class="concept-image-bottom-hud">
+                                    <div class="concept-hud-item">
+                                        <div class="concept-hud-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <path d="M3 21h18"></path>
+                                                <path d="M5 21V7l8-4v18"></path>
+                                                <path d="M19 21V11l-6-4"></path>
+                                                <path d="M9 9v.01"></path>
+                                                <path d="M9 12v.01"></path>
+                                                <path d="M9 15v.01"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="concept-hud-meta">
+                                            <h4 class="concept-hud-title" data-i18n="aboutHeroNetworkNodeClients">العملاء والمنشآت</h4>
+                                            <p class="concept-hud-sub" data-i18n="aboutGroup1DescShort">طالبو الحراسة وتأمين المنشآت</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="concept-hud-divider" aria-hidden="true"></div>
+
+                                    <div class="concept-hud-item is-center-hub">
+                                        <div class="concept-hud-icon hub-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                                <circle cx="12" cy="10" r="3"></circle>
+                                            </svg>
+                                        </div>
+                                        <div class="concept-hud-meta">
+                                            <h4 class="concept-hud-title" data-i18n="aboutHeroNetworkNodeCompanies">شركات الأمن</h4>
+                                            <p class="concept-hud-sub" data-i18n="aboutGroup2DescShort">الشركات المرخصة وغرف المراقبة</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="concept-hud-divider" aria-hidden="true"></div>
+
+                                    <div class="concept-hud-item">
+                                        <div class="concept-hud-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="9" cy="7" r="4"></circle>
+                                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="concept-hud-meta">
+                                            <h4 class="concept-hud-title" data-i18n="aboutHeroNetworkNodeGuards">أفراد الحراسة المعتمدون</h4>
+                                            <p class="concept-hud-sub" data-i18n="aboutGroup3DescShort">الكوادر الأمنية الميدانية المدربة</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- البطاقات الثلاث للأطراف المترابطة -->
+                        <div class="about-concept-groups-grid">
+                            <div class="about-concept-group-card">
+                                <span class="about-concept-group-badge" data-i18n="aboutGroup1Badge">طرف الطلب</span>
+                                <h3 class="about-concept-group-title" data-i18n="aboutGroup1Title">العملاء والجهات الباحثة عن خدمات أمنية</h3>
+                                <p class="about-concept-group-desc" data-i18n="aboutGroup1Desc">
+                                    أصحاب المجمعات السكنية، المقرات الإدارية، والمنشآت التجارية الباحثون عن حلول حراسة ملائمة وموثوقة.
+                                </p>
+                            </div>
+
+                            <div class="about-concept-group-card">
+                                <span class="about-concept-group-badge" data-i18n="aboutGroup2Badge">طرف الخدمة</span>
+                                <h3 class="about-concept-group-title" data-i18n="aboutGroup2Title">شركات الأمن ومقدمو الخدمات</h3>
+                                <p class="about-concept-group-desc" data-i18n="aboutGroup2Desc">
+                                    الشركات المعتمدة، غرف المراقبة CCTV، وفرق التدخل السريع الراغبة في استعراض جاهزيتها ونطاق تغطيتها.
+                                </p>
+                            </div>
+
+                            <div class="about-concept-group-card">
+                                <span class="about-concept-group-badge" data-i18n="aboutGroup3Badge">الكوادر الميدانية</span>
+                                <h3 class="about-concept-group-title" data-i18n="aboutGroup3Title">أفراد الأمن والباحثون عن فرص مهنية</h3>
+                                <p class="about-concept-group-desc" data-i18n="aboutGroup3Desc">
+                                    حراس الأمن المؤهلون والضباط الميدانيون الباحثون عن بيئة عمل مستقرة ومسارات مهنية واضحة ومسؤولة.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- تنبيه وضوح مرحلة ما قبل الإطلاق -->
+                        <div class="about-concept-notice" role="note">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span data-i18n="aboutConceptNotice">
+                                يوضح هذا النموذج التخطيطي الرؤية التشغيلية التي تعمل المنصة على تجهيزها وإعدادها لمرحلة الإطلاق.
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================================================
+                     Section D: Our Vision and Mission
+                     ========================================================= -->
+                <section class="about-vision-section" aria-labelledby="about-vision-title">
+                    <div class="about-section-header">
+                        <div class="about-badge">
+                            <svg class="badge-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                            <span data-i18n="aboutVisionMissionBadge">التوجه والهدف</span>
+                        </div>
+                        <h2 class="about-section-title" id="about-vision-title">
+                            رؤيتنا ورسالتنا
+                        </h2>
+                    </div>
+
+                    <div class="about-vision-mission-grid">
+                        <!-- كتلة الرؤية -->
+                        <article class="about-vision-block">
+                            <div class="about-vision-icon-row">
+                                <div class="about-vision-icon-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 14 14"></polyline>
+                                    </svg>
+                                </div>
+                                <h3 class="about-vision-heading" data-i18n="aboutVisionHeading">رؤيتنا</h3>
+                            </div>
+                            <p class="about-vision-text" data-i18n="aboutVisionText">
+                                المساهمة في بناء سوق أمني أكثر ترابطًا وتنظيمًا، من خلال تسهيل الوصول إلى الخدمات والفرص والمعلومات ذات الصلة.
+                            </p>
+                        </article>
+
+                        <!-- كتلة الرسالة -->
+                        <article class="about-vision-block">
+                            <div class="about-vision-icon-row">
+                                <div class="about-vision-icon-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <h3 class="about-vision-heading" data-i18n="aboutMissionHeading">رسالتنا</h3>
+                            </div>
+                            <p class="about-vision-text" data-i18n="aboutMissionText">
+                                تطوير منصة رقمية تجمع أطراف القطاع الأمني في بيئة واضحة وسهلة الاستخدام، مع الاهتمام بالشفافية والخصوصية وتقديم تجربة عملية تلبي احتياجات المستخدمين.
+                            </p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- =========================================================
+                     Section E: Our Principles
+                     ========================================================= -->
+                <section class="about-principles-section" aria-labelledby="about-principles-title">
+                    <div class="about-section-header">
+                        <div class="about-badge">
+                            <svg class="badge-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            <span data-i18n="aboutPrinciplesBadge">قيم العمل</span>
+                        </div>
+                        <h2 class="about-section-title" id="about-principles-title" data-i18n="aboutPrinciplesHeading">
+                            المبادئ التي نبني عليها
+                        </h2>
+                        <p class="about-section-desc" data-i18n="aboutPrinciplesIntro">
+                            نلتزم بمجموعة من المعايير المهنية التي توجه تطوير ShieldNet في كل خطوة.
+                        </p>
+                    </div>
+
+                    <div class="about-principles-grid">
+                        <!-- مبدأ 1: الثقة والشفافية -->
+                        <article class="about-principle-card">
+                            <div class="about-principle-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <polyline points="9 12 11 14 15 10"></polyline>
+                                </svg>
+                            </div>
+                            <h3 class="about-principle-title" data-i18n="aboutPrinciple1Title">الثقة والشفافية</h3>
+                            <p class="about-principle-desc" data-i18n="aboutPrinciple1Desc">
+                                تقديم المعلومات بصورة واضحة، ومساعدة المستخدمين على فهم الخيارات المتاحة دون مبالغة في الوعود.
+                            </p>
+                        </article>
+
+                        <!-- مبدأ 2: الخصوصية -->
+                        <article class="about-principle-card">
+                            <div class="about-principle-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h3 class="about-principle-title" data-i18n="aboutPrinciple2Title">الخصوصية</h3>
+                            <p class="about-principle-desc" data-i18n="aboutPrinciple2Desc">
+                                مراعاة خصوصية المستخدمين والتعامل مع البيانات بمسؤولية وفقًا للضوابط والآليات التي تطبقها المنصة فعليًا.
+                            </p>
+                        </article>
+
+                        <!-- مبدأ 3: سهولة الوصول -->
+                        <article class="about-principle-card">
+                            <div class="about-principle-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 8 8 12 12 16"></polyline>
+                                    <line x1="16" y1="12" x2="8" y2="12"></line>
+                                </svg>
+                            </div>
+                            <h3 class="about-principle-title" data-i18n="aboutPrinciple3Title">سهولة الوصول</h3>
+                            <p class="about-principle-desc" data-i18n="aboutPrinciple3Desc">
+                                تنظيم الخدمات والمعلومات والفرص بطريقة تساعد المستخدمين على الوصول إلى ما يبحثون عنه.
+                            </p>
+                        </article>
+
+                        <!-- مبدأ 4: التطوير المستمر -->
+                        <article class="about-principle-card">
+                            <div class="about-principle-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="23 4 23 10 17 10"></polyline>
+                                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                                </svg>
+                            </div>
+                            <h3 class="about-principle-title" data-i18n="aboutPrinciple4Title">التطوير المستمر</h3>
+                            <p class="about-principle-desc" data-i18n="aboutPrinciple4Desc">
+                                بناء المنصة وتحسينها تدريجيًا مع مراعاة احتياجات المستخدمين وجودة التجربة.
+                            </p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- =========================================================
+                     Section F: Where We Are Today
+                     ========================================================= -->
+                <section class="about-stage-section" aria-labelledby="about-stage-title">
+                    <div class="about-section-header">
+                        <div class="about-badge">
+                            <svg class="badge-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                            <span data-i18n="aboutStageBadge">المرحلة الحالية</span>
+                        </div>
+                        <h2 class="about-section-title" id="about-stage-title" data-i18n="aboutStageHeading">
+                            نحن في مرحلة البناء
+                        </h2>
+                    </div>
+
+                    <div class="about-stage-card">
+                        <div class="about-stage-lead-block">
+                            <p class="about-stage-lead-text" data-i18n="aboutStageLead">
+                                تعمل ShieldNet حاليًا على تجهيز منصتها وتطوير تجربة تهدف إلى ربط أطراف القطاع الأمني بصورة أكثر تنظيمًا. تمثل هذه المرحلة فرصة لبناء أساس واضح، وتحسين تجربة الاستخدام، والاستعداد لتقديم خدمات تتوافق مع احتياجات المستخدمين.
+                            </p>
+                        </div>
+
+                        <!-- مراحل التطوير الواقعية (بدون نسب وهمية أو أرقام مختلقة) -->
+                        <div class="about-stage-roadmap" role="list" aria-label="ShieldNet Pre-Launch Roadmap">
+                            <div class="about-roadmap-step is-done" role="listitem">
+                                <div class="about-step-header">
+                                    <span class="about-step-num">1</span>
+                                    <span class="about-step-status-tag" data-i18n="aboutMilestone1Status">مكتمل</span>
+                                </div>
+                                <h3 class="about-step-title" data-i18n="aboutMilestone1Title">الرؤية وهيكلة النموذج</h3>
+                                <p class="about-step-desc" data-i18n="aboutMilestone1Desc">صياغة المفهوم الأساسي وتحديد احتياجات أطراف القطاع الأمني في مصر.</p>
+                            </div>
+
+                            <div class="about-roadmap-step is-active" role="listitem">
+                                <div class="about-step-header">
+                                    <span class="about-step-num">2</span>
+                                    <span class="about-step-status-tag" data-i18n="aboutMilestone2Status">قيد الإعداد النشط</span>
+                                </div>
+                                <h3 class="about-step-title" data-i18n="aboutMilestone2Title">الدليل والمحتوى المعرفي</h3>
+                                <p class="about-step-desc" data-i18n="aboutMilestone2Desc">بناء ملفات الشركات المعتمدة وتجهيز الموسوعة الأمنية التفاعلية.</p>
+                            </div>
+
+                            <div class="about-roadmap-step" role="listitem">
+                                <div class="about-step-header">
+                                    <span class="about-step-num">3</span>
+                                    <span class="about-step-status-tag" data-i18n="aboutMilestone3Status">قيد التطوير</span>
+                                </div>
+                                <h3 class="about-step-title" data-i18n="aboutMilestone3Title">مسارات التواصل والربط</h3>
+                                <p class="about-step-desc" data-i18n="aboutMilestone3Desc">تجهيز آليات استقبال الطلبات وبروتوكولات التوفيق المنظم لمرحلة ما قبل الإطلاق.</p>
+                            </div>
+
+                            <div class="about-roadmap-step" role="listitem">
+                                <div class="about-step-header">
+                                    <span class="about-step-num">4</span>
+                                    <span class="about-step-status-tag" data-i18n="aboutMilestone4Status">الخطوة القادمة</span>
+                                </div>
+                                <h3 class="about-step-title" data-i18n="aboutMilestone4Title">الإطلاق التدريجي للمنصة</h3>
+                                <p class="about-step-desc" data-i18n="aboutMilestone4Desc">التشغيل المرحلي للخدمات بعد استكمال الاختبارات مع أطراف القطاع.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- =========================================================
+                     Section G: Closing Call to Action
+                     ========================================================= -->
+                <section class="about-cta-section" aria-labelledby="about-cta-title">
+                    <div class="about-cta-card">
+                        <div class="about-badge" style="background: rgba(212, 175, 55, 0.2); border-color: var(--color-gold);">
+                            <svg class="badge-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 14 14"></polyline>
+                            </svg>
+                            <span data-i18n="aboutCtaBadge">استكشف المنصة</span>
+                        </div>
+
+                        <h2 class="about-cta-heading" id="about-cta-title" data-i18n="aboutCtaHeading">
+                            كن جزءًا من شبكة ShieldNet
+                        </h2>
+
+                        <p class="about-cta-desc" data-i18n="aboutCtaText">
+                            استكشف فكرة ShieldNet وتعرّف على ما تعمل المنصة على تقديمه للقطاع الأمني.
+                        </p>
+
+                        <!-- أزرار الوجهات الحقيقية المتاحة -->
+                        <div class="about-cta-buttons">
+                            <a href="/companies.html" class="btn btn-explore" data-action="nav:companies" data-i18n="aboutCtaBtnCompanies">
+                                استكشف شركات الأمن
+                            </a>
+                            <a href="/knowledge.html" class="btn btn-register" data-action="nav:knowledge" data-i18n="aboutCtaBtnKnowledge">
+                                تعرّف على الموسوعة الأمنية
+                            </a>
+                            <a href="#" class="btn btn-explore" data-action="modal:open-policy" data-policy="contact" data-i18n="navContact">
+                                تواصل معنا
+                            </a>
+                            <a href="/index.html" class="btn btn-register" data-action="nav:home" data-i18n="aboutCtaBtnHome">
+                                العودة إلى الرئيسية
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- تذييل الصفحة الموحد (Shared ShieldNet Footer) -->
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-top-grid">
+                    <div class="footer-col brand-col">
+                        <div class="footer-branding">
+                            <img src="/img/logo.jpg" alt="ShieldNet Emblem" class="footer-logo-img" />
+                            <h3>Shield<span>Net</span></h3>
+                        </div>
+                        <p class="footer-tagline" data-i18n="footerTagline">
+                            The premier professional networking & staffing platform connecting prestigious corporate
+                            estates, gated compounds, and luxury private properties with certified, vetted security
+                            guards and protection forces.
+                        </p>
+                        <div class="security-badge">
+                            <span class="badge-dot"></span>
+                            <span data-i18n="footerBadge">100% Vetted & Background-Checked Guards</span>
+                        </div>
+                    </div>
+
+                    <div class="footer-col links-col">
+                        <h4 data-i18n="footerColLegal">Guard Network & Legal</h4>
+                        <ul class="footer-nav">
+                            <li>
+                                <a href="/index.html" class="footer-nav-link" data-action="nav:home" data-i18n="navHome">Home</a>
+                            </li>
+                            <li>
+                                <a href="/companies.html" class="footer-nav-link" data-action="nav:companies" data-i18n="navCompanies">Security Companies</a>
+                            </li>
+                            <li>
+                                <a href="/knowledge.html" class="footer-nav-link" data-action="nav:knowledge" data-i18n="navKnowledge">Knowledge Network</a>
+                            </li>
+                            <li>
+                                <a href="/about.html" class="footer-nav-link" data-action="nav:about" data-i18n="navAbout">About Platform</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-nav-link" data-action="modal:open-policy" data-policy="privacy" data-i18n="footerPrivacy">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-nav-link" data-action="modal:open-policy" data-policy="terms" data-i18n="footerTerms">Terms of Service</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col social-col">
+                        <h4 data-i18n="footerColSocial">Connect With Us</h4>
+                        <p class="social-text" data-i18n="footerSocialText">
+                            Follow guard staffing announcements, placement updates, and estate security insights.
+                        </p>
+                        <div class="social-links-grid" aria-label="Social media channels">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.54a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24Z" />
+                                </svg>
+                            </a>
+                            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X Twitter">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                </svg>
+                            </a>
+                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom-bar">
+                    <p class="copyright-text" data-i18n="footerCopyright">© 2026 ShieldNet. All rights reserved.</p>
+                    <div class="developer-credit">
+                        <span>Designed and developed by <a href="https://ahmello-web.vercel.app/" target="_blank" rel="noopener noreferrer" class="dev-link">Ahmed|web</a></span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- نافذة الشروط والخصوصية الموحدة (Policy Modal) -->
+        <div
+            class="custom-modal policy-dialog"
+            id="policy-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="policy-modal-title"
+            aria-hidden="true">
+            <div class="modal-backdrop" data-action="modal:close-policy" tabindex="-1"></div>
+            <div class="modal-card">
+                <button type="button" class="modal-close-btn" data-action="modal:close-policy" aria-label="Close modal">
+                    &times;
+                </button>
+                <h2 id="policy-modal-title">Guard Staffing Terms</h2>
+                <div class="policy-body" id="policy-modal-content">
+                    <p>
+                        ShieldNet verifies professional licenses, background checks, and physical security
+                        qualifications before matching guards with corporate facilities and private properties.
+                    </p>
+                </div>
+                <div class="modal-actions" style="margin-top: 20px">
+                    <button type="button" class="btn btn-explore" data-action="modal:close-policy">Understood</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- شريط الإشعارات (Toast Alert) -->
+        <aside class="action-toast" id="action-toast" role="status" aria-live="polite">
+            <span class="toast-icon">✓</span>
+            <span id="toast-message">Notification message</span>
+        </aside>
+
+        <!-- ربط ملفات الجافاسكريبت الموحدة للمنصة -->
+        <script type="module" src="/js/script.js"></script>
+    </body>
+</html>
