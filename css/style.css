@@ -6708,6 +6708,9 @@ body.lang-ar .about-quote-box {
 }
 
 @media (max-width: 640px) {
+    .concept-image-showcase {
+        display: none;
+    }
     .about-container {
         padding: 24px 16px 54px;
         gap: 40px;
