@@ -2523,6 +2523,34 @@ a.auth-back {
     cursor: pointer;
 }
 
+.split-side.right-triangle:has(.auth-inline-notice) {
+    z-index: auto;
+}
+
+.auth-inline-notice {
+    overflow: hidden;
+}
+
+.auth-notice-progress {
+    position: absolute;
+    bottom: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--color-gold);
+    pointer-events: none;
+    animation: authNoticeCountdown 4s linear forwards;
+}
+
+@keyframes authNoticeCountdown {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
+
 .auth-registration-card {
     width: min(94vw, 790px);
     text-align: left;
