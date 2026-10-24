@@ -788,6 +788,13 @@ body.lang-ar .stat-card {
     align-items: flex-start;
 }
 
+/* منع تقلص الزرين ومربعات الإحصائيات في العربية (سطح المكتب) */
+@media (min-width: 993px) {
+    body.lang-ar .interactive-zone {
+        align-self: stretch;
+    }
+}
+
 body.lang-ar .mobile-fixed-header {
     direction: rtl;
 }
