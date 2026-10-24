@@ -7,7 +7,6 @@ import {
     renderOctopusSvgHtml,
     renderArticleReaderHtml
 } from "./knowledge.js";
-import { TERMS_DOCUMENTS } from "./terms-content.js";
 
 /* =============================================================
    0. I18N - Shared Language System (English / Arabic)
@@ -204,8 +203,6 @@ const TRANSLATIONS = {
         contactSocialTitle: "Follow <span>Us</span>",
         contactSocialLead: "Our official channels will appear here as soon as they go live.",
         contactSoon: "Coming soon",
-        termsPageTitle: "Terms and Conditions | ShieldNet",
-        termsMetaDesc: "Draft terms and conditions for using ShieldNet in Egypt. This document requires review by qualified Egyptian counsel before adoption.",
         aboutPageTitle: "ShieldNet | About Us - Toward a More Connected Security Future",
         aboutMetaDesc:
             "The story and vision behind ShieldNet: uniting clients, security providers, and professional guards into one organized digital network.",
@@ -491,8 +488,6 @@ const TRANSLATIONS = {
         contactSocialTitle: "تابعنا <span>على المنصات</span>",
         contactSocialLead: "ستظهر قنواتنا الرسمية هنا فور إطلاقها.",
         contactSoon: "قريبًا",
-        termsPageTitle: "الشروط والأحكام | ShieldNet",
-        termsMetaDesc: "مسودة الشروط والأحكام لاستخدام ShieldNet في مصر، وتتطلب مراجعة قانونية متخصصة قبل اعتمادها.",
         aboutPageTitle: "ShieldNet | من نحن - نحو مستقبل أكثر ترابطًا للأمن في مصر",
         aboutMetaDesc:
             "تعرّف على قصة ShieldNet ورؤيتها لربط أطراف القطاع الأمني من عملاء وشركات وأفراد حراسة في منصة رقمية موحدة.",
@@ -591,9 +586,6 @@ const TRANSLATIONS = {
         aboutCtaBtnHome: "العودة إلى الرئيسية"
     }
 };
-
-TRANSLATIONS.en.termsDocument = TERMS_DOCUMENTS.en;
-TRANSLATIONS.ar.termsDocument = TERMS_DOCUMENTS.ar;
 
 /* =============================================================
    0.1 SECURITY COMPANIES DATA (Six Companies, 2 Recommended)
@@ -965,14 +957,6 @@ function setLanguage(lang) {
         if (metaDesc) metaDesc.setAttribute("content", translateText("contactMetaDesc", {}, validLang));
         const ogDesc = document.querySelector('meta[property="og:description"]');
         if (ogDesc) ogDesc.setAttribute("content", translateText("contactMetaDesc", {}, validLang));
-    } else if (document.getElementById("terms-view")) {
-        document.title = translateText("termsPageTitle", {}, validLang);
-        const ogTitle = document.querySelector('meta[property="og:title"]');
-        if (ogTitle) ogTitle.setAttribute("content", translateText("termsPageTitle", {}, validLang));
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) metaDesc.setAttribute("content", translateText("termsMetaDesc", {}, validLang));
-        const ogDesc = document.querySelector('meta[property="og:description"]');
-        if (ogDesc) ogDesc.setAttribute("content", translateText("termsMetaDesc", {}, validLang));
     } else if (document.getElementById("about-view")) {
         document.title = translateText("aboutPageTitle", {}, validLang);
         const ogTitle = document.querySelector('meta[property="og:title"]');
@@ -1169,14 +1153,13 @@ setLanguage(getLanguage());
    ============================================================= */
 (function initHomePage() {
     function start() {
-        // Run on the shared platform pages that use navigation and account actions.
+        // Run on pages containing hero-container, discover-view, knowledge-view / knowledge-page, or about-view
         const heroContainer = document.getElementById("hero-container");
         const discoverView = document.getElementById("discover-view");
         const knowledgeView = document.getElementById("knowledge-view");
         const aboutView = document.getElementById("about-view");
         const contactView = document.getElementById("contact-view");
-        const termsView = document.getElementById("terms-view");
-        if (!heroContainer && !discoverView && !knowledgeView && !aboutView && !contactView && !termsView) return;
+        if (!heroContainer && !discoverView && !knowledgeView && !aboutView && !contactView) return;
 
         /* ----- DOM references ----- */
         const policyModal = document.getElementById("policy-modal");
@@ -1215,10 +1198,8 @@ setLanguage(getLanguage());
         const RECENT_SEARCHES_KEY = "shieldnet_recent_searches";
 
         let currentPage =
-            termsView && !heroContainer && !discoverView && !knowledgeView && !aboutView && !contactView
-                ? "terms"
-                : contactView && !heroContainer && !discoverView && !knowledgeView && !aboutView
-                  ? "contact"
+            contactView && !heroContainer && !discoverView && !knowledgeView && !aboutView
+                ? "contact"
                 : aboutView && !heroContainer && !discoverView && !knowledgeView
                   ? "about"
                   : knowledgeView && !heroContainer && !discoverView
@@ -1407,7 +1388,6 @@ setLanguage(getLanguage());
             const isKnowledge = page === "knowledge";
             const isAbout = page === "about";
             const isContact = page === "contact";
-            const isTerms = page === "terms";
             const isHome = page === "home";
 
             const updateLink = (link) => {
@@ -1453,19 +1433,11 @@ setLanguage(getLanguage());
                     !isAboutLink &&
                     (action === "nav:contact" || rawHref.includes("contact"));
 
-                const isTermsLink =
-                    !isKnowledgeLink &&
-                    !isCompaniesLink &&
-                    !isAboutLink &&
-                    !isContactLink &&
-                    (action === "nav:terms" || rawHref.includes("terms"));
-
                 const isHomeLink =
                     !isKnowledgeLink &&
                     !isCompaniesLink &&
                     !isAboutLink &&
                     !isContactLink &&
-                    !isTermsLink &&
                     (action === "nav:home" ||
                         rawHref === "/" ||
                         rawHref === "/index.html" ||
@@ -1480,8 +1452,6 @@ setLanguage(getLanguage());
                     link.classList.toggle("active", isAbout);
                 } else if (isContactLink) {
                     link.classList.toggle("active", isContact);
-                } else if (isTermsLink) {
-                    link.classList.toggle("active", isTerms);
                 } else if (isHomeLink) {
                     link.classList.toggle("active", isHome);
                 } else {
@@ -2441,10 +2411,6 @@ setLanguage(getLanguage());
                     closeMobileDrawer();
                     navigateToContact();
                 },
-                "nav:terms": () => {
-                    closeMobileDrawer();
-                    window.location.href = "/terms.html";
-                },
                 "knowledge:select-topic": (target) => {
                     const topicId =
                         target.getAttribute("data-topic-id") ||
@@ -2704,9 +2670,6 @@ setLanguage(getLanguage());
             } else if (contactView || window.location.pathname.includes("contact.html")) {
                 currentPage = "contact";
                 updateActiveNavigation("contact");
-            } else if (termsView || window.location.pathname.includes("terms.html")) {
-                currentPage = "terms";
-                updateActiveNavigation("terms");
             } else if (aboutView || window.location.pathname.includes("about.html")) {
                 currentPage = "about";
                 updateActiveNavigation("about");
@@ -2784,9 +2747,6 @@ setLanguage(getLanguage());
             navigateToCompanies(true);
         } else if (window.location.hash && window.location.hash.startsWith("#knowledge")) {
             navigateToKnowledge(true);
-        } else if (termsView || window.location.pathname.includes("terms.html")) {
-            currentPage = "terms";
-            updateActiveNavigation("terms");
         } else if (
             contactView ||
             window.location.pathname.includes("contact.html") ||
@@ -2965,22 +2925,37 @@ setLanguage(getLanguage());
                       : "off";
         input.required = required;
         if (type === "tel") input.inputMode = "tel";
-        wrapper.append(labelEl, input);
+        wrapper.appendChild(labelEl);
         if (type === "password") {
+            // Eye icon toggle (icon only). The accessible name is kept in aria-label,
+            // which follows the active language through data-i18n-aria-label.
+            const inputWrap = document.createElement("div");
+            inputWrap.className = "password-input-wrap";
+            inputWrap.appendChild(input);
             const reveal = document.createElement("button");
             reveal.type = "button";
             reveal.className = "password-toggle";
-            reveal.dataset.i18n = "registrationShowPassword";
-            reveal.textContent = translateText("registrationShowPassword");
             reveal.setAttribute("aria-controls", id);
+            reveal.innerHTML =
+                '<svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
+                '<svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+            const setRevealState = (showing) => {
+                const key = showing ? "registrationHidePassword" : "registrationShowPassword";
+                reveal.dataset.state = showing ? "visible" : "hidden";
+                reveal.setAttribute("aria-pressed", showing ? "true" : "false");
+                reveal.setAttribute("data-i18n-aria-label", key);
+                reveal.setAttribute("aria-label", translateText(key));
+            };
+            setRevealState(false);
             reveal.addEventListener("click", () => {
                 const showing = input.type === "text";
                 input.type = showing ? "password" : "text";
-                const key = showing ? "registrationShowPassword" : "registrationHidePassword";
-                reveal.dataset.i18n = key;
-                reveal.textContent = translateText(key);
+                setRevealState(!showing);
             });
-            wrapper.appendChild(reveal);
+            inputWrap.appendChild(reveal);
+            wrapper.appendChild(inputWrap);
+        } else {
+            wrapper.appendChild(input);
         }
         return wrapper;
     }
