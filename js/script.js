@@ -205,7 +205,8 @@ const TRANSLATIONS = {
         contactSocialLead: "Our official channels will appear here as soon as they go live.",
         contactSoon: "Coming soon",
         termsPageTitle: "Terms and Conditions | ShieldNet",
-        termsMetaDesc: "Draft ShieldNet terms and conditions for Egypt, subject to review by qualified Egyptian counsel.",
+        termsMetaDesc:
+            "Draft ShieldNet terms and conditions for Egypt, subject to review by qualified Egyptian counsel.",
         aboutPageTitle: "ShieldNet | About Us - Toward a More Connected Security Future",
         aboutMetaDesc:
             "The story and vision behind ShieldNet: uniting clients, security providers, and professional guards into one organized digital network.",
@@ -1131,6 +1132,24 @@ document.addEventListener(
                 }
                 notice.classList.remove("is-visible");
                 requestAnimationFrame(() => notice.classList.add("is-visible"));
+
+                // Countdown bar + auto-close after 4 seconds
+                let progressBar = notice.querySelector(":scope > .auth-notice-progress");
+                if (!progressBar) {
+                    progressBar = document.createElement("span");
+                    progressBar.className = "auth-notice-progress";
+                    progressBar.setAttribute("aria-hidden", "true");
+                    notice.appendChild(progressBar);
+                }
+                progressBar.style.animation = "none";
+                void progressBar.offsetWidth; // restart the bar animation on every click
+                progressBar.style.animation = "";
+                clearTimeout(notice._autoCloseTimer);
+                clearTimeout(notice._removeTimer);
+                notice._autoCloseTimer = setTimeout(() => {
+                    notice.classList.remove("is-visible");
+                    notice._removeTimer = setTimeout(() => notice.remove(), 250);
+                }, 4000);
             }
             return;
         }
@@ -1218,20 +1237,20 @@ setLanguage(getLanguage());
             termsView && !heroContainer && !discoverView && !knowledgeView && !aboutView && !contactView
                 ? "terms"
                 : contactView && !heroContainer && !discoverView && !knowledgeView && !aboutView
-                ? "contact"
-                : aboutView && !heroContainer && !discoverView && !knowledgeView
-                  ? "about"
-                  : knowledgeView && !heroContainer && !discoverView
-                    ? "knowledge"
-                    : discoverView && !heroContainer && !knowledgeView
-                      ? "companies"
-                      : window.location.hash && window.location.hash.startsWith("#companies")
+                  ? "contact"
+                  : aboutView && !heroContainer && !discoverView && !knowledgeView
+                    ? "about"
+                    : knowledgeView && !heroContainer && !discoverView
+                      ? "knowledge"
+                      : discoverView && !heroContainer && !knowledgeView
                         ? "companies"
-                        : window.location.hash && window.location.hash.startsWith("#knowledge")
-                          ? "knowledge"
-                          : window.location.hash && window.location.hash.startsWith("#about")
-                            ? "about"
-                            : "home";
+                        : window.location.hash && window.location.hash.startsWith("#companies")
+                          ? "companies"
+                          : window.location.hash && window.location.hash.startsWith("#knowledge")
+                            ? "knowledge"
+                            : window.location.hash && window.location.hash.startsWith("#about")
+                              ? "about"
+                              : "home";
         let isNavigating = false;
         let currentKnowledgeTopic = "fundamentals";
 
